@@ -88,12 +88,14 @@
         let sheetId = null;
 
         async function loadData() {
-            setContent('<div class="empty-state"><div class="ei">⏳</div><p>Yuklanmoqda...</p></div>');
+            showLoading();
             try {
                 data = await DB.getAll();
                 render();
             } catch (err) {
                 setContent('<div class="empty-state"><div class="ei">❌</div><p>Xatolik: ' + err.message + '</p></div>');
+            } finally {
+                hideLoading();
             }
         }
 
@@ -190,39 +192,48 @@
 
         // ── Actions ───────────────────────────────────────────
         async function setStatus(id, status) {
+            const item = data.find(a => a.id === id);
+            if (item) item.status = status;   // optimistic: darrov o'sha bo'limga o'tadi
+            render();
             try {
                 await DB.setStatus(id, status);
-                data = await DB.getAll();   // server dan qayta yukla
+            } catch (err) {
+                alert('Xatolik: ' + err.message);
+                data = await DB.getAll();   // xato bo'lsa serverdan tiklash
                 render();
-            } catch (err) { alert('Xatolik: ' + err.message); }
+            }
         }
 
         async function permDelete(id) {
             if (!confirm("Butunlay o'chirilsinmi?")) return;
+            data = data.filter(a => a.id !== id);   // optimistic: ro'yxatdan olib tashlash
+            render();
             try {
                 await DB.delete(id);
+            } catch (err) {
+                alert('Xatolik: ' + err.message);
                 data = await DB.getAll();
                 render();
-            } catch (err) { alert('Xatolik: ' + err.message); }
+            }
         }
 
         async function clearTab() {
             if (curTab === 'deleted') {
                 if (!confirm("O'chirilganlar to'liq tozalansinmi? Bu amalni qaytarib bo'lmaydi!")) return;
+                data = data.filter(a => a.status !== 'deleted');
+                render();
                 try {
                     await DB.delByStatus('deleted');
-                    data = await DB.getAll();
-                    render();
-                } catch (err) { alert('Xatolik: ' + err.message); }
+                } catch (err) { alert('Xatolik: ' + err.message); data = await DB.getAll(); render(); }
             } else {
                 const lbl = curTab === 'new' ? 'yangi' : 'tekshirilgan';
                 if (!confirm(`Barcha ${lbl} arizalar o'chirilganlar bo'limiga o'tkazilsinmi?`)) return;
+                const ids = data.filter(a => a.status === curTab).map(a => a.id);
+                data.forEach(a => { if (ids.includes(a.id)) a.status = 'deleted'; });
+                render();
                 try {
-                    const ids = data.filter(a => a.status === curTab).map(a => a.id);
                     for (const id of ids) await DB.setStatus(id, 'deleted');
-                    data = await DB.getAll();
-                    render();
-                } catch (err) { alert('Xatolik: ' + err.message); }
+                } catch (err) { alert('Xatolik: ' + err.message); data = await DB.getAll(); render(); }
             }
         }
 
@@ -268,22 +279,20 @@
         async function sheetAction() {
             const a = data.find(x => x.id === sheetId); if (!a) return;
             const next = a.status === 'new' ? 'checked' : 'new';
-            try {
-                await DB.setStatus(sheetId, next);
-                data = await DB.getAll();
-                closeSheetModal(); render();
-            } catch (err) { alert('Xatolik: ' + err.message); }
+            const id = a.id;
+            closeSheetModal();
+            setStatus(id, next);
         }
 
         async function sheetDel() {
             const a = data.find(x => x.id === sheetId); if (!a) return;
+            const id = a.id;
             if (a.status === 'deleted') {
-                if (!confirm("Butunlay o'chirilsinmi?")) return;
-                try { await DB.delete(sheetId); data = await DB.getAll(); closeSheetModal(); render(); }
-                catch (err) { alert('Xatolik: ' + err.message); }
+                closeSheetModal();
+                permDelete(id);
             } else {
-                try { await DB.setStatus(sheetId, 'deleted'); data = await DB.getAll(); closeSheetModal(); render(); }
-                catch (err) { alert('Xatolik: ' + err.message); }
+                closeSheetModal();
+                setStatus(id, 'deleted');
             }
         }
 
@@ -293,6 +302,10 @@
             sheetId = null;
         }
         function closeSheet(e) { if (e.target === document.getElementById('sheetOverlay')) closeSheetModal(); }
+
+        // ── Loading overlay ───────────────────────────────────
+        function showLoading() { document.getElementById('loadingOverlay').classList.add('open'); }
+        function hideLoading() { document.getElementById('loadingOverlay').classList.remove('open'); }
 
         // ── Init ──────────────────────────────────────────────
         window.addEventListener('DOMContentLoaded', () => {
