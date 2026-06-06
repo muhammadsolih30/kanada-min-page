@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fransuz Tili Kursi – Kanada PR Tayyorlov</title>
+    <title>Fransuz Tili Kursi – Kanada PR</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
         rel="stylesheet">
@@ -14,12 +14,12 @@
             --red: #c41e3a;
             --gold: #d4a843;
             --cream: #f8f4ed;
-            --white: #ffffff;
+            --white: #fff;
             --gray: #6b7280;
-            --light-gray: #f3f4f6;
+            --light: #f3f4f6;
             --border: #e5e7eb;
             --green: #16a34a;
-            --green-light: #dcfce7;
+            --green-l: #dcfce7;
         }
 
         * {
@@ -49,7 +49,7 @@
 
         .logo {
             font-family: 'Playfair Display', serif;
-            color: var(--white);
+            color: #fff;
             font-size: 1.4rem;
             font-weight: 700;
         }
@@ -58,37 +58,25 @@
             color: var(--gold);
         }
 
-        nav a {
+        .nav-admin {
             color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: color 0.2s;
+            background: none;
+            border: none;
+            font-family: inherit;
         }
 
-        nav a:hover {
+        .nav-admin:hover {
             color: var(--gold);
         }
 
         /* HERO */
         .hero {
             background: var(--navy);
-            color: white;
+            color: #fff;
             padding: 5rem 2rem 4rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -20%;
-            width: 60%;
-            height: 200%;
-            background: radial-gradient(ellipse, rgba(212, 168, 67, 0.08) 0%, transparent 70%);
-            pointer-events: none;
         }
 
         .hero-badge {
@@ -96,23 +84,21 @@
             background: rgba(212, 168, 67, 0.15);
             border: 1px solid var(--gold);
             color: var(--gold);
-            padding: 0.4rem 1.2rem;
+            padding: .4rem 1.2rem;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: .8rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
+            letter-spacing: .1em;
             text-transform: uppercase;
             margin-bottom: 1.5rem;
-            animation: fadeUp 0.6s ease both;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 900;
             line-height: 1.15;
             margin-bottom: 1.2rem;
-            animation: fadeUp 0.7s ease 0.1s both;
         }
 
         .hero h1 em {
@@ -121,49 +107,33 @@
         }
 
         .hero p {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: rgba(255, 255, 255, 0.72);
-            max-width: 560px;
+            max-width: 540px;
             margin: 0 auto 2.5rem;
             line-height: 1.7;
-            animation: fadeUp 0.7s ease 0.2s both;
         }
 
         .hero-flags {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            animation: fadeUp 0.6s ease 0s both;
         }
 
         .cta-btn {
-            display: inline-block;
             background: var(--red);
-            color: white;
+            color: #fff;
             padding: 1rem 2.5rem;
             border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             border: none;
-            transition: background 0.2s, transform 0.15s;
-            animation: fadeUp 0.7s ease 0.3s both;
+            font-family: inherit;
+            transition: background .2s;
         }
 
         .cta-btn:hover {
             background: #a01830;
-            transform: translateY(-2px);
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
         }
 
         /* STATS */
@@ -175,10 +145,10 @@
         }
 
         .stat {
-            padding: 1.8rem 2.5rem;
+            padding: 1.8rem 2rem;
             text-align: center;
             flex: 1;
-            min-width: 160px;
+            min-width: 140px;
             border-right: 1px solid var(--border);
         }
 
@@ -195,47 +165,48 @@
         }
 
         .stat-label {
-            font-size: 0.78rem;
+            font-size: .75rem;
             color: var(--gray);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: .06em;
             font-weight: 500;
         }
 
+        /* SECTIONS */
         section {
             padding: 4rem 2rem;
             max-width: 1100px;
             margin: 0 auto;
         }
 
-        .section-tag {
-            font-size: 0.75rem;
+        .sec-tag {
+            font-size: .75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: .12em;
             color: var(--red);
-            margin-bottom: 0.5rem;
+            margin-bottom: .5rem;
         }
 
-        .section-title {
+        .sec-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.6rem, 3vw, 2.3rem);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
             font-weight: 700;
             margin-bottom: 1rem;
-            line-height: 1.25;
         }
 
-        .section-sub {
+        .sec-sub {
             color: var(--gray);
-            font-size: 0.97rem;
+            font-size: .97rem;
             line-height: 1.7;
             max-width: 600px;
             margin-bottom: 2.5rem;
         }
 
+        /* KURSLAR */
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 1.2rem;
         }
 
@@ -244,32 +215,32 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.8rem;
-            transition: box-shadow 0.2s, transform 0.2s;
+            transition: box-shadow .2s, transform .2s;
         }
 
         .course-card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .1);
             transform: translateY(-3px);
         }
 
         .course-card.featured {
             border-color: var(--gold);
-            background: linear-gradient(135deg, var(--navy) 0%, #162040 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--navy), #162040);
+            color: #fff;
         }
 
         .course-icon {
             font-size: 1.8rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: .8rem;
         }
 
         .course-type {
-            font-size: 0.75rem;
+            font-size: .72rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: .08em;
             color: var(--red);
-            margin-bottom: 0.3rem;
+            margin-bottom: .3rem;
         }
 
         .course-card.featured .course-type {
@@ -278,16 +249,16 @@
 
         .course-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: .5rem;
         }
 
         .course-price {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--navy);
-            margin-bottom: 0.3rem;
+            margin-bottom: .3rem;
         }
 
         .course-card.featured .course-price {
@@ -295,18 +266,19 @@
         }
 
         .course-desc {
-            font-size: 0.85rem;
+            font-size: .83rem;
             color: var(--gray);
             line-height: 1.5;
         }
 
         .course-card.featured .course-desc {
-            color: rgba(255, 255, 255, 0.65);
+            color: rgba(255, 255, 255, .6);
         }
 
+        /* INFO */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
@@ -319,7 +291,7 @@
 
         .info-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 1rem;
         }
 
@@ -327,11 +299,11 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 0.55rem;
+            gap: .5rem;
         }
 
         .info-card ul li {
-            font-size: 0.9rem;
+            font-size: .88rem;
             color: var(--gray);
             padding-left: 1.2rem;
             position: relative;
@@ -344,12 +316,12 @@
             left: 0;
             color: var(--gold);
             font-weight: 700;
-            font-size: 0.8rem;
         }
 
+        /* TEACHER */
         .teacher-box {
             background: var(--navy);
-            color: white;
+            color: #fff;
             border-radius: 16px;
             padding: 2.5rem;
             display: grid;
@@ -363,22 +335,23 @@
 
         .teacher-emoji {
             font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: .5rem;
         }
 
         .teacher-item h4 {
             font-family: 'Playfair Display', serif;
             font-size: 1rem;
-            margin-bottom: 0.3rem;
             color: var(--gold);
+            margin-bottom: .3rem;
         }
 
         .teacher-item p {
-            font-size: 0.83rem;
-            color: rgba(255, 255, 255, 0.65);
+            font-size: .82rem;
+            color: rgba(255, 255, 255, .65);
             line-height: 1.5;
         }
 
+        /* FORM */
         .form-section {
             background: var(--white);
             border-top: 1px solid var(--border);
@@ -386,7 +359,7 @@
         }
 
         .form-wrap {
-            max-width: 560px;
+            max-width: 540px;
             margin: 0 auto;
         }
 
@@ -401,38 +374,38 @@
 
         label {
             display: block;
-            font-size: 0.82rem;
+            font-size: .8rem;
             font-weight: 600;
             color: var(--navy);
-            margin-bottom: 0.4rem;
+            margin-bottom: .4rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: .05em;
         }
 
         input,
         select {
             width: 100%;
-            padding: 0.85rem 1rem;
+            padding: .85rem 1rem;
             border: 1.5px solid var(--border);
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: .95rem;
             font-family: inherit;
             background: var(--cream);
             color: var(--navy);
-            transition: border-color 0.2s;
             outline: none;
+            transition: border-color .2s;
         }
 
         input:focus,
         select:focus {
             border-color: var(--navy);
-            background: white;
+            background: #fff;
         }
 
         .submit-btn {
             width: 100%;
             background: var(--navy);
-            color: white;
+            color: #fff;
             padding: 1rem;
             border: none;
             border-radius: 8px;
@@ -440,8 +413,8 @@
             font-weight: 700;
             cursor: pointer;
             font-family: inherit;
-            transition: background 0.2s;
-            margin-top: 0.5rem;
+            transition: background .2s;
+            margin-top: .5rem;
         }
 
         .submit-btn:hover {
@@ -453,42 +426,38 @@
             cursor: not-allowed;
         }
 
-        .success-msg {
+        .msg {
             display: none;
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 1rem 1.2rem;
+            padding: 1rem;
             border-radius: 8px;
             text-align: center;
-            font-size: 0.95rem;
+            font-size: .92rem;
             margin-top: 1rem;
         }
 
-        .error-msg {
-            display: none;
+        .msg-ok {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .msg-err {
             background: #fee2e2;
             border: 1px solid #fca5a5;
             color: #991b1b;
-            padding: 1rem 1.2rem;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.95rem;
-            margin-top: 1rem;
         }
 
         footer {
             background: var(--navy);
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, .5);
             text-align: center;
             padding: 2rem;
-            font-size: 0.82rem;
+            font-size: .82rem;
         }
 
-        .divider {
+        hr {
             border: none;
             border-top: 1px solid var(--border);
-            margin: 0;
         }
 
         /* ===== ADMIN ===== */
@@ -500,38 +469,38 @@
 
         .admin-nav {
             background: var(--navy);
-            padding: 0.9rem 1.5rem;
+            padding: .9rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .admin-logout {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.4rem 1rem;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: #fff;
+            padding: .4rem 1rem;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: .85rem;
             font-family: inherit;
         }
 
         .admin-logout:hover {
             background: var(--red);
-            border-color: var(--red);
         }
 
         .admin-tabs {
             background: var(--white);
             border-bottom: 1px solid var(--border);
             display: flex;
-            padding: 0 1.5rem;
+            padding: 0 1rem;
+            overflow-x: auto;
         }
 
         .tab-btn {
-            padding: 1rem 1.5rem;
-            font-size: 0.9rem;
+            padding: .9rem 1.2rem;
+            font-size: .88rem;
             font-weight: 600;
             font-family: inherit;
             background: none;
@@ -539,10 +508,10 @@
             border-bottom: 3px solid transparent;
             cursor: pointer;
             color: var(--gray);
-            transition: all 0.2s;
+            white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: .4rem;
         }
 
         .tab-btn.active {
@@ -551,64 +520,74 @@
         }
 
         .cnt {
-            background: var(--red);
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.1rem 0.45rem;
+            font-size: .7rem;
+            padding: .1rem .4rem;
             border-radius: 50px;
             font-weight: 700;
             min-width: 18px;
             text-align: center;
+            color: #fff;
         }
 
-        .cnt.green {
+        .cnt-new {
+            background: var(--red);
+        }
+
+        .cnt-done {
             background: var(--green);
         }
 
+        .cnt-del {
+            background: var(--gray);
+        }
+
         .admin-body {
-            padding: 1.5rem;
+            padding: 1rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .summary-cards {
+        .sum-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: .8rem;
+            margin-bottom: 1rem;
         }
 
-        .summary-card {
+        .sum-card {
             background: var(--white);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
         }
 
-        .s-num {
+        .sum-num {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
         }
 
-        .s-label {
-            font-size: 0.78rem;
+        .sum-label {
+            font-size: .72rem;
             color: var(--gray);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-top: 0.2rem;
+            letter-spacing: .06em;
         }
 
-        .sc-total .s-num {
+        .sum-total .sum-num {
             color: var(--navy);
         }
 
-        .sc-new .s-num {
+        .sum-new .sum-num {
             color: var(--red);
         }
 
-        .sc-done .s-num {
+        .sum-done .sum-num {
             color: var(--green);
+        }
+
+        .sum-del .sum-num {
+            color: var(--gray);
         }
 
         .table-card {
@@ -619,49 +598,65 @@
         }
 
         .table-toolbar {
-            padding: 1rem 1.2rem;
+            padding: .9rem 1.2rem;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1rem;
+            gap: .8rem;
             flex-wrap: wrap;
         }
 
-        .table-toolbar h3 {
-            font-size: 0.95rem;
+        .tbl-title {
+            font-size: .95rem;
             font-weight: 700;
         }
 
-        .table-wrap {
+        .clear-btn {
+            background: transparent;
+            border: 1px solid var(--red);
+            color: var(--red);
+            padding: .35rem .9rem;
+            border-radius: 6px;
+            font-size: .8rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .clear-btn:hover {
+            background: var(--red);
+            color: #fff;
+        }
+
+        /* Desktop table */
+        .tbl-wrap {
             overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.88rem;
+            font-size: .87rem;
             min-width: 680px;
         }
 
         thead {
             background: var(--navy);
-            color: white;
+            color: #fff;
         }
 
         th {
-            padding: 0.8rem 1rem;
+            padding: .75rem 1rem;
             text-align: left;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: .73rem;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: .06em;
         }
 
         td {
-            padding: 0.8rem 1rem;
+            padding: .75rem 1rem;
             border-bottom: 1px solid var(--border);
-            color: var(--navy);
             vertical-align: middle;
         }
 
@@ -670,83 +665,156 @@
         }
 
         tr:hover td {
-            background: var(--light-gray);
+            background: var(--light);
         }
 
         .badge {
             display: inline-block;
-            padding: 0.2rem 0.6rem;
+            padding: .15rem .55rem;
             border-radius: 50px;
-            font-size: 0.72rem;
+            font-size: .7rem;
             font-weight: 600;
         }
 
-        .badge-m {
+        .b-m {
             background: #dbeafe;
             color: #1e40af;
         }
 
-        .badge-f {
+        .b-f {
             background: #fce7f3;
             color: #9d174d;
         }
 
-        .action-btn {
-            padding: 0.35rem 0.8rem;
+        .ab {
+            padding: .3rem .7rem;
             border-radius: 6px;
-            font-size: 0.78rem;
+            font-size: .76rem;
             font-weight: 600;
             cursor: pointer;
             border: none;
             font-family: inherit;
-            transition: all 0.15s;
         }
 
-        .btn-check {
-            background: var(--green-light);
+        .ab-check {
+            background: var(--green-l);
             color: var(--green);
         }
 
-        .btn-check:hover {
+        .ab-check:hover {
             background: var(--green);
-            color: white;
+            color: #fff;
         }
 
-        .btn-uncheck {
-            background: #fee2e2;
-            color: #991b1b;
+        .ab-back {
+            background: #fef3c7;
+            color: #92400e;
         }
 
-        .btn-uncheck:hover {
-            background: var(--red);
-            color: white;
+        .ab-back:hover {
+            background: #f59e0b;
+            color: #fff;
         }
 
-        .btn-delete {
-            background: var(--light-gray);
+        .ab-restore {
+            background: var(--green-l);
+            color: var(--green);
+        }
+
+        .ab-restore:hover {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .ab-del {
+            background: var(--light);
             color: var(--gray);
-            margin-left: 0.3rem;
+            margin-left: .3rem;
         }
 
-        .btn-delete:hover {
+        .ab-del:hover {
             background: #fee2e2;
             color: var(--red);
         }
 
-        .clear-btn {
-            background: transparent;
-            border: 1px solid var(--red);
+        .ab-perm {
+            background: #fee2e2;
             color: var(--red);
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-family: inherit;
+            margin-left: .3rem;
         }
 
-        .clear-btn:hover {
+        .ab-perm:hover {
             background: var(--red);
-            color: white;
+            color: #fff;
+        }
+
+        /* Mobile cards */
+        .cards-wrap {
+            display: none;
+            flex-direction: column;
+            gap: .7rem;
+            padding: .8rem;
+        }
+
+        .m-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            cursor: pointer;
+        }
+
+        .m-card:active {
+            background: var(--light);
+        }
+
+        .m-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .av-m {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .av-f {
+            background: #fce7f3;
+            color: #9d174d;
+        }
+
+        .m-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .m-name {
+            font-weight: 700;
+            font-size: .93rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .m-sub {
+            font-size: .76rem;
+            color: var(--gray);
+            margin-top: .1rem;
+        }
+
+        .m-arrow {
+            color: #cbd5e1;
+            font-size: 1.2rem;
         }
 
         .empty-state {
@@ -757,127 +825,31 @@
 
         .empty-state .ei {
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: .8rem;
         }
 
-        .loading-row td {
-            text-align: center;
-            color: var(--gray);
-            padding: 2rem;
-        }
-
-        /* LOGIN */
-        .login-overlay {
+        /* Bottom sheet */
+        .sheet-overlay {
             position: fixed;
             inset: 0;
-            background: var(--navy);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-overlay.show {
-            display: flex;
-        }
-
-        .login-box {
-            background: white;
-            border-radius: 16px;
-            padding: 2.5rem;
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .login-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .login-box p {
-            color: var(--gray);
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
-            margin-bottom: 1rem;
-            outline: none;
-            text-align: center;
-            letter-spacing: 0.15em;
-        }
-
-        .login-box input:focus {
-            border-color: var(--navy);
-        }
-
-        .login-btn {
-            width: 100%;
-            background: var(--navy);
-            color: white;
-            padding: 0.9rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .login-btn:hover {
-            background: var(--red);
-        }
-
-        .login-err {
-            color: var(--red);
-            font-size: 0.85rem;
-            margin-top: 0.7rem;
-            display: none;
-        }
-
-        .back-link {
-            display: block;
-            margin-top: 1rem;
-            font-size: 0.82rem;
-            color: var(--gray);
-            cursor: pointer;
-        }
-
-        .back-link:hover {
-            color: var(--navy);
-        }
-
-        /* DETAIL MODAL */
-        .detail-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, .5);
             z-index: 5000;
             display: none;
             align-items: flex-end;
             justify-content: center;
         }
 
-        .detail-overlay.show {
+        .sheet-overlay.open {
             display: flex;
         }
 
-        .detail-sheet {
-            background: var(--white);
+        .sheet {
+            background: #fff;
             border-radius: 20px 20px 0 0;
             width: 100%;
             max-width: 520px;
             padding: 1.5rem 1.5rem 2rem;
-            animation: slideUp 0.25s ease;
+            animation: slideUp .25s ease;
         }
 
         @keyframes slideUp {
@@ -900,56 +872,55 @@
 
         .sheet-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 0.2rem;
+            margin-bottom: 1rem;
         }
 
         .sheet-rows {
             display: flex;
             flex-direction: column;
-            gap: 0;
-            margin: 1rem 0 1.2rem;
+            margin-bottom: 1.2rem;
         }
 
         .sheet-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
-            padding: 0.65rem 0;
+            padding: .6rem 0;
             border-bottom: 1px solid var(--border);
+            font-size: .9rem;
         }
 
         .sheet-row:last-child {
             border-bottom: none;
         }
 
-        .sheet-label {
+        .s-lbl {
             color: var(--gray);
-            font-size: 0.78rem;
+            font-size: .76rem;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: .06em;
         }
 
-        .sheet-val {
+        .s-val {
             font-weight: 600;
         }
 
         .sheet-btns {
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
+            gap: .6rem;
         }
 
-        .sheet-call {
+        .s-call {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: .5rem;
             background: var(--green);
-            color: white;
-            padding: 0.9rem;
+            color: #fff;
+            padding: .9rem;
             border-radius: 10px;
             font-size: 1rem;
             font-weight: 700;
@@ -960,142 +931,126 @@
             width: 100%;
         }
 
-        .sheet-call:hover {
-            background: #15803d;
-        }
-
-        .sheet-action-btn {
-            padding: 0.8rem;
+        .s-btn {
+            padding: .8rem;
             border-radius: 10px;
-            font-size: 0.9rem;
+            font-size: .88rem;
             font-weight: 600;
             cursor: pointer;
             border: none;
             font-family: inherit;
-            text-align: center;
             width: 100%;
         }
 
-        .sheet-close {
-            background: var(--light-gray);
+        .s-close {
+            background: var(--light);
             color: var(--gray);
-            padding: 0.8rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            width: 100%;
         }
 
-        /* MOBILE CARDS */
-        .cards-grid {
+        /* Login */
+        .login-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--navy);
+            z-index: 9999;
             display: none;
-            flex-direction: column;
-            gap: 0.75rem;
-            padding: 1rem;
-        }
-
-        .ariza-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.8rem;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .ariza-card:active {
-            background: var(--light-gray);
-        }
-
-        .card-left {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .card-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            font-weight: 700;
-            flex-shrink: 0;
         }
 
-        .avatar-m {
-            background: #dbeafe;
-            color: #1e40af;
+        .login-overlay.open {
+            display: flex;
         }
 
-        .avatar-f {
-            background: #fce7f3;
-            color: #9d174d;
+        .login-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 360px;
+            text-align: center;
         }
 
-        .card-info {
-            min-width: 0;
+        .login-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: .3rem;
         }
 
-        .card-name {
-            font-weight: 700;
-            font-size: 0.95rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .card-sub {
-            font-size: 0.78rem;
+        .login-box p {
             color: var(--gray);
-            margin-top: 0.15rem;
+            font-size: .85rem;
+            margin-bottom: 1.5rem;
         }
 
-        .card-arrow {
-            color: #cbd5e1;
-            font-size: 1.2rem;
-            flex-shrink: 0;
+        .login-box input {
+            width: 100%;
+            padding: .85rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            text-align: center;
+            letter-spacing: .15em;
+            margin-bottom: 1rem;
+        }
+
+        .login-box input:focus {
+            border-color: var(--navy);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: var(--navy);
+            color: #fff;
+            padding: .9rem;
+            border: none;
+            border-radius: 8px;
+            font-size: .95rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .login-btn:hover {
+            background: var(--red);
+        }
+
+        .login-err {
+            color: var(--red);
+            font-size: .83rem;
+            margin-top: .6rem;
+            display: none;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 1rem;
+            font-size: .82rem;
+            color: var(--gray);
+            cursor: pointer;
         }
 
         @media(max-width:700px) {
             .teacher-box {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
             }
 
-            .stat {
-                padding: 1.2rem 1rem
-            }
-
-            .tab-btn {
-                padding: 0.8rem 1rem;
-                font-size: 0.82rem
-            }
-
-            .table-wrap {
-                display: none !important;
-            }
-
-            .cards-grid {
-                display: flex;
-            }
-
-            .summary-cards {
+            .sum-cards {
                 grid-template-columns: 1fr 1fr;
             }
 
+            .tbl-wrap {
+                display: none !important;
+            }
+
+            .cards-wrap {
+                display: flex;
+            }
+
             .admin-body {
-                padding: 0.75rem;
+                padding: .7rem;
             }
 
             .table-card {
@@ -1103,9 +1058,16 @@
                 border-left: none;
                 border-right: none;
             }
+        }
 
-            .table-toolbar {
-                padding: 0.8rem 1rem;
+        @media(max-width:480px) {
+            .stat {
+                padding: 1.2rem .8rem;
+            }
+
+            .tab-btn {
+                padding: .8rem .8rem;
+                font-size: .82rem;
             }
         }
     </style>
@@ -1113,11 +1075,11 @@
 
 <body>
 
-    <!-- MAIN SITE -->
+    <!-- ====== MAIN SITE ====== -->
     <div id="mainSite">
         <nav>
             <div class="logo">Fransuz<span>Tili</span></div>
-            <a onclick="openLogin()">⚙ Admin</a>
+            <button class="nav-admin" onclick="openLogin()">⚙ Admin</button>
         </nav>
 
         <div class="hero">
@@ -1139,10 +1101,10 @@
         </div>
 
         <section>
-            <div class="section-tag">Kurs turlari</div>
-            <div class="section-title">O'zingizga mos formatni tanlang</div>
-            <p class="section-sub">Barcha kurslar TCF Canada imtihoniga yo'naltirilgan. Listening, Reading, Writing va
-                Speaking bo'limlari bo'yicha strategiyalar o'rgatiladi.</p>
+            <div class="sec-tag">Kurs turlari</div>
+            <div class="sec-title">O'zingizga mos formatni tanlang</div>
+            <p class="sec-sub">Barcha kurslar TCF Canada imtihoniga yo'naltirilgan. Listening, Reading, Writing va
+                Speaking bo'yicha strategiyalar o'rgatiladi.</p>
             <div class="courses-grid">
                 <div class="course-card">
                     <div class="course-icon">🏫</div>
@@ -1156,30 +1118,30 @@
                     <div class="course-type">Online</div>
                     <div class="course-name">Guruh darslari</div>
                     <div class="course-price">490 000 so'm</div>
-                    <div class="course-desc">Asosan kechki vaqtlarda. Zoom va Google Meet orqali. Qulay va arzon.</div>
+                    <div class="course-desc">Asosan kechki vaqtlarda. Zoom va Google Meet orqali.</div>
                 </div>
                 <div class="course-card">
                     <div class="course-icon">👥</div>
                     <div class="course-type">Mini-guruh</div>
                     <div class="course-name">2–3 kishi</div>
                     <div class="course-price">900 000 so'm</div>
-                    <div class="course-desc">Kichik guruhda intensiv tayyorlov. Qulay vaqtga moslab belgilanadi.</div>
+                    <div class="course-desc">Kichik guruhda intensiv tayyorlov. Qulay vaqtga moslab.</div>
                 </div>
                 <div class="course-card">
                     <div class="course-icon">👤</div>
                     <div class="course-type">Individual</div>
                     <div class="course-name">Shaxsiy darslar</div>
                     <div class="course-price">1 200 000 so'm</div>
-                    <div class="course-desc">To'liq individual yondashuv. O'quvchiga qulay vaqt va sur'at.</div>
+                    <div class="course-desc">To'liq individual yondashuv. O'quvchiga qulay vaqt.</div>
                 </div>
             </div>
         </section>
 
-        <hr class="divider">
+        <hr>
 
         <section>
-            <div class="section-tag">Batafsil ma'lumot</div>
-            <div class="section-title">Nima o'rgatiladi?</div>
+            <div class="sec-tag">Batafsil ma'lumot</div>
+            <div class="sec-title">Nima o'rgatiladi?</div>
             <div class="info-grid">
                 <div class="info-card">
                     <h3>📚 Dars tarkibi</h3>
@@ -1210,27 +1172,27 @@
                         <li>Uy vazifalarini muntazam bajarish</li>
                         <li>To'lovlarni belgilangan muddatda to'lash</li>
                         <li>O'qituvchi va guruhdoshlarni hurmat qilish</li>
-                        <li>Sababsiz qoldirilgan darslar qayta o'tilmaydi</li>
+                        <li>Sababsiz darslar qayta o'tilmaydi</li>
                     </ul>
                 </div>
                 <div class="info-card">
-                    <h3>🇨🇦 Immigratsiya yo'nalishi</h3>
+                    <h3>🇨🇦 Immigratsiya</h3>
                     <ul>
-                        <li>Express Entry dasturi bo'yicha yo'nalish</li>
+                        <li>Express Entry dasturi yo'nalishi</li>
                         <li>TCF Canada B2 talab darajasi</li>
                         <li>Hujjat ishlari bilan shug'ullanmaymiz</li>
-                        <li>Umumiy yo'nalish va maslahat beriladi</li>
+                        <li>Umumiy yo'nalish va maslahat</li>
                         <li>Kanada PR jarayoni tushuntiriladi</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <hr class="divider">
+        <hr>
 
         <section>
-            <div class="section-tag">Jamoamiz</div>
-            <div class="section-title">Tajribali o'qituvchilar</div>
+            <div class="sec-tag">Jamoamiz</div>
+            <div class="sec-title">Tajribali o'qituvchilar</div>
             <div class="teacher-box">
                 <div class="teacher-item">
                     <div class="teacher-emoji">🎓</div>
@@ -1253,503 +1215,115 @@
         <div class="form-section" id="registration">
             <div class="form-wrap">
                 <div class="form-header">
-                    <div class="section-tag" style="text-align:center">Ro'yxatdan o'tish</div>
-                    <div class="section-title" style="text-align:center">Bugun boshlang</div>
-                    <p style="color:var(--gray);font-size:0.92rem;margin-top:0.5rem">Ma'lumotlaringizni qoldiring,
+                    <div class="sec-tag" style="text-align:center">Ro'yxatdan o'tish</div>
+                    <div class="sec-title" style="text-align:center">Bugun boshlang</div>
+                    <p style="color:var(--gray);font-size:.9rem;margin-top:.5rem">Ma'lumotlaringizni qoldiring,
                         mutaxassislarimiz siz bilan bog'lanadi.</p>
                 </div>
                 <form id="regForm" onsubmit="submitForm(event)">
-                    <div class="form-group"><label>Ism *</label><input type="text" id="fname" placeholder="Ismingiz"
+                    <div class="form-group"><label>Ism *</label><input type="text" id="f_fname" placeholder="Ismingiz"
                             required></div>
-                    <div class="form-group"><label>Familiya *</label><input type="text" id="lname"
+                    <div class="form-group"><label>Familiya *</label><input type="text" id="f_lname"
                             placeholder="Familiyangiz" required></div>
-                    <div class="form-group"><label>Yosh *</label><input type="number" id="age" placeholder="Yoshingiz"
+                    <div class="form-group"><label>Yosh *</label><input type="number" id="f_age" placeholder="Yoshingiz"
                             min="14" max="70" required></div>
-                    <div class="form-group"><label>Jinsi *</label><select id="gender" required>
+                    <div class="form-group"><label>Jinsi *</label><select id="f_gender" required>
                             <option value="">Tanlang...</option>
                             <option value="Erkak">Erkak</option>
                             <option value="Ayol">Ayol</option>
                         </select></div>
-                    <div class="form-group"><label>Telefon raqami *</label><input type="tel" id="phone"
+                    <div class="form-group"><label>Telefon *</label><input type="tel" id="f_phone"
                             placeholder="+998 90 000 00 00" required></div>
                     <button type="submit" class="submit-btn" id="submitBtn">Ro'yxatdan o'tish →</button>
                 </form>
-                <div class="success-msg" id="successMsg">✅ Muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.
-                </div>
-                <div class="error-msg" id="errorMsg">❌ Xatolik yuz berdi. Qayta urinib ko'ring.</div>
+                <div class="msg msg-ok" id="msgOk">✅ Muvaffaqiyatli yuborildi! Tez orada bog'lanamiz.</div>
+                <div class="msg msg-err" id="msgErr">❌ Xatolik yuz berdi. Qayta urinib ko'ring.</div>
             </div>
         </div>
 
         <footer>
             <p>© 2025 Fransuz Tili Kursi · TCF Canada Tayyorlov Markazi</p>
-            <p style="margin-top:0.3rem">Barcha huquqlar himoyalangan</p>
         </footer>
     </div>
 
-    <!-- LOGIN OVERLAY -->
+    <!-- ====== LOGIN ====== -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-box">
-            <div style="font-size:2.5rem;margin-bottom:0.5rem">🔐</div>
+            <div style="font-size:2.5rem;margin-bottom:.5rem">🔐</div>
             <h2>Admin Kirish</h2>
             <p>Davom etish uchun parol kiriting</p>
-            <input type="password" id="adminPassInput" placeholder="••••••••"
-                onkeydown="if(event.key==='Enter') doLogin()">
+            <input type="password" id="passInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
             <button class="login-btn" onclick="doLogin()">Kirish</button>
             <p class="login-err" id="loginErr">❌ Noto'g'ri parol!</p>
             <span class="back-link" onclick="closeLogin()">← Ortga qaytish</span>
         </div>
     </div>
 
-    <!-- ADMIN PAGE -->
+    <!-- ====== ADMIN ====== -->
     <div id="adminPage">
         <nav class="admin-nav">
-            <div class="logo">Fransuz<span>Tili</span> <span style="font-size:0.8rem;opacity:0.6">· Admin</span></div>
+            <div class="logo">Fransuz<span>Tili</span> <span style="font-size:.8rem;opacity:.6">· Admin</span></div>
             <button class="admin-logout" onclick="logout()">Chiqish →</button>
         </nav>
 
         <div class="admin-tabs">
-            <button class="tab-btn active" id="tabNew" onclick="switchTab('new')">
-                📥 Yangi arizalar <span class="cnt" id="cntNew">0</span>
-            </button>
-            <button class="tab-btn" id="tabDone" onclick="switchTab('checked')">
-                ✅ Tekshirilganlar <span class="cnt green" id="cntDone">0</span>
-            </button>
-            <button class="tab-btn" id="tabDel" onclick="switchTab('deleted')">
-                🗑 O'chirilganlar <span class="cnt" id="cntDel" style="background:var(--gray)">0</span>
-            </button>
+            <button class="tab-btn active" id="tab_new" onclick="switchTab('new')">📥 Yangi <span class="cnt cnt-new"
+                    id="cnt_new">0</span></button>
+            <button class="tab-btn" id="tab_checked" onclick="switchTab('checked')">✅ Tekshirilgan <span
+                    class="cnt cnt-done" id="cnt_checked">0</span></button>
+            <button class="tab-btn" id="tab_deleted" onclick="switchTab('deleted')">🗑 O'chirilgan <span
+                    class="cnt cnt-del" id="cnt_deleted">0</span></button>
         </div>
 
         <div class="admin-body">
-            <div class="summary-cards">
-                <div class="summary-card sc-total">
-                    <div class="s-num" id="sTotal">0</div>
-                    <div class="s-label">Jami arizalar</div>
+            <div class="sum-cards">
+                <div class="sum-card sum-total">
+                    <div class="sum-num" id="s_total">0</div>
+                    <div class="sum-label">Jami</div>
                 </div>
-                <div class="summary-card sc-new">
-                    <div class="s-num" id="sNew">0</div>
-                    <div class="s-label">Yangi / Ko'rilmagan</div>
+                <div class="sum-card sum-new">
+                    <div class="sum-num" id="s_new">0</div>
+                    <div class="sum-label">Yangi</div>
                 </div>
-                <div class="summary-card sc-done">
-                    <div class="s-num" id="sDone">0</div>
-                    <div class="s-label">Tekshirilgan</div>
+                <div class="sum-card sum-done">
+                    <div class="sum-num" id="s_checked">0</div>
+                    <div class="sum-label">Tekshirilgan</div>
                 </div>
-                <div class="summary-card" style="border-left:3px solid var(--gray)">
-                    <div class="s-num" id="sDel" style="color:var(--gray)">0</div>
-                    <div class="s-label">O'chirilgan</div>
+                <div class="sum-card sum-del">
+                    <div class="sum-num" id="s_deleted">0</div>
+                    <div class="sum-label">O'chirilgan</div>
                 </div>
             </div>
 
             <div class="table-card">
                 <div class="table-toolbar">
-                    <h3 id="tblTitle">📥 Yangi arizalar</h3>
-                    <button class="clear-btn" id="clearBtn" onclick="clearTab()">Ro'yxatni tozalash</button>
+                    <span class="tbl-title" id="tblTitle">📥 Yangi arizalar</span>
+                    <button class="clear-btn" onclick="clearTab()">Ro'yxatni tozalash</button>
                 </div>
-                <div class="table-wrap" id="tableWrap"></div>
-                <div class="cards-grid" id="cardsGrid">
-                    <div class="empty-state">
-                        <div class="ei">⏳</div>
-                        <p>Yuklanmoqda...</p>
-                    </div>
-                </div>
+                <!-- Desktop -->
+                <div class="tbl-wrap" id="tblWrap"></div>
+                <!-- Mobile -->
+                <div class="cards-wrap" id="cardsWrap"></div>
             </div>
         </div>
     </div>
 
-    <script>
-        /* ---- CONFIG ---- */
-        const SB_URL = 'https://fireuryrmexwmindvqlx.supabase.co';
-        const SB_KEY = 'sb_publishable_PMjg2XXVVAChMDzowbDhsg_CuCAGY1C';
-        const TABLE = 'arizalar';
-
-        /* ---- SUPABASE HELPERS ---- */
-        async function sbFetch(path, opts = {}) {
-            const res = await fetch(SB_URL + '/rest/v1/' + path, {
-                headers: {
-                    'apikey': SB_KEY,
-                    'Authorization': 'Bearer ' + SB_KEY,
-                    'Content-Type': 'application/json',
-                    'Prefer': opts.prefer || '',
-                    ...opts.headers
-                },
-                method: opts.method || 'GET',
-                body: opts.body ? JSON.stringify(opts.body) : undefined
-            });
-            if (!res.ok) {
-                const err = await res.text();
-                throw new Error(err);
-            }
-            const txt = await res.text();
-            return txt ? JSON.parse(txt) : null;
-        }
-
-        async function insertAriza(data) {
-            return sbFetch(TABLE, { method: 'POST', prefer: 'return=representation', body: data });
-        }
-
-        async function fetchAll() {
-            return sbFetch(TABLE + '?order=created_at.desc&select=*');
-        }
-
-        async function updateStatus(id, status) {
-            return sbFetch(TABLE + '?id=eq.' + id, {
-                method: 'PATCH',
-                prefer: 'return=representation',
-                body: { status }
-            });
-        }
-
-        async function deleteRow(id) {
-            return sbFetch(TABLE + '?id=eq.' + id, { method: 'DELETE' });
-        }
-
-        async function deleteByStatus(status) {
-            return sbFetch(TABLE + '?status=eq.' + status, { method: 'DELETE' });
-        }
-
-        /* ---- FORM SUBMIT ---- */
-        async function submitForm(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.textContent = 'Yuklanmoqda...';
-
-            const payload = {
-                fname: document.getElementById('fname').value.trim(),
-                lname: document.getElementById('lname').value.trim(),
-                age: parseInt(document.getElementById('age').value),
-                gender: document.getElementById('gender').value,
-                phone: document.getElementById('phone').value.trim(),
-                status: 'new'
-            };
-
-            try {
-                await insertAriza(payload);
-                document.getElementById('regForm').reset();
-                show('successMsg');
-                setTimeout(() => hide('successMsg'), 6000);
-            } catch (err) {
-                console.error(err);
-                show('errorMsg');
-                setTimeout(() => hide('errorMsg'), 5000);
-            } finally {
-                btn.disabled = false;
-                btn.textContent = "Ro'yxatdan o'tish →";
-            }
-        }
-
-        /* ---- LOGIN ---- */
-        function openLogin() {
-            document.getElementById('adminPassInput').value = '';
-            document.getElementById('loginErr').style.display = 'none';
-            document.getElementById('loginOverlay').classList.add('show');
-            setTimeout(() => document.getElementById('adminPassInput').focus(), 100);
-        }
-        function closeLogin() {
-            document.getElementById('loginOverlay').classList.remove('show');
-        }
-        function doLogin() {
-            if (document.getElementById('adminPassInput').value === 'admin1234') {
-                sessionStorage.setItem('admin_auth', '1');
-                closeLogin();
-                showAdmin();
-            } else {
-                document.getElementById('loginErr').style.display = 'block';
-            }
-        }
-        function logout() {
-            sessionStorage.removeItem('admin_auth');
-            document.getElementById('adminPage').style.display = 'none';
-            document.getElementById('mainSite').style.display = 'block';
-        }
-        function showAdmin() {
-            document.getElementById('mainSite').style.display = 'none';
-            document.getElementById('adminPage').style.display = 'block';
-            currentTab = 'new';
-            loadAdmin();
-        }
-        // Sahifa yuklanganda session tekshirish
-        window.addEventListener('DOMContentLoaded', () => {
-            if (sessionStorage.getItem('admin_auth') === '1') {
-                showAdmin();
-            }
-        });
-
-        /* ---- ADMIN ---- */
-        let currentTab = 'new';
-        let allData = [];
-
-        async function loadAdmin() {
-            const loadMsg = '<div class="empty-state"><div class="ei">⏳</div><p>Ma\'lumotlar yuklanmoqda...</p></div>';
-            document.getElementById('tableWrap').innerHTML = loadMsg;
-            document.getElementById('cardsGrid').innerHTML = loadMsg;
-            try {
-                allData = await fetchAll();
-                renderAdmin();
-            } catch (err) {
-                const errMsg = '<div class="empty-state"><div class="ei">❌</div><p>Xatolik: ' + err.message + '</p></div>';
-                document.getElementById('tableWrap').innerHTML = errMsg;
-                document.getElementById('cardsGrid').innerHTML = errMsg;
-            }
-        }
-
-        function renderAdmin() {
-            const newItems = allData.filter(a => a.status === 'new');
-            const checkedItems = allData.filter(a => a.status === 'checked');
-            const deletedItems = allData.filter(a => a.status === 'deleted');
-
-            document.getElementById('cntNew').textContent = newItems.length;
-            document.getElementById('cntDone').textContent = checkedItems.length;
-            document.getElementById('cntDel').textContent = deletedItems.length;
-            document.getElementById('sTotal').textContent = newItems.length + checkedItems.length;
-            document.getElementById('sNew').textContent = newItems.length;
-            document.getElementById('sDone').textContent = checkedItems.length;
-            document.getElementById('sDel').textContent = deletedItems.length;
-
-            const list = currentTab === 'new' ? newItems : currentTab === 'checked' ? checkedItems : deletedItems;
-            renderTable(list);
-        }
-
-        function switchTab(tab) {
-            currentTab = tab;
-            document.getElementById('tabNew').classList.toggle('active', tab === 'new');
-            document.getElementById('tabDone').classList.toggle('active', tab === 'checked');
-            document.getElementById('tabDel').classList.toggle('active', tab === 'deleted');
-            const titles = { new: '📥 Yangi arizalar', checked: '✅ Tekshirilganlar', deleted: "🗑 O'chirilganlar" };
-            document.getElementById('tblTitle').textContent = titles[tab] || '';
-            renderAdmin();
-        }
-
-        let activeDetailId = null;
-
-        function renderTable(list) {
-            const wrap = document.getElementById('tableWrap');
-            const cards = document.getElementById('cardsGrid');
-            const empty = !list || list.length === 0;
-
-            if (empty) {
-                const msg = `<div class="empty-state"><div class="ei">${currentTab === 'new' ? '📭' : '🗂️'}</div><p>${currentTab === 'new' ? "Yangi ariza yo'q" : "Tekshirilgan ariza yo'q"}</p></div>`;
-                wrap.innerHTML = msg;
-                cards.innerHTML = msg;
-                return;
-            }
-
-            // --- DESKTOP TABLE ---
-            let html = `<table><thead><tr>
-      <th>#</th><th>Ism Familiya</th><th>Yosh</th><th>Jinsi</th><th>Telefon</th><th>Sana</th><th>Amal</th>
-    </tr></thead><tbody>`;
-            list.forEach((a, i) => {
-                const gBadge = a.gender === 'Erkak'
-                    ? `<span class="badge badge-m">Erkak</span>`
-                    : `<span class="badge badge-f">Ayol</span>`;
-                const dateStr = new Date(a.created_at).toLocaleString('uz-UZ');
-                let actionBtn = '';
-                if (currentTab === 'new') {
-                    actionBtn = `<button class="action-btn btn-check" onclick="markStatus(${a.id},'checked')">✓ Tekshirildi</button>`;
-                } else if (currentTab === 'checked') {
-                    actionBtn = `<button class="action-btn btn-uncheck" onclick="markStatus(${a.id},'new')">↩ Qaytarish</button>`;
-                } else {
-                    actionBtn = `<button class="action-btn btn-check" onclick="markStatus(${a.id},'new')">↩ Tiklash</button>`;
-                }
-                const delLabel = currentTab === 'deleted' ? "✕ Butunlay" : "🗑";
-                html += `<tr>
-        <td>${i + 1}</td>
-        <td><strong>${a.fname} ${a.lname}</strong></td>
-        <td>${a.age}</td>
-        <td>${gBadge}</td>
-        <td><a href="tel:${a.phone}" style="color:var(--navy);text-decoration:none;font-weight:600">${a.phone}</a></td>
-        <td style="color:var(--gray);font-size:0.8rem">${dateStr}</td>
-        <td style="white-space:nowrap">${actionBtn}<button class="action-btn btn-delete" onclick="delRow(${a.id})">${delLabel}</button></td>
-      </tr>`;
-            });
-            html += `</tbody></table>`;
-            wrap.innerHTML = html;
-
-            // --- MOBILE CARDS ---
-            let cardHtml = '';
-            list.forEach(a => {
-                const initials = (a.fname[0] || '') + (a.lname[0] || '');
-                const cls = a.gender === 'Erkak' ? 'avatar-m' : 'avatar-f';
-                const dateStr = new Date(a.created_at).toLocaleString('uz-UZ');
-                cardHtml += `<div class="ariza-card" onclick="openDetail(${a.id})">
-        <div class="card-left">
-          <div class="card-avatar ${cls}">${initials}</div>
-          <div class="card-info">
-            <div class="card-name">${a.fname} ${a.lname}</div>
-            <div class="card-sub">${a.phone} · ${a.age} yosh · ${a.gender}</div>
-          </div>
-        </div>
-        <div class="card-arrow">›</div>
-      </div>`;
-            });
-            cards.innerHTML = cardHtml;
-        }
-
-        function openDetail(id) {
-            const a = allData.find(x => x.id === id);
-            if (!a) return;
-            activeDetailId = id;
-            const dateStr = new Date(a.created_at).toLocaleString('uz-UZ');
-            document.getElementById('dName').textContent = a.fname + ' ' + a.lname;
-            document.getElementById('dRows').innerHTML = `
-      <div class="sheet-row"><span class="sheet-label">Telefon</span><span class="sheet-val">${a.phone}</span></div>
-      <div class="sheet-row"><span class="sheet-label">Yosh</span><span class="sheet-val">${a.age}</span></div>
-      <div class="sheet-row"><span class="sheet-label">Jinsi</span><span class="sheet-val">${a.gender}</span></div>
-      <div class="sheet-row"><span class="sheet-label">Holat</span><span class="sheet-val">${a.status === 'new' ? '🔴 Yangi' : '✅ Tekshirilgan'}</span></div>
-      <div class="sheet-row"><span class="sheet-label">Sana</span><span class="sheet-val" style="font-size:0.82rem">${dateStr}</span></div>
-    `;
-            document.getElementById('dCall').href = 'tel:' + a.phone;
-            const btn = document.getElementById('dActionBtn');
-            const delBtn = document.getElementById('dDeleteBtn');
-            if (a.status === 'new') {
-                btn.textContent = '✓ Tekshirildi deb belgilash';
-                btn.style.background = 'var(--green-light)';
-                btn.style.color = 'var(--green)';
-                btn.style.display = 'block';
-                delBtn.textContent = "🗑 O'chirilganlarga o'tkazish";
-                delBtn.style.background = '#fee2e2';
-                delBtn.style.color = '#991b1b';
-            } else if (a.status === 'checked') {
-                btn.textContent = '↩ Yangilarga qaytarish';
-                btn.style.background = '#fef3c7';
-                btn.style.color = '#92400e';
-                btn.style.display = 'block';
-                delBtn.textContent = "🗑 O'chirilganlarga o'tkazish";
-                delBtn.style.background = '#fee2e2';
-                delBtn.style.color = '#991b1b';
-            } else {
-                btn.textContent = '↩ Yangilarga qaytarish';
-                btn.style.background = 'var(--green-light)';
-                btn.style.color = 'var(--green)';
-                btn.style.display = 'block';
-                delBtn.textContent = "🗑 Butunlay o'chirish";
-                delBtn.style.background = '#fee2e2';
-                delBtn.style.color = '#991b1b';
-            }
-            document.getElementById('detailOverlay').classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        async function sheetAction() {
-            if (!activeDetailId) return;
-            const a = allData.find(x => x.id === activeDetailId);
-            if (!a) return;
-            const newStatus = a.status === 'new' ? 'checked' : a.status === 'checked' ? 'new' : 'new';
-            try {
-                await updateStatus(activeDetailId, newStatus);
-                a.status = newStatus;
-                closeDetailModal();
-                renderAdmin();
-            } catch (err) { alert('Xatolik: ' + err.message); }
-        }
-
-        async function sheetDelete() {
-            if (!activeDetailId) return;
-            const a = allData.find(x => x.id === activeDetailId);
-            if (!a) return;
-            if (a.status === 'deleted') {
-                if (!confirm("Butunlay o'chirishni tasdiqlaysizmi?")) return;
-                try {
-                    await deleteRow(activeDetailId);
-                    allData = allData.filter(x => x.id !== activeDetailId);
-                    closeDetailModal();
-                    renderAdmin();
-                } catch (err) { alert('Xatolik: ' + err.message); }
-            } else {
-                try {
-                    await updateStatus(activeDetailId, 'deleted');
-                    a.status = 'deleted';
-                    closeDetailModal();
-                    renderAdmin();
-                } catch (err) { alert('Xatolik: ' + err.message); }
-            }
-        }
-
-        function closeDetailModal() {
-            document.getElementById('detailOverlay').classList.remove('show');
-            document.body.style.overflow = '';
-            activeDetailId = null;
-        }
-
-        function closeDetail(e) {
-            if (e.target === document.getElementById('detailOverlay')) closeDetailModal();
-        }
-
-        async function markStatus(id, status) {
-            try {
-                await updateStatus(id, status);
-                const item = allData.find(a => a.id === id);
-                if (item) item.status = status;
-                renderAdmin();
-            } catch (err) { alert('Xatolik: ' + err.message); }
-        }
-
-        async function delRow(id) {
-            const a = allData.find(x => x.id === id);
-            if (!a) return;
-            if (a.status === 'deleted') {
-                // Permanently delete
-                if (!confirm("Bu arizani butunlay o'chirishni tasdiqlaysizmi?")) return;
-                try {
-                    await deleteRow(id);
-                    allData = allData.filter(x => x.id !== id);
-                    renderAdmin();
-                } catch (err) { alert('Xatolik: ' + err.message); }
-            } else {
-                // Move to deleted
-                try {
-                    await updateStatus(id, 'deleted');
-                    a.status = 'deleted';
-                    renderAdmin();
-                } catch (err) { alert('Xatolik: ' + err.message); }
-            }
-        }
-
-        async function clearTab() {
-            if (currentTab === 'deleted') {
-                // Permanently delete all in deleted tab
-                if (!confirm("O'chirilganlar ro'yxati butunlay tozalansinmi? Bu amalni qaytarib bo'lmaydi!")) return;
-                try {
-                    await deleteByStatus('deleted');
-                    allData = allData.filter(a => a.status !== 'deleted');
-                    renderAdmin();
-                } catch (err) { alert('Xatolik: ' + err.message); }
-            } else {
-                // Move current tab items to deleted
-                const label = currentTab === 'new' ? "yangi arizalar" : "tekshirilgan arizalar";
-                if (!confirm(`Barcha ${label} o'chirilganlar bo'limiga o'tkazilsinmi?`)) return;
-                try {
-                    // Update all in this tab to deleted status
-                    const ids = allData.filter(a => a.status === currentTab).map(a => a.id);
-                    for (const id of ids) {
-                        await updateStatus(id, 'deleted');
-                        const item = allData.find(a => a.id === id);
-                        if (item) item.status = 'deleted';
-                    }
-                    renderAdmin();
-                } catch (err) { alert('Xatolik: ' + err.message); }
-            }
-        }
-
-        /* ---- UTILS ---- */
-        function show(id) { document.getElementById(id).style.display = 'block'; }
-        function hide(id) { document.getElementById(id).style.display = 'none'; }
-    </script>
-
-    <!-- DETAIL MODAL (mobile) -->
-    <div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
-        <div class="detail-sheet" id="detailSheet">
+    <!-- ====== BOTTOM SHEET ====== -->
+    <div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet(event)">
+        <div class="sheet" id="sheet">
             <div class="sheet-handle"></div>
-            <div class="sheet-name" id="dName"></div>
-            <div class="sheet-rows" id="dRows"></div>
+            <div class="sheet-name" id="sh_name"></div>
+            <div class="sheet-rows" id="sh_rows"></div>
             <div class="sheet-btns">
-                <a class="sheet-call" id="dCall" href="#">📞 Telefon qilish</a>
-                <button class="sheet-action-btn" id="dActionBtn" onclick="sheetAction()"></button>
-                <button class="sheet-action-btn" id="dDeleteBtn" onclick="sheetDelete()"></button>
-                <button class="sheet-close" onclick="closeDetailModal()">✕ Yopish</button>
+                <a class="s-call" id="sh_call" href="#">📞 Telefon qilish</a>
+                <button class="s-btn" id="sh_action" onclick="sheetAction()"></button>
+                <button class="s-btn" id="sh_del" onclick="sheetDel()"></button>
+                <button class="s-btn s-close" onclick="closeSheetModal()">✕ Yopish</button>
             </div>
         </div>
     </div>
 
+    <script src="./index.js"></script>
 </body>
 
 </html>
