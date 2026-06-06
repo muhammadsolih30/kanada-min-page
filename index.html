@@ -1,1285 +1,514 @@
 <!DOCTYPE html>
 <html lang="uz">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fransuz Tili Kursi – Kanada PR Tayyorlov</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --navy: #0a1628;
-            --red: #c41e3a;
-            --gold: #d4a843;
-            --cream: #f8f4ed;
-            --white: #ffffff;
-            --gray: #6b7280;
-            --light-gray: #f3f4f6;
-            --border: #e5e7eb;
-            --green: #16a34a;
-            --green-light: #dcfce7;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--cream);
-            color: var(--navy);
-            overflow-x: hidden;
-        }
-
-        /* NAV */
-        nav {
-            background: var(--navy);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            color: var(--white);
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .logo span {
-            color: var(--gold);
-        }
-
-        nav a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
-        nav a:hover {
-            color: var(--gold);
-        }
-
-        /* HERO */
-        .hero {
-            background: var(--navy);
-            color: white;
-            padding: 5rem 2rem 4rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -20%;
-            width: 60%;
-            height: 200%;
-            background: radial-gradient(ellipse, rgba(212, 168, 67, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(212, 168, 67, 0.15);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            animation: fadeUp 0.6s ease both;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
-            font-weight: 900;
-            line-height: 1.15;
-            margin-bottom: 1.2rem;
-            animation: fadeUp 0.7s ease 0.1s both;
-        }
-
-        .hero h1 em {
-            font-style: normal;
-            color: var(--gold);
-        }
-
-        .hero p {
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.72);
-            max-width: 560px;
-            margin: 0 auto 2.5rem;
-            line-height: 1.7;
-            animation: fadeUp 0.7s ease 0.2s both;
-        }
-
-        .hero-flags {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            animation: fadeUp 0.6s ease 0s both;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            background: var(--red);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: background 0.2s, transform 0.15s;
-            animation: fadeUp 0.7s ease 0.3s both;
-        }
-
-        .cta-btn:hover {
-            background: #a01830;
-            transform: translateY(-2px);
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* STATS */
-        .stats {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            background: var(--white);
-            border-bottom: 3px solid var(--gold);
-        }
-
-        .stat {
-            padding: 1.8rem 2.5rem;
-            text-align: center;
-            flex: 1;
-            min-width: 160px;
-            border-right: 1px solid var(--border);
-        }
-
-        .stat:last-child {
-            border-right: none;
-        }
-
-        .stat-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--red);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.78rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 500;
-        }
-
-        /* SECTION */
-        section {
-            padding: 4rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-tag {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--red);
-            margin-bottom: 0.5rem;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.6rem, 3vw, 2.3rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.25;
-        }
-
-        .section-sub {
-            color: var(--gray);
-            font-size: 0.97rem;
-            line-height: 1.7;
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-        }
-
-        /* KURS TURLARI */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .course-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.8rem;
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
-
-        .course-card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .course-card.featured {
-            border-color: var(--gold);
-            background: linear-gradient(135deg, var(--navy) 0%, #162040 100%);
-            color: white;
-        }
-
-        .course-icon {
-            font-size: 1.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .course-type {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--red);
-            margin-bottom: 0.3rem;
-        }
-
-        .course-card.featured .course-type {
-            color: var(--gold);
-        }
-
-        .course-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .course-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 0.3rem;
-        }
-
-        .course-card.featured .course-price {
-            color: var(--gold);
-        }
-
-        .course-desc {
-            font-size: 0.85rem;
-            color: var(--gray);
-            line-height: 1.5;
-        }
-
-        .course-card.featured .course-desc {
-            color: rgba(255, 255, 255, 0.65);
-        }
-
-        /* INFO GRID */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .info-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-        }
-
-        .info-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .info-card ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-        }
-
-        .info-card ul li {
-            font-size: 0.9rem;
-            color: var(--gray);
-            padding-left: 1.2rem;
-            position: relative;
-            line-height: 1.5;
-        }
-
-        .info-card ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-
-        /* TEACHER */
-        .teacher-box {
-            background: var(--navy);
-            color: white;
-            border-radius: 16px;
-            padding: 2.5rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .teacher-item {
-            text-align: center;
-        }
-
-        .teacher-emoji {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .teacher-item h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-            color: var(--gold);
-        }
-
-        .teacher-item p {
-            font-size: 0.83rem;
-            color: rgba(255, 255, 255, 0.65);
-            line-height: 1.5;
-        }
-
-        /* FORM SECTION */
-        .form-section {
-            background: var(--white);
-            border-top: 1px solid var(--border);
-            padding: 4rem 2rem;
-        }
-
-        .form-wrap {
-            max-width: 560px;
-            margin: 0 auto;
-        }
-
-        .form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        label {
-            display: block;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--navy);
-            margin-bottom: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            background: var(--cream);
-            color: var(--navy);
-            transition: border-color 0.2s;
-            outline: none;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: var(--navy);
-            background: white;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: var(--navy);
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: inherit;
-            letter-spacing: 0.03em;
-            transition: background 0.2s;
-            margin-top: 0.5rem;
-        }
-
-        .submit-btn:hover {
-            background: var(--red);
-        }
-
-        .success-msg {
-            display: none;
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 1rem 1.2rem;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.95rem;
-            margin-top: 1rem;
-        }
-
-        /* FOOTER */
-        footer {
-            background: var(--navy);
-            color: rgba(255, 255, 255, 0.5);
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.82rem;
-        }
-
-        .divider {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 0;
-        }
-
-        /* ======= ADMIN PAGE ======= */
-        #adminPage {
-            display: none;
-            min-height: 100vh;
-            background: #f0f2f5;
-        }
-
-        .admin-nav {
-            background: var(--navy);
-            padding: 0.9rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-nav .logo {
-            font-size: 1.1rem;
-        }
-
-        .admin-logout {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-family: inherit;
-            transition: background 0.2s;
-        }
-
-        .admin-logout:hover {
-            background: var(--red);
-            border-color: var(--red);
-        }
-
-        /* TABS */
-        .admin-tabs {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            padding: 0 1.5rem;
-        }
-
-        .tab-btn {
-            padding: 1rem 1.5rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            font-family: inherit;
-            background: none;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            color: var(--gray);
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tab-btn.active {
-            color: var(--navy);
-            border-bottom-color: var(--navy);
-        }
-
-        .tab-btn .count-badge {
-            background: var(--red);
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.1rem 0.45rem;
-            border-radius: 50px;
-            font-weight: 700;
-        }
-
-        .tab-btn.active.tab-checked .count-badge {
-            background: var(--green);
-        }
-
-        /* ADMIN BODY */
-        .admin-body {
-            padding: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* SUMMARY CARDS */
-        .summary-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .summary-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.2rem 1.5rem;
-        }
-
-        .summary-card .s-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 900;
-        }
-
-        .summary-card .s-label {
-            font-size: 0.78rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-top: 0.2rem;
-        }
-
-        .summary-card.new .s-num {
-            color: var(--red);
-        }
-
-        .summary-card.checked .s-num {
-            color: var(--green);
-        }
-
-        .summary-card.total .s-num {
-            color: var(--navy);
-        }
-
-        /* TABLE */
-        .table-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .table-toolbar {
-            padding: 1rem 1.2rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .table-toolbar h3 {
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
-        .table-wrap {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.88rem;
-            min-width: 640px;
-        }
-
-        thead {
-            background: var(--navy);
-            color: white;
-        }
-
-        th {
-            padding: 0.8rem 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        td {
-            padding: 0.8rem 1rem;
-            border-bottom: 1px solid var(--border);
-            color: var(--navy);
-            vertical-align: middle;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background: var(--light-gray);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 50px;
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
-
-        .badge-m {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .badge-f {
-            background: #fce7f3;
-            color: #9d174d;
-        }
-
-        .badge-new {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .badge-done {
-            background: var(--green-light);
-            color: #15803d;
-        }
-
-        .action-btn {
-            padding: 0.35rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            transition: all 0.15s;
-        }
-
-        .btn-check {
-            background: var(--green-light);
-            color: var(--green);
-        }
-
-        .btn-check:hover {
-            background: var(--green);
-            color: white;
-        }
-
-        .btn-uncheck {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .btn-uncheck:hover {
-            background: var(--red);
-            color: white;
-        }
-
-        .btn-delete {
-            background: var(--light-gray);
-            color: var(--gray);
-            margin-left: 0.3rem;
-        }
-
-        .btn-delete:hover {
-            background: #fee2e2;
-            color: var(--red);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--gray);
-        }
-
-        .empty-state div {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .clear-btn {
-            background: transparent;
-            border: 1px solid var(--red);
-            color: var(--red);
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.15s;
-        }
-
-        .clear-btn:hover {
-            background: var(--red);
-            color: white;
-        }
-
-        /* LOGIN OVERLAY */
-        .login-overlay {
-            position: fixed;
-            inset: 0;
-            background: var(--navy);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-box {
-            background: white;
-            border-radius: 16px;
-            padding: 2.5rem;
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .login-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .login-box p {
-            color: var(--gray);
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            margin-bottom: 1rem;
-            outline: none;
-            text-align: center;
-            letter-spacing: 0.1em;
-        }
-
-        .login-box input:focus {
-            border-color: var(--navy);
-        }
-
-        .login-btn {
-            width: 100%;
-            background: var(--navy);
-            color: white;
-            padding: 0.9rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: inherit;
-            transition: background 0.2s;
-        }
-
-        .login-btn:hover {
-            background: var(--red);
-        }
-
-        .login-error {
-            color: var(--red);
-            font-size: 0.85rem;
-            margin-top: 0.7rem;
-            display: none;
-        }
-
-        .back-link {
-            display: block;
-            margin-top: 1rem;
-            font-size: 0.82rem;
-            color: var(--gray);
-            cursor: pointer;
-        }
-
-        .back-link:hover {
-            color: var(--navy);
-        }
-
-        @media (max-width: 700px) {
-            .teacher-box {
-                grid-template-columns: 1fr;
-            }
-
-            .stat {
-                padding: 1.2rem 1rem;
-            }
-
-            .tab-btn {
-                padding: 0.8rem 1rem;
-                font-size: 0.82rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fransuz Tili Kursi – Kanada PR Tayyorlov</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628; --red: #c41e3a; --gold: #d4a843; --cream: #f8f4ed;
+    --white: #ffffff; --gray: #6b7280; --light-gray: #f3f4f6; --border: #e5e7eb;
+    --green: #16a34a; --green-light: #dcfce7;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--navy); overflow-x:hidden; }
+
+  /* NAV */
+  nav { background:var(--navy); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; }
+  .logo { font-family:'Playfair Display',serif; color:var(--white); font-size:1.4rem; font-weight:700; }
+  .logo span { color:var(--gold); }
+  nav a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.9rem; cursor:pointer; transition:color 0.2s; }
+  nav a:hover { color:var(--gold); }
+
+  /* HERO */
+  .hero { background:var(--navy); color:white; padding:5rem 2rem 4rem; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-50%; left:-20%; width:60%; height:200%; background:radial-gradient(ellipse,rgba(212,168,67,0.08) 0%,transparent 70%); pointer-events:none; }
+  .hero-badge { display:inline-block; background:rgba(212,168,67,0.15); border:1px solid var(--gold); color:var(--gold); padding:0.4rem 1.2rem; border-radius:50px; font-size:0.8rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; animation:fadeUp 0.6s ease both; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; line-height:1.15; margin-bottom:1.2rem; animation:fadeUp 0.7s ease 0.1s both; }
+  .hero h1 em { font-style:normal; color:var(--gold); }
+  .hero p { font-size:1.05rem; color:rgba(255,255,255,0.72); max-width:560px; margin:0 auto 2.5rem; line-height:1.7; animation:fadeUp 0.7s ease 0.2s both; }
+  .hero-flags { font-size:2.5rem; margin-bottom:1rem; animation:fadeUp 0.6s ease 0s both; }
+  .cta-btn { display:inline-block; background:var(--red); color:white; padding:1rem 2.5rem; border-radius:8px; font-size:1rem; font-weight:600; cursor:pointer; border:none; transition:background 0.2s,transform 0.15s; animation:fadeUp 0.7s ease 0.3s both; }
+  .cta-btn:hover { background:#a01830; transform:translateY(-2px); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* STATS */
+  .stats { display:flex; flex-wrap:wrap; background:var(--white); border-bottom:3px solid var(--gold); }
+  .stat { padding:1.8rem 2.5rem; text-align:center; flex:1; min-width:160px; border-right:1px solid var(--border); }
+  .stat:last-child { border-right:none; }
+  .stat-num { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--red); display:block; }
+  .stat-label { font-size:0.78rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.06em; font-weight:500; }
+
+  section { padding:4rem 2rem; max-width:1100px; margin:0 auto; }
+  .section-tag { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--red); margin-bottom:0.5rem; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.3rem); font-weight:700; margin-bottom:1rem; line-height:1.25; }
+  .section-sub { color:var(--gray); font-size:0.97rem; line-height:1.7; max-width:600px; margin-bottom:2.5rem; }
+
+  .courses-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.2rem; }
+  .course-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:1.8rem; transition:box-shadow 0.2s,transform 0.2s; }
+  .course-card:hover { box-shadow:0 8px 30px rgba(0,0,0,0.1); transform:translateY(-3px); }
+  .course-card.featured { border-color:var(--gold); background:linear-gradient(135deg,var(--navy) 0%,#162040 100%); color:white; }
+  .course-icon { font-size:1.8rem; margin-bottom:0.8rem; }
+  .course-type { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--red); margin-bottom:0.3rem; }
+  .course-card.featured .course-type { color:var(--gold); }
+  .course-name { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:0.5rem; }
+  .course-price { font-size:1.5rem; font-weight:700; color:var(--navy); margin-bottom:0.3rem; }
+  .course-card.featured .course-price { color:var(--gold); }
+  .course-desc { font-size:0.85rem; color:var(--gray); line-height:1.5; }
+  .course-card.featured .course-desc { color:rgba(255,255,255,0.65); }
+
+  .info-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+  .info-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:2rem; }
+  .info-card h3 { font-family:'Playfair Display',serif; font-size:1.1rem; margin-bottom:1rem; }
+  .info-card ul { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
+  .info-card ul li { font-size:0.9rem; color:var(--gray); padding-left:1.2rem; position:relative; line-height:1.5; }
+  .info-card ul li::before { content:'✓'; position:absolute; left:0; color:var(--gold); font-weight:700; font-size:0.8rem; }
+
+  .teacher-box { background:var(--navy); color:white; border-radius:16px; padding:2.5rem; display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; }
+  .teacher-item { text-align:center; }
+  .teacher-emoji { font-size:2.5rem; margin-bottom:0.5rem; }
+  .teacher-item h4 { font-family:'Playfair Display',serif; font-size:1rem; margin-bottom:0.3rem; color:var(--gold); }
+  .teacher-item p { font-size:0.83rem; color:rgba(255,255,255,0.65); line-height:1.5; }
+
+  .form-section { background:var(--white); border-top:1px solid var(--border); padding:4rem 2rem; }
+  .form-wrap { max-width:560px; margin:0 auto; }
+  .form-header { text-align:center; margin-bottom:2rem; }
+  .form-group { margin-bottom:1.2rem; }
+  label { display:block; font-size:0.82rem; font-weight:600; color:var(--navy); margin-bottom:0.4rem; text-transform:uppercase; letter-spacing:0.05em; }
+  input, select { width:100%; padding:0.85rem 1rem; border:1.5px solid var(--border); border-radius:8px; font-size:0.95rem; font-family:inherit; background:var(--cream); color:var(--navy); transition:border-color 0.2s; outline:none; }
+  input:focus, select:focus { border-color:var(--navy); background:white; }
+  .submit-btn { width:100%; background:var(--navy); color:white; padding:1rem; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; font-family:inherit; transition:background 0.2s; margin-top:0.5rem; }
+  .submit-btn:hover { background:var(--red); }
+  .submit-btn:disabled { background:var(--gray); cursor:not-allowed; }
+  .success-msg { display:none; background:#d4edda; border:1px solid #c3e6cb; color:#155724; padding:1rem 1.2rem; border-radius:8px; text-align:center; font-size:0.95rem; margin-top:1rem; }
+  .error-msg { display:none; background:#fee2e2; border:1px solid #fca5a5; color:#991b1b; padding:1rem 1.2rem; border-radius:8px; text-align:center; font-size:0.95rem; margin-top:1rem; }
+
+  footer { background:var(--navy); color:rgba(255,255,255,0.5); text-align:center; padding:2rem; font-size:0.82rem; }
+  .divider { border:none; border-top:1px solid var(--border); margin:0; }
+
+  /* ===== ADMIN ===== */
+  #adminPage { display:none; min-height:100vh; background:#f0f2f5; }
+  .admin-nav { background:var(--navy); padding:0.9rem 1.5rem; display:flex; justify-content:space-between; align-items:center; }
+  .admin-logout { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white; padding:0.4rem 1rem; border-radius:6px; cursor:pointer; font-size:0.85rem; font-family:inherit; }
+  .admin-logout:hover { background:var(--red); border-color:var(--red); }
+
+  .admin-tabs { background:var(--white); border-bottom:1px solid var(--border); display:flex; padding:0 1.5rem; }
+  .tab-btn { padding:1rem 1.5rem; font-size:0.9rem; font-weight:600; font-family:inherit; background:none; border:none; border-bottom:3px solid transparent; cursor:pointer; color:var(--gray); transition:all 0.2s; display:flex; align-items:center; gap:0.5rem; }
+  .tab-btn.active { color:var(--navy); border-bottom-color:var(--navy); }
+  .cnt { background:var(--red); color:white; font-size:0.7rem; padding:0.1rem 0.45rem; border-radius:50px; font-weight:700; min-width:18px; text-align:center; }
+  .cnt.green { background:var(--green); }
+
+  .admin-body { padding:1.5rem; max-width:1200px; margin:0 auto; }
+  .summary-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-bottom:1.5rem; }
+  .summary-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:1.2rem 1.5rem; }
+  .s-num { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; }
+  .s-label { font-size:0.78rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.06em; margin-top:0.2rem; }
+  .sc-total .s-num { color:var(--navy); }
+  .sc-new .s-num { color:var(--red); }
+  .sc-done .s-num { color:var(--green); }
+
+  .table-card { background:var(--white); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  .table-toolbar { padding:1rem 1.2rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .table-toolbar h3 { font-size:0.95rem; font-weight:700; }
+  .table-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:0.88rem; min-width:680px; }
+  thead { background:var(--navy); color:white; }
+  th { padding:0.8rem 1rem; text-align:left; font-weight:600; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; }
+  td { padding:0.8rem 1rem; border-bottom:1px solid var(--border); color:var(--navy); vertical-align:middle; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:var(--light-gray); }
+
+  .badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:50px; font-size:0.72rem; font-weight:600; }
+  .badge-m { background:#dbeafe; color:#1e40af; }
+  .badge-f { background:#fce7f3; color:#9d174d; }
+  .action-btn { padding:0.35rem 0.8rem; border-radius:6px; font-size:0.78rem; font-weight:600; cursor:pointer; border:none; font-family:inherit; transition:all 0.15s; }
+  .btn-check { background:var(--green-light); color:var(--green); }
+  .btn-check:hover { background:var(--green); color:white; }
+  .btn-uncheck { background:#fee2e2; color:#991b1b; }
+  .btn-uncheck:hover { background:var(--red); color:white; }
+  .btn-delete { background:var(--light-gray); color:var(--gray); margin-left:0.3rem; }
+  .btn-delete:hover { background:#fee2e2; color:var(--red); }
+  .clear-btn { background:transparent; border:1px solid var(--red); color:var(--red); padding:0.4rem 1rem; border-radius:6px; font-size:0.8rem; cursor:pointer; font-family:inherit; }
+  .clear-btn:hover { background:var(--red); color:white; }
+
+  .empty-state { text-align:center; padding:3rem; color:var(--gray); }
+  .empty-state .ei { font-size:3rem; margin-bottom:1rem; }
+
+  .loading-row td { text-align:center; color:var(--gray); padding:2rem; }
+
+  /* LOGIN */
+  .login-overlay { position:fixed; inset:0; background:var(--navy); z-index:9999; display:none; align-items:center; justify-content:center; }
+  .login-overlay.show { display:flex; }
+  .login-box { background:white; border-radius:16px; padding:2.5rem; width:90%; max-width:380px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+  .login-box h2 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:0.3rem; }
+  .login-box p { color:var(--gray); font-size:0.85rem; margin-bottom:1.5rem; }
+  .login-box input { width:100%; padding:0.85rem 1rem; border:1.5px solid var(--border); border-radius:8px; font-size:1rem; font-family:inherit; margin-bottom:1rem; outline:none; text-align:center; letter-spacing:0.15em; }
+  .login-box input:focus { border-color:var(--navy); }
+  .login-btn { width:100%; background:var(--navy); color:white; padding:0.9rem; border:none; border-radius:8px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+  .login-btn:hover { background:var(--red); }
+  .login-err { color:var(--red); font-size:0.85rem; margin-top:0.7rem; display:none; }
+  .back-link { display:block; margin-top:1rem; font-size:0.82rem; color:var(--gray); cursor:pointer; }
+  .back-link:hover { color:var(--navy); }
+
+  @media(max-width:700px){
+    .teacher-box{grid-template-columns:1fr}
+    .stat{padding:1.2rem 1rem}
+    .tab-btn{padding:0.8rem 1rem;font-size:0.82rem}
+  }
+</style>
 </head>
-
 <body>
 
-    <!-- ========== MAIN SITE ========== -->
-    <div id="mainSite">
+<!-- MAIN SITE -->
+<div id="mainSite">
+  <nav>
+    <div class="logo">Fransuz<span>Tili</span></div>
+    <a onclick="openLogin()">⚙ Admin</a>
+  </nav>
 
-        <nav>
-            <div class="logo">Fransuz<span>Tili</span></div>
-            <a onclick="goAdmin()">⚙ Admin</a>
-        </nav>
+  <div class="hero">
+    <div class="hero-flags">🇫🇷 🇨🇦</div>
+    <div class="hero-badge">TCF Canada · Express Entry · PR</div>
+    <h1>Fransuz tilini o'rganib,<br><em>Kanadaga yo'l oching</em></h1>
+    <p>TCF Canada imtihoniga professional tayyorlov. B2 darajasiga erishing va Kanada PR dasturiga murojaat qiling.</p>
+    <button class="cta-btn" onclick="document.getElementById('registration').scrollIntoView({behavior:'smooth'})">Ro'yxatdan o'tish →</button>
+  </div>
 
-        <div class="hero">
-            <div class="hero-flags">🇫🇷 🇨🇦</div>
-            <div class="hero-badge">TCF Canada · Express Entry · PR</div>
-            <h1>Fransuz tilini o'rganib,<br><em>Kanadaga yo'l oching</em></h1>
-            <p>TCF Canada imtihoniga professional tayyorlov. B2 darajasiga erishing va Kanada PR dasturiga murojaat
-                qiling.</p>
-            <button class="cta-btn"
-                onclick="document.getElementById('registration').scrollIntoView({behavior:'smooth'})">
-                Ro'yxatdan o'tish →
-            </button>
-        </div>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">6–8</span><span class="stat-label">oy kurs davomiyligi</span></div>
+    <div class="stat"><span class="stat-num">B2</span><span class="stat-label">maqsad daraja</span></div>
+    <div class="stat"><span class="stat-num">C1+</span><span class="stat-label">o'qituvchi darajasi</span></div>
+    <div class="stat"><span class="stat-num">10+</span><span class="stat-label">yil tajriba</span></div>
+  </div>
 
-        <div class="stats">
-            <div class="stat"><span class="stat-num">6–8</span><span class="stat-label">oy kurs davomiyligi</span></div>
-            <div class="stat"><span class="stat-num">B2</span><span class="stat-label">maqsad daraja</span></div>
-            <div class="stat"><span class="stat-num">C1+</span><span class="stat-label">o'qituvchi darajasi</span></div>
-            <div class="stat"><span class="stat-num">10+</span><span class="stat-label">yil tajriba</span></div>
-        </div>
+  <section>
+    <div class="section-tag">Kurs turlari</div>
+    <div class="section-title">O'zingizga mos formatni tanlang</div>
+    <p class="section-sub">Barcha kurslar TCF Canada imtihoniga yo'naltirilgan. Listening, Reading, Writing va Speaking bo'limlari bo'yicha strategiyalar o'rgatiladi.</p>
+    <div class="courses-grid">
+      <div class="course-card"><div class="course-icon">🏫</div><div class="course-type">Offline</div><div class="course-name">Guruh darslari</div><div class="course-price">700 000 so'm</div><div class="course-desc">Talabga qarab guruh soati belgilanadi. Yuzma-yuz muloqot va amaliyot.</div></div>
+      <div class="course-card featured"><div class="course-icon">💻</div><div class="course-type">Online</div><div class="course-name">Guruh darslari</div><div class="course-price">490 000 so'm</div><div class="course-desc">Asosan kechki vaqtlarda. Zoom va Google Meet orqali. Qulay va arzon.</div></div>
+      <div class="course-card"><div class="course-icon">👥</div><div class="course-type">Mini-guruh</div><div class="course-name">2–3 kishi</div><div class="course-price">900 000 so'm</div><div class="course-desc">Kichik guruhda intensiv tayyorlov. Qulay vaqtga moslab belgilanadi.</div></div>
+      <div class="course-card"><div class="course-icon">👤</div><div class="course-type">Individual</div><div class="course-name">Shaxsiy darslar</div><div class="course-price">1 200 000 so'm</div><div class="course-desc">To'liq individual yondashuv. O'quvchiga qulay vaqt va sur'at.</div></div>
+    </div>
+  </section>
 
-        <section>
-            <div class="section-tag">Kurs turlari</div>
-            <div class="section-title">O'zingizga mos formatni tanlang</div>
-            <p class="section-sub">Barcha kurslar TCF Canada imtihoniga yo'naltirilgan. Listening, Reading, Writing va
-                Speaking bo'limlari bo'yicha kerakli strategiyalar o'rgatiladi.</p>
-            <div class="courses-grid">
-                <div class="course-card">
-                    <div class="course-icon">🏫</div>
-                    <div class="course-type">Offline</div>
-                    <div class="course-name">Guruh darslari</div>
-                    <div class="course-price">700 000 so'm</div>
-                    <div class="course-desc">Talabga qarab guruh soati belgilanadi. Yuzma-yuz muloqot va amaliyot.</div>
-                </div>
-                <div class="course-card featured">
-                    <div class="course-icon">💻</div>
-                    <div class="course-type">Online</div>
-                    <div class="course-name">Guruh darslari</div>
-                    <div class="course-price">490 000 so'm</div>
-                    <div class="course-desc">Asosan kechki vaqtlarda. Zoom va Google Meet orqali. Qulay va arzon.</div>
-                </div>
-                <div class="course-card">
-                    <div class="course-icon">👥</div>
-                    <div class="course-type">Mini-guruh</div>
-                    <div class="course-name">2–3 kishi</div>
-                    <div class="course-price">900 000 so'm</div>
-                    <div class="course-desc">Kichik guruhda intensiv tayyorlov. Qulay vaqtga moslab belgilanadi.</div>
-                </div>
-                <div class="course-card">
-                    <div class="course-icon">👤</div>
-                    <div class="course-type">Individual</div>
-                    <div class="course-name">Shaxsiy darslar</div>
-                    <div class="course-price">1 200 000 so'm</div>
-                    <div class="course-desc">To'liq individual yondashuv. O'quvchiga qulay vaqt va sur'at.</div>
-                </div>
-            </div>
-        </section>
+  <hr class="divider">
 
-        <hr class="divider">
+  <section>
+    <div class="section-tag">Batafsil ma'lumot</div>
+    <div class="section-title">Nima o'rgatiladi?</div>
+    <div class="info-grid">
+      <div class="info-card"><h3>📚 Dars tarkibi</h3><ul><li>Speaking (og'zaki nutq)</li><li>Listening (tinglash)</li><li>Reading (o'qish)</li><li>Writing (yozish)</li><li>Grammar (grammatika)</li><li>Vocabulary (so'z boyligi)</li></ul></div>
+      <div class="info-card"><h3>🎯 Sertifikatlar</h3><ul><li>TCF Canada (asosiy maqsad)</li><li>DELF / DALF</li><li>CEFR darajasi</li><li>Imtihon strategiyalari</li><li>Namuna testlar</li><li>Mock imtihonlar</li></ul></div>
+      <div class="info-card"><h3>📋 Markazi qoidalari</h3><ul><li>Darslarga o'z vaqtida qatnashish</li><li>Uy vazifalarini muntazam bajarish</li><li>To'lovlarni belgilangan muddatda to'lash</li><li>O'qituvchi va guruhdoshlarni hurmat qilish</li><li>Sababsiz qoldirilgan darslar qayta o'tilmaydi</li></ul></div>
+      <div class="info-card"><h3>🇨🇦 Immigratsiya yo'nalishi</h3><ul><li>Express Entry dasturi bo'yicha yo'nalish</li><li>TCF Canada B2 talab darajasi</li><li>Hujjat ishlari bilan shug'ullanmaymiz</li><li>Umumiy yo'nalish va maslahat beriladi</li><li>Kanada PR jarayoni tushuntiriladi</li></ul></div>
+    </div>
+  </section>
 
-        <section>
-            <div class="section-tag">Batafsil ma'lumot</div>
-            <div class="section-title">Nima o'rgatiladi?</div>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3>📚 Dars tarkibi</h3>
-                    <ul>
-                        <li>Speaking (og'zaki nutq)</li>
-                        <li>Listening (tinglash)</li>
-                        <li>Reading (o'qish)</li>
-                        <li>Writing (yozish)</li>
-                        <li>Grammar (grammatika)</li>
-                        <li>Vocabulary (so'z boyligi)</li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h3>🎯 Sertifikatlar</h3>
-                    <ul>
-                        <li>TCF Canada (asosiy maqsad)</li>
-                        <li>DELF / DALF</li>
-                        <li>CEFR darajasi</li>
-                        <li>Imtihon strategiyalari</li>
-                        <li>Namuna testlar</li>
-                        <li>Mock imtihonlar</li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h3>📋 O'quv markazi qoidalari</h3>
-                    <ul>
-                        <li>Darslarga o'z vaqtida qatnashish</li>
-                        <li>Uy vazifalarini muntazam bajarish</li>
-                        <li>To'lovlarni belgilangan muddatda amalga oshirish</li>
-                        <li>O'qituvchi va guruhdoshlarni hurmat qilish</li>
-                        <li>Sababsiz qoldirilgan darslar qayta o'tilmaydi</li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h3>🇨🇦 Immigratsiya yo'nalishi</h3>
-                    <ul>
-                        <li>Express Entry dasturi bo'yicha yo'nalish</li>
-                        <li>TCF Canada B2 talab darajasi</li>
-                        <li>Hujjat ishlari bilan shug'ullanmaymiz</li>
-                        <li>Umumiy yo'nalish va maslahat beriladi</li>
-                        <li>Kanada PR jarayoni tushuntiriladi</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+  <hr class="divider">
 
-        <hr class="divider">
+  <section>
+    <div class="section-tag">Jamoamiz</div>
+    <div class="section-title">Tajribali o'qituvchilar</div>
+    <div class="teacher-box">
+      <div class="teacher-item"><div class="teacher-emoji">🎓</div><h4>C1+ Daraja</h4><p>Barcha ustozlarimiz fransuz tilini C1 va undan yuqori darajada biladi</p></div>
+      <div class="teacher-item"><div class="teacher-emoji">📅</div><h4>10+ Yil Tajriba</h4><p>10 yildan ortiq pedagogik tajribaga ega mutaxassislar faoliyat yuritadi</p></div>
+      <div class="teacher-item"><div class="teacher-emoji">🌍</div><h4>Native Speaker</h4><p>Fransuz tilida so'zlashuvchi native speaker va xalqaro imtihon mutaxassislari mavjud</p></div>
+    </div>
+  </section>
 
-        <section>
-            <div class="section-tag">Jamoamiz</div>
-            <div class="section-title">Tajribali o'qituvchilar</div>
-            <div class="teacher-box">
-                <div class="teacher-item">
-                    <div class="teacher-emoji">🎓</div>
-                    <h4>C1+ Daraja</h4>
-                    <p>Barcha ustozlarimiz fransuz tilini C1 va undan yuqori darajada biladi</p>
-                </div>
-                <div class="teacher-item">
-                    <div class="teacher-emoji">📅</div>
-                    <h4>10+ Yil Tajriba</h4>
-                    <p>10 yildan ortiq pedagogik tajribaga ega mutaxassislar faoliyat yuritadi</p>
-                </div>
-                <div class="teacher-item">
-                    <div class="teacher-emoji">🌍</div>
-                    <h4>Native Speaker</h4>
-                    <p>Jamoamizda fransuz tilida so'zlashuvchi native speaker va xalqaro imtihon mutaxassislari mavjud
-                    </p>
-                </div>
-            </div>
-        </section>
+  <div class="form-section" id="registration">
+    <div class="form-wrap">
+      <div class="form-header">
+        <div class="section-tag" style="text-align:center">Ro'yxatdan o'tish</div>
+        <div class="section-title" style="text-align:center">Bugun boshlang</div>
+        <p style="color:var(--gray);font-size:0.92rem;margin-top:0.5rem">Ma'lumotlaringizni qoldiring, mutaxassislarimiz siz bilan bog'lanadi.</p>
+      </div>
+      <form id="regForm" onsubmit="submitForm(event)">
+        <div class="form-group"><label>Ism *</label><input type="text" id="fname" placeholder="Ismingiz" required></div>
+        <div class="form-group"><label>Familiya *</label><input type="text" id="lname" placeholder="Familiyangiz" required></div>
+        <div class="form-group"><label>Yosh *</label><input type="number" id="age" placeholder="Yoshingiz" min="14" max="70" required></div>
+        <div class="form-group"><label>Jinsi *</label><select id="gender" required><option value="">Tanlang...</option><option value="Erkak">Erkak</option><option value="Ayol">Ayol</option></select></div>
+        <div class="form-group"><label>Telefon raqami *</label><input type="tel" id="phone" placeholder="+998 90 000 00 00" required></div>
+        <button type="submit" class="submit-btn" id="submitBtn">Ro'yxatdan o'tish →</button>
+      </form>
+      <div class="success-msg" id="successMsg">✅ Muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.</div>
+      <div class="error-msg" id="errorMsg">❌ Xatolik yuz berdi. Qayta urinib ko'ring.</div>
+    </div>
+  </div>
 
-        <div class="form-section" id="registration">
-            <div class="form-wrap">
-                <div class="form-header">
-                    <div class="section-tag" style="text-align:center">Ro'yxatdan o'tish</div>
-                    <div class="section-title" style="text-align:center">Bugun boshlang</div>
-                    <p style="color:var(--gray);font-size:0.92rem;margin-top:0.5rem">Ma'lumotlaringizni qoldiring,
-                        mutaxassislarimiz siz bilan bog'lanadi.</p>
-                </div>
-                <form id="regForm" onsubmit="submitForm(event)">
-                    <div class="form-group"><label>Ism *</label><input type="text" id="fname" placeholder="Ismingiz"
-                            required></div>
-                    <div class="form-group"><label>Familiya *</label><input type="text" id="lname"
-                            placeholder="Familiyangiz" required></div>
-                    <div class="form-group"><label>Yosh *</label><input type="number" id="age" placeholder="Yoshingiz"
-                            min="14" max="70" required></div>
-                    <div class="form-group">
-                        <label>Jinsi *</label>
-                        <select id="gender" required>
-                            <option value="">Tanlang...</option>
-                            <option value="Erkak">Erkak</option>
-                            <option value="Ayol">Ayol</option>
-                        </select>
-                    </div>
-                    <div class="form-group"><label>Telefon raqami *</label><input type="tel" id="phone"
-                            placeholder="+998 90 000 00 00" required></div>
-                    <button type="submit" class="submit-btn">Ro'yxatdan o'tish →</button>
-                </form>
-                <div class="success-msg" id="successMsg">✅ Muvaffaqiyatli! Tez orada siz bilan bog'lanamiz.</div>
-            </div>
-        </div>
+  <footer>
+    <p>© 2025 Fransuz Tili Kursi · TCF Canada Tayyorlov Markazi</p>
+    <p style="margin-top:0.3rem">Barcha huquqlar himoyalangan</p>
+  </footer>
+</div>
 
-        <footer>
-            <p>© 2025 Fransuz Tili Kursi · TCF Canada Tayyorlov Markazi</p>
-            <p style="margin-top:0.3rem">Barcha huquqlar himoyalangan</p>
-        </footer>
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div style="font-size:2.5rem;margin-bottom:0.5rem">🔐</div>
+    <h2>Admin Kirish</h2>
+    <p>Davom etish uchun parol kiriting</p>
+    <input type="password" id="adminPassInput" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()">
+    <button class="login-btn" onclick="doLogin()">Kirish</button>
+    <p class="login-err" id="loginErr">❌ Noto'g'ri parol!</p>
+    <span class="back-link" onclick="closeLogin()">← Ortga qaytish</span>
+  </div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div id="adminPage">
+  <nav class="admin-nav">
+    <div class="logo">Fransuz<span>Tili</span> <span style="font-size:0.8rem;opacity:0.6">· Admin</span></div>
+    <button class="admin-logout" onclick="logout()">Chiqish →</button>
+  </nav>
+
+  <div class="admin-tabs">
+    <button class="tab-btn active" id="tabNew" onclick="switchTab('new')">
+      📥 Yangi arizalar <span class="cnt" id="cntNew">0</span>
+    </button>
+    <button class="tab-btn" id="tabDone" onclick="switchTab('checked')">
+      ✅ Tekshirilganlar <span class="cnt green" id="cntDone">0</span>
+    </button>
+  </div>
+
+  <div class="admin-body">
+    <div class="summary-cards">
+      <div class="summary-card sc-total"><div class="s-num" id="sTotal">0</div><div class="s-label">Jami arizalar</div></div>
+      <div class="summary-card sc-new"><div class="s-num" id="sNew">0</div><div class="s-label">Yangi / Ko'rilmagan</div></div>
+      <div class="summary-card sc-done"><div class="s-num" id="sDone">0</div><div class="s-label">Tekshirilgan</div></div>
     </div>
 
-    <!-- ========== ADMIN LOGIN OVERLAY ========== -->
-    <div class="login-overlay" id="loginOverlay" style="display:none">
-        <div class="login-box">
-            <div style="font-size:2.5rem;margin-bottom:0.5rem">🔐</div>
-            <h2>Admin Kirish</h2>
-            <p>Davom etish uchun parol kiriting</p>
-            <input type="password" id="adminPassInput" placeholder="••••••••"
-                onkeydown="if(event.key==='Enter') doLogin()">
-            <button class="login-btn" onclick="doLogin()">Kirish</button>
-            <p class="login-error" id="loginErr">❌ Noto'g'ri parol!</p>
-            <span class="back-link" onclick="cancelLogin()">← Ortga qaytish</span>
-        </div>
+    <div class="table-card">
+      <div class="table-toolbar">
+        <h3 id="tblTitle">📥 Yangi arizalar</h3>
+        <button class="clear-btn" onclick="clearTab()">Ro'yxatni tozalash</button>
+      </div>
+      <div class="table-wrap" id="tableWrap">
+        <div class="empty-state"><div class="ei">⏳</div><p>Yuklanmoqda...</p></div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- ========== ADMIN PAGE ========== -->
-    <div id="adminPage">
-        <nav class="admin-nav">
-            <div class="logo">Fransuz<span>Tili</span> · <span style="font-size:0.85rem;opacity:0.7">Admin</span></div>
-            <button class="admin-logout" onclick="logout()">Chiqish →</button>
-        </nav>
+<script>
+  /* ---- CONFIG ---- */
+  const SB_URL = 'https://fireuryrmexwmindvqlx.supabase.co';
+  const SB_KEY = 'sb_publishable_PMjg2XXVVAChMDzowbDhsg_CuCAGY1C';
+  const TABLE  = 'arizalar';
 
-        <div class="admin-tabs">
-            <button class="tab-btn active" id="tabNew" onclick="switchTab('new')">
-                📥 Yangi arizalar <span class="count-badge" id="newCount">0</span>
-            </button>
-            <button class="tab-btn tab-checked" id="tabChecked" onclick="switchTab('checked')">
-                ✅ Tekshirilganlar <span class="count-badge" id="checkedCount" style="background:var(--green)">0</span>
-            </button>
-        </div>
+  /* ---- SUPABASE HELPERS ---- */
+  async function sbFetch(path, opts = {}) {
+    const res = await fetch(SB_URL + '/rest/v1/' + path, {
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': opts.prefer || '',
+        ...opts.headers
+      },
+      method: opts.method || 'GET',
+      body: opts.body ? JSON.stringify(opts.body) : undefined
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err);
+    }
+    const txt = await res.text();
+    return txt ? JSON.parse(txt) : null;
+  }
 
-        <div class="admin-body">
-            <!-- Summary -->
-            <div class="summary-cards">
-                <div class="summary-card total">
-                    <div class="s-num" id="totalNum">0</div>
-                    <div class="s-label">Jami arizalar</div>
-                </div>
-                <div class="summary-card new">
-                    <div class="s-num" id="newNum">0</div>
-                    <div class="s-label">Yangi / Ko'rilmagan</div>
-                </div>
-                <div class="summary-card checked">
-                    <div class="s-num" id="checkedNum">0</div>
-                    <div class="s-label">Tekshirilgan</div>
-                </div>
-            </div>
+  async function insertAriza(data) {
+    return sbFetch(TABLE, { method:'POST', prefer:'return=representation', body: data });
+  }
 
-            <!-- Table -->
-            <div class="table-card">
-                <div class="table-toolbar">
-                    <h3 id="tableTitle">📥 Yangi arizalar</h3>
-                    <button class="clear-btn" onclick="clearCurrent()">Ro'yxatni tozalash</button>
-                </div>
-                <div class="table-wrap">
-                    <div id="tableArea"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+  async function fetchAll() {
+    return sbFetch(TABLE + '?order=created_at.desc&select=*');
+  }
 
-    <script>
-        const STORE_KEY = 'fransuz_kurs_v2';
+  async function updateStatus(id, status) {
+    return sbFetch(TABLE + '?id=eq.' + id, {
+      method: 'PATCH',
+      prefer: 'return=representation',
+      body: { status }
+    });
+  }
 
-        function getData() {
-            try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{"new":[],"checked":[]}'); }
-            catch { return { new: [], checked: [] }; }
-        }
-        function saveData(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
+  async function deleteRow(id) {
+    return sbFetch(TABLE + '?id=eq.' + id, { method: 'DELETE' });
+  }
 
-        // ---- FORM ----
-        function submitForm(e) {
-            e.preventDefault();
-            const fname = document.getElementById('fname').value.trim();
-            const lname = document.getElementById('lname').value.trim();
-            const age = document.getElementById('age').value;
-            const gender = document.getElementById('gender').value;
-            const phone = document.getElementById('phone').value.trim();
-            if (!fname || !lname || !age || !gender || !phone) return;
+  async function deleteByStatus(status) {
+    return sbFetch(TABLE + '?status=eq.' + status, { method: 'DELETE' });
+  }
 
-            const d = getData();
-            d.new.unshift({ id: Date.now(), fname, lname, age, gender, phone, date: new Date().toLocaleString('uz-UZ') });
-            saveData(d);
+  /* ---- FORM SUBMIT ---- */
+  async function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Yuklanmoqda...';
 
-            document.getElementById('regForm').reset();
-            const msg = document.getElementById('successMsg');
-            msg.style.display = 'block';
-            setTimeout(() => msg.style.display = 'none', 5000);
-        }
+    const payload = {
+      fname:  document.getElementById('fname').value.trim(),
+      lname:  document.getElementById('lname').value.trim(),
+      age:    parseInt(document.getElementById('age').value),
+      gender: document.getElementById('gender').value,
+      phone:  document.getElementById('phone').value.trim(),
+      status: 'new'
+    };
 
-        // ---- ADMIN NAV ----
-        function goAdmin() {
-            document.getElementById('loginOverlay').style.display = 'flex';
-            document.getElementById('adminPassInput').value = '';
-            document.getElementById('loginErr').style.display = 'none';
-            setTimeout(() => document.getElementById('adminPassInput').focus(), 100);
-        }
+    try {
+      await insertAriza(payload);
+      document.getElementById('regForm').reset();
+      show('successMsg');
+      setTimeout(() => hide('successMsg'), 6000);
+    } catch(err) {
+      console.error(err);
+      show('errorMsg');
+      setTimeout(() => hide('errorMsg'), 5000);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Ro'yxatdan o'tish →";
+    }
+  }
 
-        function doLogin() {
-            const pass = document.getElementById('adminPassInput').value;
-            if (pass === 'admin1234') {
-                document.getElementById('loginOverlay').style.display = 'none';
-                document.getElementById('mainSite').style.display = 'none';
-                document.getElementById('adminPage').style.display = 'block';
-                currentTab = 'new';
-                renderAdmin();
-            } else {
-                document.getElementById('loginErr').style.display = 'block';
-            }
-        }
+  /* ---- LOGIN ---- */
+  function openLogin() {
+    document.getElementById('adminPassInput').value = '';
+    document.getElementById('loginErr').style.display = 'none';
+    document.getElementById('loginOverlay').classList.add('show');
+    setTimeout(() => document.getElementById('adminPassInput').focus(), 100);
+  }
+  function closeLogin() {
+    document.getElementById('loginOverlay').classList.remove('show');
+  }
+  function doLogin() {
+    if (document.getElementById('adminPassInput').value === 'admin1234') {
+      closeLogin();
+      document.getElementById('mainSite').style.display = 'none';
+      document.getElementById('adminPage').style.display = 'block';
+      currentTab = 'new';
+      loadAdmin();
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+    }
+  }
+  function logout() {
+    document.getElementById('adminPage').style.display = 'none';
+    document.getElementById('mainSite').style.display = 'block';
+  }
 
-        function cancelLogin() {
-            document.getElementById('loginOverlay').style.display = 'none';
-        }
+  /* ---- ADMIN ---- */
+  let currentTab = 'new';
+  let allData = [];
 
-        function logout() {
-            document.getElementById('adminPage').style.display = 'none';
-            document.getElementById('mainSite').style.display = 'block';
-        }
+  async function loadAdmin() {
+    document.getElementById('tableWrap').innerHTML = '<div class="empty-state"><div class="ei">⏳</div><p>Ma\'lumotlar yuklanmoqda...</p></div>';
+    try {
+      allData = await fetchAll();
+      renderAdmin();
+    } catch(err) {
+      document.getElementById('tableWrap').innerHTML = '<div class="empty-state"><div class="ei">❌</div><p>Xatolik: ' + err.message + '</p></div>';
+    }
+  }
 
-        // ---- TABS ----
-        let currentTab = 'new';
+  function renderAdmin() {
+    const newItems     = allData.filter(a => a.status === 'new');
+    const checkedItems = allData.filter(a => a.status === 'checked');
 
-        function switchTab(tab) {
-            currentTab = tab;
-            document.getElementById('tabNew').classList.toggle('active', tab === 'new');
-            document.getElementById('tabChecked').classList.toggle('active', tab === 'checked');
-            renderTable();
-            document.getElementById('tableTitle').textContent =
-                tab === 'new' ? '📥 Yangi arizalar' : '✅ Tekshirilganlar';
-        }
+    document.getElementById('cntNew').textContent  = newItems.length;
+    document.getElementById('cntDone').textContent = checkedItems.length;
+    document.getElementById('sTotal').textContent  = allData.length;
+    document.getElementById('sNew').textContent    = newItems.length;
+    document.getElementById('sDone').textContent   = checkedItems.length;
 
-        function renderAdmin() {
-            const d = getData();
-            const nLen = d.new.length;
-            const cLen = d.checked.length;
+    const list = currentTab === 'new' ? newItems : checkedItems;
+    renderTable(list);
+  }
 
-            document.getElementById('newCount').textContent = nLen;
-            document.getElementById('checkedCount').textContent = cLen;
-            document.getElementById('totalNum').textContent = nLen + cLen;
-            document.getElementById('newNum').textContent = nLen;
-            document.getElementById('checkedNum').textContent = cLen;
+  function switchTab(tab) {
+    currentTab = tab;
+    document.getElementById('tabNew').classList.toggle('active', tab === 'new');
+    document.getElementById('tabDone').classList.toggle('active', tab === 'checked');
+    document.getElementById('tblTitle').textContent = tab === 'new' ? '📥 Yangi arizalar' : '✅ Tekshirilganlar';
+    renderAdmin();
+  }
 
-            renderTable();
-        }
+  function renderTable(list) {
+    const wrap = document.getElementById('tableWrap');
+    if (!list || list.length === 0) {
+      wrap.innerHTML = `<div class="empty-state"><div class="ei">${currentTab==='new'?'📭':'🗂️'}</div><p>${currentTab==='new'?"Yangi ariza yo'q":"Tekshirilgan ariza yo'q"}</p></div>`;
+      return;
+    }
 
-        function renderTable() {
-            const d = getData();
-            const list = currentTab === 'new' ? d.new : d.checked;
-            const area = document.getElementById('tableArea');
-
-            if (list.length === 0) {
-                area.innerHTML = `<div class="empty-state"><div>${currentTab === 'new' ? '📭' : '🗂️'}</div><p>${currentTab === 'new' ? 'Yangi ariza yo\'q' : 'Tekshirilgan ariza yo\'q'}</p></div>`;
-                return;
-            }
-
-            let html = `<table><thead><tr>
+    let html = `<table><thead><tr>
       <th>#</th><th>Ism Familiya</th><th>Yosh</th><th>Jinsi</th><th>Telefon</th><th>Sana</th><th>Amal</th>
     </tr></thead><tbody>`;
 
-            list.forEach((a, i) => {
-                const gBadge = a.gender === 'Erkak'
-                    ? `<span class="badge badge-m">Erkak</span>`
-                    : `<span class="badge badge-f">Ayol</span>`;
+    list.forEach((a, i) => {
+      const gBadge = a.gender === 'Erkak'
+        ? `<span class="badge badge-m">Erkak</span>`
+        : `<span class="badge badge-f">Ayol</span>`;
 
-                const actionBtn = currentTab === 'new'
-                    ? `<button class="action-btn btn-check" onclick="markChecked(${a.id})">✓ Tekshirildi</button>`
-                    : `<button class="action-btn btn-uncheck" onclick="markUnchecked(${a.id})">↩ Qaytarish</button>`;
+      const d = new Date(a.created_at);
+      const dateStr = d.toLocaleString('uz-UZ');
 
-                html += `<tr>
-        <td>${i + 1}</td>
+      const actionBtn = currentTab === 'new'
+        ? `<button class="action-btn btn-check" onclick="markStatus(${a.id},'checked')">✓ Tekshirildi</button>`
+        : `<button class="action-btn btn-uncheck" onclick="markStatus(${a.id},'new')">↩ Qaytarish</button>`;
+
+      html += `<tr>
+        <td>${i+1}</td>
         <td><strong>${a.fname} ${a.lname}</strong></td>
         <td>${a.age}</td>
         <td>${gBadge}</td>
-        <td><a href="tel:${a.phone}" style="color:var(--navy);text-decoration:none">${a.phone}</a></td>
-        <td style="color:var(--gray);font-size:0.8rem">${a.date}</td>
-        <td>
+        <td><a href="tel:${a.phone}" style="color:var(--navy);text-decoration:none;font-weight:600">${a.phone}</a></td>
+        <td style="color:var(--gray);font-size:0.8rem">${dateStr}</td>
+        <td style="white-space:nowrap">
           ${actionBtn}
-          <button class="action-btn btn-delete" onclick="deleteEntry(${a.id})">🗑</button>
+          <button class="action-btn btn-delete" onclick="delRow(${a.id})">🗑</button>
         </td>
       </tr>`;
-            });
+    });
 
-            html += `</tbody></table>`;
-            area.innerHTML = html;
-        }
+    html += `</tbody></table>`;
+    wrap.innerHTML = html;
+  }
 
-        function markChecked(id) {
-            const d = getData();
-            const idx = d.new.findIndex(a => a.id === id);
-            if (idx === -1) return;
-            const [item] = d.new.splice(idx, 1);
-            d.checked.unshift(item);
-            saveData(d);
-            renderAdmin();
-        }
+  async function markStatus(id, status) {
+    try {
+      await updateStatus(id, status);
+      const item = allData.find(a => a.id === id);
+      if (item) item.status = status;
+      renderAdmin();
+    } catch(err) { alert('Xatolik: ' + err.message); }
+  }
 
-        function markUnchecked(id) {
-            const d = getData();
-            const idx = d.checked.findIndex(a => a.id === id);
-            if (idx === -1) return;
-            const [item] = d.checked.splice(idx, 1);
-            d.new.unshift(item);
-            saveData(d);
-            renderAdmin();
-        }
+  async function delRow(id) {
+    if (!confirm("Bu arizani o'chirishni tasdiqlaysizmi?")) return;
+    try {
+      await deleteRow(id);
+      allData = allData.filter(a => a.id !== id);
+      renderAdmin();
+    } catch(err) { alert('Xatolik: ' + err.message); }
+  }
 
-        function deleteEntry(id) {
-            if (!confirm('Bu arizani o\'chirishni tasdiqlaysizmi?')) return;
-            const d = getData();
-            d.new = d.new.filter(a => a.id !== id);
-            d.checked = d.checked.filter(a => a.id !== id);
-            saveData(d);
-            renderAdmin();
-        }
+  async function clearTab() {
+    const label = currentTab === 'new' ? 'yangi arizalar' : 'tekshirilgan arizalar';
+    if (!confirm(`Barcha ${label} o'chirilsinmi?`)) return;
+    try {
+      await deleteByStatus(currentTab);
+      allData = allData.filter(a => a.status !== currentTab);
+      renderAdmin();
+    } catch(err) { alert('Xatolik: ' + err.message); }
+  }
 
-        function clearCurrent() {
-            const label = currentTab === 'new' ? 'yangi arizalar' : 'tekshirilgan arizalar';
-            if (!confirm(`Barcha ${label} o'chirilsinmi?`)) return;
-            const d = getData();
-            d[currentTab] = [];
-            saveData(d);
-            renderAdmin();
-        }
-    </script>
+  /* ---- UTILS ---- */
+  function show(id) { document.getElementById(id).style.display = 'block'; }
+  function hide(id) { document.getElementById(id).style.display = 'none'; }
+</script>
 </body>
-
 </html>
