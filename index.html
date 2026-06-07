@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fransuz Tili Kursi – Kanada PR</title>
+    <title>France TCF – Fransuz Tili & Kanada PR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800;900&family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -16,19 +18,42 @@
     <!-- ====== MAIN SITE ====== -->
     <div id="mainSite">
         <nav>
-            <div class="logo">Fransuz<span>Tili</span></div>
+            <div class="logo">France<span>TCF</span></div>
             <button class="nav-admin" onclick="openLogin()">⚙ Admin</button>
         </nav>
 
         <div class="hero">
-            <div class="hero-flags">🇫🇷 🇨🇦</div>
-            <div class="hero-badge">TCF Canada · Express Entry · PR</div>
-            <h1>Fransuz tilini o'rganib,<br><em>Kanadaga yo'l oching</em></h1>
-            <p>TCF Canada imtihoniga professional tayyorlov. B2 darajasiga erishing va Kanada PR dasturiga murojaat
-                qiling.</p>
-            <button class="cta-btn"
-                onclick="document.getElementById('registration').scrollIntoView({behavior:'smooth'})">Ro'yxatdan o'tish
-                →</button>
+            <div class="hero-orbs">
+                <span class="orb orb-blue"></span>
+                <span class="orb orb-red"></span>
+                <span class="orb orb-gold"></span>
+            </div>
+            <div class="hero-inner">
+                <div class="hero-flags">🇫🇷 🇨🇦</div>
+                <div class="hero-badge">TCF Canada · Express Entry · PR</div>
+                <h1>Fransuz tilini o'rganib,<br><em>Kanadaga yo'l oching</em></h1>
+                <p>France TCF — TCF Canada imtihoniga professional tayyorlov markazi. B2 darajasiga erishing va Kanada
+                    PR
+                    dasturiga murojaat qiling.</p>
+                <div class="hero-actions">
+                    <button class="cta-btn"
+                        onclick="document.getElementById('registration').scrollIntoView({behavior:'smooth'})">Ro'yxatdan
+                        o'tish →</button>
+                    <button class="cta-ghost"
+                        onclick="document.querySelector('.courses-grid').scrollIntoView({behavior:'smooth'})">Kurslar
+                        narxi</button>
+                </div>
+                <div class="hero-trust">
+                    <span>✓ B2 kafolatlangan natija</span>
+                    <span>✓ Native speaker ustozlar</span>
+                    <span>✓ 10+ yil tajriba</span>
+                </div>
+            </div>
+            <div class="hero-wave">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                    <path d="M0,64 C360,120 1080,0 1440,64 L1440,120 L0,120 Z"></path>
+                </svg>
+            </div>
         </div>
 
         <div class="stats">
@@ -38,51 +63,58 @@
             <div class="stat"><span class="stat-num">10+</span><span class="stat-label">yil tajriba</span></div>
         </div>
 
-        <section>
-            <div class="sec-tag">Kurs turlari</div>
-            <div class="sec-title">O'zingizga mos formatni tanlang</div>
-            <p class="sec-sub">Barcha kurslar TCF Canada imtihoniga yo'naltirilgan. Listening, Reading, Writing va
-                Speaking bo'yicha strategiyalar o'rgatiladi.</p>
+        <section data-reveal>
+            <div class="sec-head">
+                <div class="sec-tag">Kurs turlari va narxlari</div>
+                <div class="sec-title">O'zingizga mos formatni tanlang</div>
+                <p class="sec-sub">Barcha kurslar TCF Canada imtihoniga yo'naltirilgan. Listening, Reading, Writing va
+                    Speaking bo'yicha strategiyalar o'rgatiladi.</p>
+            </div>
             <div class="courses-grid">
-                <div class="course-card">
+                <div class="course-card" data-tilt>
                     <div class="course-icon">🏫</div>
                     <div class="course-type">Offline</div>
                     <div class="course-name">Guruh darslari</div>
-                    <div class="course-price">700 000 so'm</div>
-                    <div class="course-desc">Talabga qarab guruh soati belgilanadi. Yuzma-yuz muloqot va amaliyot.</div>
+                    <div class="course-price">700 000<span class="cp-unit"> so'm</span></div>
+                    <div class="course-tier">A1–A2 daraja</div>
+                    <div class="course-price2">800 000 so'm — B1+ daraja</div>
+                    <div class="course-desc">Yuzma-yuz muloqot va amaliyot. Talabga qarab guruh soati belgilanadi.</div>
                 </div>
-                <div class="course-card featured">
+                <div class="course-card featured" data-tilt>
+                    <div class="course-flag">Eng mashhur</div>
                     <div class="course-icon">💻</div>
                     <div class="course-type">Online</div>
                     <div class="course-name">Guruh darslari</div>
-                    <div class="course-price">490 000 so'm</div>
+                    <div class="course-price">490 000<span class="cp-unit"> so'm</span></div>
                     <div class="course-desc">Asosan kechki vaqtlarda. Zoom va Google Meet orqali.</div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-tilt>
                     <div class="course-icon">👥</div>
                     <div class="course-type">Mini-guruh</div>
-                    <div class="course-name">2–3 kishi</div>
-                    <div class="course-price">900 000 so'm</div>
+                    <div class="course-name">2–4 kishi</div>
+                    <div class="course-price">900 000<span class="cp-unit"> so'm</span></div>
                     <div class="course-desc">Kichik guruhda intensiv tayyorlov. Qulay vaqtga moslab.</div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-tilt>
                     <div class="course-icon">👤</div>
-                    <div class="course-type">Individual</div>
+                    <div class="course-type">Individual online</div>
                     <div class="course-name">Shaxsiy darslar</div>
-                    <div class="course-price">1 200 000 so'm</div>
+                    <div class="course-price">1 200 000<span class="cp-unit"> so'm</span></div>
                     <div class="course-desc">To'liq individual yondashuv. O'quvchiga qulay vaqt.</div>
                 </div>
             </div>
         </section>
 
-        <hr>
-
-        <section>
-            <div class="sec-tag">Batafsil ma'lumot</div>
-            <div class="sec-title">Nima o'rgatiladi?</div>
+        <section data-reveal>
+            <div class="sec-head">
+                <div class="sec-tag">Batafsil ma'lumot</div>
+                <div class="sec-title">Nima o'rgatiladi?</div>
+                <p class="sec-sub">Har bir kurs to'rt asosiy ko'nikma va imtihon strategiyasiga yo'naltirilgan. Quyida
+                    nimalarga e'tibor qaratishimizni ko'rishingiz mumkin.</p>
+            </div>
             <div class="info-grid">
-                <div class="info-card">
-                    <h3>📚 Dars tarkibi</h3>
+                <div class="info-card" data-reveal>
+                    <h3><span class="ic-emoji">📚</span> Dars tarkibi</h3>
                     <ul>
                         <li>Speaking (og'zaki nutq)</li>
                         <li>Listening (tinglash)</li>
@@ -92,8 +124,8 @@
                         <li>Vocabulary (so'z boyligi)</li>
                     </ul>
                 </div>
-                <div class="info-card">
-                    <h3>🎯 Sertifikatlar</h3>
+                <div class="info-card" data-reveal>
+                    <h3><span class="ic-emoji">🎯</span> Sertifikatlar</h3>
                     <ul>
                         <li>TCF Canada (asosiy maqsad)</li>
                         <li>DELF / DALF</li>
@@ -103,8 +135,8 @@
                         <li>Mock imtihonlar</li>
                     </ul>
                 </div>
-                <div class="info-card">
-                    <h3>📋 Markazi qoidalari</h3>
+                <div class="info-card" data-reveal>
+                    <h3><span class="ic-emoji">📋</span> Markaz qoidalari</h3>
                     <ul>
                         <li>Darslarga o'z vaqtida qatnashish</li>
                         <li>Uy vazifalarini muntazam bajarish</li>
@@ -113,12 +145,12 @@
                         <li>Sababsiz darslar qayta o'tilmaydi</li>
                     </ul>
                 </div>
-                <div class="info-card">
-                    <h3>🇨🇦 Immigratsiya</h3>
+                <div class="info-card" data-reveal>
+                    <h3><span class="ic-emoji">🇨🇦</span> Immigratsiya</h3>
                     <ul>
                         <li>Express Entry dasturi yo'nalishi</li>
                         <li>TCF Canada B2 talab darajasi</li>
-                        <li>Hujjat ishlari bilan shug'ullanmaymiz</li>
+                        <li>Dastlabki baholash formasi</li>
                         <li>Umumiy yo'nalish va maslahat</li>
                         <li>Kanada PR jarayoni tushuntiriladi</li>
                     </ul>
@@ -126,11 +158,11 @@
             </div>
         </section>
 
-        <hr>
-
-        <section>
-            <div class="sec-tag">Jamoamiz</div>
-            <div class="sec-title">Tajribali o'qituvchilar</div>
+        <section data-reveal>
+            <div class="sec-head">
+                <div class="sec-tag">Jamoamiz</div>
+                <div class="sec-title">Tajribali o'qituvchilar</div>
+            </div>
             <div class="teacher-box">
                 <div class="teacher-item">
                     <div class="teacher-emoji">🎓</div>
@@ -151,36 +183,228 @@
         </section>
 
         <div class="form-section" id="registration">
-            <div class="form-wrap">
+            <div class="form-wrap" data-reveal>
                 <div class="form-header">
                     <div class="sec-tag" style="text-align:center">Ro'yxatdan o'tish</div>
                     <div class="sec-title" style="text-align:center">Bugun boshlang</div>
-                    <p style="color:var(--gray);font-size:.9rem;margin-top:.5rem">Ma'lumotlaringizni qoldiring,
+                    <p style="color:var(--gray);font-size:1rem;margin-top:.6rem">Quyidagi formani to'ldiring,
                         mutaxassislarimiz siz bilan bog'lanadi.</p>
                 </div>
-                <form id="regForm" onsubmit="submitForm(event)">
-                    <div class="form-group"><label>Ism *</label><input type="text" id="f_fname" placeholder="Ismingiz"
+
+                <!-- ===== ROZILIK DARVOZASI ===== -->
+                <div class="consent-box" id="consentBox">
+                    <div class="consent-icon">📋</div>
+                    <h3 class="consent-title">Kursga yozilishdan oldin</h3>
+                    <p class="consent-text">Ariza qoldirishdan oldin kurs haqidagi barcha ma'lumotlar — narxlar, dars
+                        tarkibi, sertifikatlar va markaz qoidalari bilan tanishib chiqing.</p>
+                    <ul class="consent-list">
+                        <li>Darslarga o'z vaqtida qatnashish</li>
+                        <li>Uy vazifalarini muntazam bajarish</li>
+                        <li>To'lovlarni belgilangan muddatda to'lash</li>
+                        <li>O'qituvchi va guruhdoshlarni hurmat qilish</li>
+                        <li>Sababsiz o'tkazib yuborilgan darslar qayta o'tilmaydi</li>
+                    </ul>
+                    <label class="consent-check">
+                        <input type="checkbox" id="consentCheck" onchange="toggleConsentBtn()">
+                        <span>Kurs haqidagi barcha ma'lumotlar bilan tanishib chiqdim va kursning barcha
+                            qonun-qoidalariga roziman.</span>
+                    </label>
+                    <button type="button" class="consent-btn" id="consentBtn" disabled
+                        onclick="acceptConsent()">Roziman, davom etish →</button>
+                </div>
+
+                <!-- Form switcher -->
+                <div class="form-switch" id="formSwitch" style="display:none">
+                    <button type="button" class="fs-btn active" id="fsb_france" onclick="switchForm('france')">🇫🇷
+                        France TCF kursi</button>
+                    <button type="button" class="fs-btn" id="fsb_canada" onclick="switchForm('canada')">🇨🇦 Kanada
+                        immigratsiya baholash</button>
+                </div>
+
+                <!-- ===== FORM 1: FRANCE TCF ===== -->
+                <form id="franceForm" class="reg-form" style="display:none" onsubmit="submitFrance(event)">
+                    <div class="form-group"><label>1. To'liq ism-familiyangiz *</label><input type="text"
+                            id="fr_fullname" placeholder="Ism Familiya" required></div>
+                    <div class="form-group"><label>2. Yashash manzilingiz *</label><input type="text" id="fr_address"
+                            placeholder="Shahar, tuman" required></div>
+                    <div class="form-group"><label>3. Tug'ilgan sanangiz *</label><input type="date" id="fr_birthdate"
                             required></div>
-                    <div class="form-group"><label>Familiya *</label><input type="text" id="f_lname"
-                            placeholder="Familiyangiz" required></div>
-                    <div class="form-group"><label>Yosh *</label><input type="number" id="f_age" placeholder="Yoshingiz"
-                            min="14" max="70" required></div>
-                    <div class="form-group"><label>Jinsi *</label><select id="f_gender" required>
-                            <option value="">Tanlang...</option>
-                            <option value="Erkak">Erkak</option>
-                            <option value="Ayol">Ayol</option>
-                        </select></div>
-                    <div class="form-group"><label>Telefon *</label><input type="tel" id="f_phone"
+                    <div class="form-group"><label>4. Ma'lumotingiz</label><input type="text" id="fr_education"
+                            placeholder="Oliy bo'lsa qayerda o'qiysiz yoki tugatgansiz"></div>
+                    <div class="form-group"><label>5. Ish joyingiz va ish tajribangiz</label><input type="text"
+                            id="fr_work" placeholder="Ish joyi, tajriba"></div>
+                    <div class="form-group"><label>6. Oilaviy holatingiz</label><input type="text" id="fr_family"
+                            placeholder="Nechta farzandingiz bor"></div>
+                    <div class="form-group"><label>7. Ingliz tilini bilish darajangiz</label><input type="text"
+                            id="fr_english" placeholder="Sertifikat bo'lsa qanaqa"></div>
+                    <div class="form-group"><label>8. Telefon raqamingiz *</label><input type="tel" id="fr_phone"
                             placeholder="+998 90 000 00 00" required></div>
-                    <button type="submit" class="submit-btn" id="submitBtn">Ro'yxatdan o'tish →</button>
+                    <div class="form-group"><label>Telegram akkauntingiz</label><input type="text" id="fr_telegram"
+                            placeholder="@username"></div>
+                    <div class="form-group"><label>9. Fransuz tilini o'rganishdan maqsadingiz</label><input type="text"
+                            id="fr_goal" placeholder="Maqsadingiz"></div>
+                    <div class="form-group"><label>10. Hozirgi fransuz tili darajangiz</label><select id="fr_frlevel">
+                            <option value="">Tanlang...</option>
+                            <option>Bilmayman</option>
+                            <option>A1</option>
+                            <option>A2</option>
+                            <option>B1</option>
+                            <option>B2</option>
+                            <option>C1</option>
+                            <option>C2</option>
+                        </select></div>
+                    <div class="form-group"><label>11. Qachon sertifikatga imtihon topshirmoqchisiz?</label><input
+                            type="text" id="fr_examdate" placeholder="Masalan: 2025-yil kuzi"></div>
+                    <div class="form-group"><label>12. Qaysi davlat yoki maqsad uchun o'rganyapsiz?</label><input
+                            type="text" id="fr_country" placeholder="Masalan: Kanada PR"></div>
+                    <div class="form-group"><label>13. Bir kunda o'rtacha qancha vaqt ajrata olasiz?</label><select
+                            id="fr_time">
+                            <option value="">Tanlang...</option>
+                            <option>30 daqiqagacha</option>
+                            <option>1 soat</option>
+                            <option>2 soat</option>
+                            <option>3 soat va undan ko'p</option>
+                        </select></div>
+                    <div class="form-group"><label>14. Darslarning qaysi formatini afzal ko'rasiz?</label><select
+                            id="fr_format">
+                            <option value="">Tanlang...</option>
+                            <option>Online</option>
+                            <option>Offline</option>
+                            <option>Farqi yo'q</option>
+                        </select></div>
+                    <div class="form-group"><label>15. Biz haqimizda qayerdan eshitdingiz?</label><select
+                            id="fr_source">
+                            <option value="">Tanlang...</option>
+                            <option>Telegram</option>
+                            <option>Instagram</option>
+                            <option>Facebook</option>
+                            <option>YouTube</option>
+                            <option>Do'stlar tavsiyasi</option>
+                            <option>Google qidiruvi</option>
+                            <option>Boshqa</option>
+                        </select></div>
+                    <button type="submit" class="submit-btn" id="frSubmitBtn">Ro'yxatdan o'tish →</button>
                 </form>
+
+                <!-- ===== FORM 2: KANADA IMMIGRATSIYA ===== -->
+                <form id="canadaForm" class="reg-form" style="display:none" onsubmit="submitCanada(event)">
+                    <div class="form-note">🇨🇦 Kanada immigratsiyasi uchun dastlabki baholash formasi</div>
+                    <div class="form-group"><label>1. To'liq ism va familiyangiz *</label><input type="text"
+                            id="ca_fullname" placeholder="Ism Familiya" required></div>
+                    <div class="form-group"><label>2. Yashash manzilingiz *</label><input type="text" id="ca_address"
+                            placeholder="Shahar, tuman" required></div>
+                    <div class="form-group"><label>3. Tug'ilgan sanangiz *</label><input type="date" id="ca_birthdate"
+                            required></div>
+                    <div class="form-group"><label>4. Ma'lumotingiz</label><select id="ca_education">
+                            <option value="">Tanlang...</option>
+                            <option>O'rta</option>
+                            <option>O'rta maxsus</option>
+                            <option>Bakalavr</option>
+                            <option>Magistr</option>
+                            <option>Doktorantura</option>
+                        </select></div>
+                    <div class="form-group"><label>Ta'lim muassasasi nomi (oliy ma'lumot bo'lsa)</label><input
+                            type="text" id="ca_institution" placeholder="Universitet/institut nomi"></div>
+                    <div class="form-group"><label>5. Hozirgi ish joyingiz</label><input type="text" id="ca_work"
+                            placeholder="Ish joyingiz"></div>
+                    <div class="form-group"><label>Ish tajribangiz (yil hisobida)</label><input type="number"
+                            id="ca_experience" min="0" max="60" placeholder="0"></div>
+                    <div class="form-group"><label>6. Oilaviy holatingiz</label><select id="ca_marital">
+                            <option value="">Tanlang...</option>
+                            <option>Bo'ydoq/Turmush qurmagan</option>
+                            <option>Turmush qurgan</option>
+                            <option>Ajrashgan</option>
+                            <option>Beva</option>
+                        </select></div>
+                    <div class="form-group"><label>Farzandlaringiz soni</label><input type="number" id="ca_children"
+                            min="0" max="20" placeholder="0"></div>
+                    <div class="form-group"><label>7. Ingliz tili darajangiz</label><select id="ca_english">
+                            <option value="">Tanlang...</option>
+                            <option>Boshlang'ich</option>
+                            <option>O'rta</option>
+                            <option>Yaxshi</option>
+                            <option>Erkin</option>
+                        </select></div>
+                    <div class="form-group"><label>Sertifikatingiz bo'lsa, turi va balli (IELTS,
+                            CELPIP...)</label><input type="text" id="ca_engcert" placeholder="Masalan: IELTS 7.0"></div>
+                    <div class="form-group"><label>8. Telefon raqamingiz *</label><input type="tel" id="ca_phone"
+                            placeholder="+998 90 000 00 00" required></div>
+                    <div class="form-group"><label>Telegram akkauntingiz</label><input type="text" id="ca_telegram"
+                            placeholder="@username"></div>
+                    <div class="form-group"><label>9. Fransuz tilini o'rganishdan maqsadingiz</label><input type="text"
+                            id="ca_goal" placeholder="Maqsadingiz"></div>
+                    <div class="form-group"><label>10. Hozirgi fransuz tili darajangiz</label><select id="ca_frlevel">
+                            <option value="">Tanlang...</option>
+                            <option>Bilmayman</option>
+                            <option>A1</option>
+                            <option>A2</option>
+                            <option>B1</option>
+                            <option>B2</option>
+                            <option>C1</option>
+                            <option>C2</option>
+                        </select></div>
+                    <div class="form-group"><label>11. Sertifikat imtihonini qachon rejalashtiryapsiz?</label><input
+                            type="text" id="ca_examdate" placeholder="Sana yoki davr"></div>
+                    <div class="form-group"><label>12. Qaysi davlat yoki maqsad uchun o'rganyapsiz?</label><input
+                            type="text" id="ca_country" placeholder="Masalan: Kanada PR"></div>
+                    <div class="form-group"><label>13. Bir kunda o'rtacha qancha vaqt ajrata olasiz?</label><select
+                            id="ca_time">
+                            <option value="">Tanlang...</option>
+                            <option>30 daqiqagacha</option>
+                            <option>1 soat</option>
+                            <option>2 soat</option>
+                            <option>3 soat va undan ko'p</option>
+                        </select></div>
+                    <div class="form-group"><label>14. Darslarning qaysi formatini afzal ko'rasiz?</label><select
+                            id="ca_format">
+                            <option value="">Tanlang...</option>
+                            <option>Online</option>
+                            <option>Offline</option>
+                            <option>Farqi yo'q</option>
+                        </select></div>
+                    <div class="form-group"><label>15. Biz haqimizda qayerdan eshitdingiz?</label><select
+                            id="ca_source">
+                            <option value="">Tanlang...</option>
+                            <option>Telegram</option>
+                            <option>Instagram</option>
+                            <option>Facebook</option>
+                            <option>YouTube</option>
+                            <option>Do'stlar tavsiyasi</option>
+                            <option>Google qidiruvi</option>
+                            <option>Boshqa</option>
+                        </select></div>
+                    <div class="form-group fg-full"><label>Qo'shimcha izohlar (ixtiyoriy)</label><textarea id="ca_notes"
+                            rows="3" placeholder="Qo'shimcha ma'lumot"></textarea></div>
+                    <button type="submit" class="submit-btn" id="caSubmitBtn">Baholash uchun yuborish →</button>
+                </form>
+
                 <div class="msg msg-ok" id="msgOk">✅ Muvaffaqiyatli yuborildi! Tez orada bog'lanamiz.</div>
                 <div class="msg msg-err" id="msgErr">❌ Xatolik yuz berdi. Qayta urinib ko'ring.</div>
             </div>
         </div>
 
         <footer>
-            <p>© 2025 Fransuz Tili Kursi · TCF Canada Tayyorlov Markazi</p>
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <div class="logo">France<span>TCF</span></div>
+                    <p>TCF Canada imtihoniga professional tayyorlov markazi. Fransuz tili orqali Kanada PR yo'lida
+                        ishonchli hamrohingiz.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Kurslar</h5>
+                    <span>Offline guruh</span>
+                    <span>Online guruh</span>
+                    <span>Mini-guruh</span>
+                    <span>Individual</span>
+                </div>
+                <div class="footer-col">
+                    <h5>Bog'lanish</h5>
+                    <span>📞 Telefon</span>
+                    <span>✈️ Telegram</span>
+                    <span>📷 Instagram</span>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2025 France TCF · TCF Canada Tayyorlov Markazi</div>
         </footer>
     </div>
 
@@ -200,7 +424,7 @@
     <!-- ====== ADMIN ====== -->
     <div id="adminPage">
         <nav class="admin-nav">
-            <div class="logo">Fransuz<span>Tili</span> <span style="font-size:.8rem;opacity:.6">· Admin</span></div>
+            <div class="logo">France<span>TCF</span> <span style="font-size:.8rem;opacity:.6">· Admin</span></div>
             <button class="admin-logout" onclick="logout()">Chiqish →</button>
         </nav>
 

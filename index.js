@@ -24,30 +24,124 @@
         const DB = {
             getAll: () => api(TBL + '?order=created_at.desc&select=*'),
             insert: (d) => api(TBL, 'POST', d, 'return=minimal'),
-            setStatus: (id, st) => api(TBL + '?id=eq.' + id, 'PATCH', { status: st }, 'return=minimal'),
-            delete: (id) => api(TBL + '?id=eq.' + id, 'DELETE'),
-            delByStatus: (st) => api(TBL + '?status=eq.' + st, 'DELETE'),
+            setStatus: async (id, st) => {
+                const res = await api(TBL + '?id=eq.' + id + '&select=*', 'PATCH', { status: st }, 'return=representation');
+                if (!res || !res.length) throw new Error("Ruxsat yo'q (RLS) — UPDATE policy qo'shilmagan");
+                return res;
+            },
+            delete: async (id) => {
+                const res = await api(TBL + '?id=eq.' + id + '&select=*', 'DELETE', null, 'return=representation');
+                if (!res || !res.length) throw new Error("Ruxsat yo'q (RLS) — DELETE policy qo'shilmagan");
+                return res;
+            },
+            delByStatus: (st) => api(TBL + '?status=eq.' + st + '&select=*', 'DELETE', null, 'return=representation'),
         };
 
-        // ── Form ──────────────────────────────────────────────
-        async function submitForm(e) {
+        const val = (id) => (document.getElementById(id)?.value || '').trim();
+
+        // ── Rozilik darvozasi ─────────────────────────────────
+        function toggleConsentBtn() {
+            document.getElementById('consentBtn').disabled = !document.getElementById('consentCheck').checked;
+        }
+        function acceptConsent() {
+            if (!document.getElementById('consentCheck').checked) return;
+            document.getElementById('consentBox').style.display = 'none';
+            document.getElementById('formSwitch').style.display = 'flex';
+            switchForm('france');
+        }
+
+        // ── Form switcher ─────────────────────────────────────
+        function switchForm(type) {
+            const isFr = type === 'france';
+            document.getElementById('franceForm').style.display = isFr ? 'block' : 'none';
+            document.getElementById('canadaForm').style.display = isFr ? 'none' : 'block';
+            document.getElementById('fsb_france').classList.toggle('active', isFr);
+            document.getElementById('fsb_canada').classList.toggle('active', !isFr);
+        }
+
+        // ── France TCF form ───────────────────────────────────
+        async function submitFrance(e) {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
+            const btn = document.getElementById('frSubmitBtn');
             btn.disabled = true; btn.textContent = 'Yuklanmoqda...';
             try {
+                const fullname = val('fr_fullname');
+                const parts = fullname.split(' ');
                 await DB.insert({
-                    fname: document.getElementById('f_fname').value.trim(),
-                    lname: document.getElementById('f_lname').value.trim(),
-                    age: +document.getElementById('f_age').value,
-                    gender: document.getElementById('f_gender').value,
-                    phone: document.getElementById('f_phone').value.trim(),
-                    status: 'new'
+                    fname: parts[0] || fullname,
+                    lname: parts.slice(1).join(' ') || '',
+                    phone: val('fr_phone'),
+                    status: 'new',
+                    form_type: 'france',
+                    details: {
+                        'To\'liq ismi': fullname,
+                        'Yashash manzili': val('fr_address'),
+                        'Tug\'ilgan sana': val('fr_birthdate'),
+                        'Ma\'lumoti': val('fr_education'),
+                        'Ish joyi va tajriba': val('fr_work'),
+                        'Oilaviy holati': val('fr_family'),
+                        'Ingliz tili darajasi': val('fr_english'),
+                        'Telefon': val('fr_phone'),
+                        'Telegram': val('fr_telegram'),
+                        'Fransuz tili maqsadi': val('fr_goal'),
+                        'Hozirgi fransuz darajasi': val('fr_frlevel'),
+                        'Imtihon vaqti': val('fr_examdate'),
+                        'Davlat/maqsad': val('fr_country'),
+                        'Kunlik vaqt': val('fr_time'),
+                        'Dars formati': val('fr_format'),
+                        'Qayerdan eshitdi': val('fr_source'),
+                    }
                 });
-                document.getElementById('regForm').reset();
+                document.getElementById('franceForm').reset();
                 showMsg('msgOk');
             } catch { showMsg('msgErr'); }
             btn.disabled = false; btn.textContent = "Ro'yxatdan o'tish →";
         }
+
+        // ── Kanada immigratsiya form ──────────────────────────
+        async function submitCanada(e) {
+            e.preventDefault();
+            const btn = document.getElementById('caSubmitBtn');
+            btn.disabled = true; btn.textContent = 'Yuklanmoqda...';
+            try {
+                const fullname = val('ca_fullname');
+                const parts = fullname.split(' ');
+                await DB.insert({
+                    fname: parts[0] || fullname,
+                    lname: parts.slice(1).join(' ') || '',
+                    phone: val('ca_phone'),
+                    status: 'new',
+                    form_type: 'canada',
+                    details: {
+                        'To\'liq ismi': fullname,
+                        'Yashash manzili': val('ca_address'),
+                        'Tug\'ilgan sana': val('ca_birthdate'),
+                        'Ma\'lumoti': val('ca_education'),
+                        'Ta\'lim muassasasi': val('ca_institution'),
+                        'Ish joyi': val('ca_work'),
+                        'Ish tajribasi (yil)': val('ca_experience'),
+                        'Oilaviy holati': val('ca_marital'),
+                        'Farzandlar soni': val('ca_children'),
+                        'Ingliz tili darajasi': val('ca_english'),
+                        'Ingliz sertifikati': val('ca_engcert'),
+                        'Telefon': val('ca_phone'),
+                        'Telegram': val('ca_telegram'),
+                        'Fransuz tili maqsadi': val('ca_goal'),
+                        'Hozirgi fransuz darajasi': val('ca_frlevel'),
+                        'Imtihon vaqti': val('ca_examdate'),
+                        'Davlat/maqsad': val('ca_country'),
+                        'Kunlik vaqt': val('ca_time'),
+                        'Dars formati': val('ca_format'),
+                        'Qayerdan eshitdi': val('ca_source'),
+                        'Qo\'shimcha izoh': val('ca_notes'),
+                    }
+                });
+                document.getElementById('canadaForm').reset();
+                showMsg('msgOk');
+            } catch { showMsg('msgErr'); }
+            btn.disabled = false; btn.textContent = "Baholash uchun yuborish →";
+        }
+
         function showMsg(id) {
             document.getElementById(id).style.display = 'block';
             setTimeout(() => document.getElementById(id).style.display = 'none', 5000);
@@ -110,7 +204,6 @@
                 checked: data.filter(a => a.status === 'checked'),
                 deleted: data.filter(a => a.status === 'deleted'),
             };
-            // Counts
             ['new', 'checked', 'deleted'].forEach(s => {
                 document.getElementById('cnt_' + s).textContent = grp[s].length;
                 document.getElementById('s_' + s).textContent = grp[s].length;
@@ -122,33 +215,45 @@
             buildCards(list);
         }
 
+        function fullName(a) {
+            if (a.details && a.details["To'liq ismi"]) return a.details["To'liq ismi"];
+            return ((a.fname || '') + ' ' + (a.lname || '')).trim() || '—';
+        }
+        function formLabel(a) {
+            if (a.form_type === 'canada') return '<span class="badge b-ca">🇨🇦 Kanada</span>';
+            if (a.form_type === 'france') return '<span class="badge b-fr">🇫🇷 France TCF</span>';
+            return '<span class="badge b-old">Eski</span>';
+        }
+
         function buildTable(list) {
             const wrap = document.getElementById('tblWrap');
             if (!list.length) { wrap.innerHTML = emptyHtml(); return; }
 
             let h = `<table><thead><tr>
-    <th>#</th><th>Ism Familiya</th><th>Yosh</th><th>Jinsi</th><th>Telefon</th><th>Sana</th><th>Amal</th>
+    <th>#</th><th>Ism Familiya</th><th>Forma</th><th>Telefon</th><th>Sana</th><th>Amal</th>
   </tr></thead><tbody>`;
 
             list.forEach((a, i) => {
-                const gb = a.gender === 'Erkak' ? `<span class="badge b-m">Erkak</span>` : `<span class="badge b-f">Ayol</span>`;
                 const ds = new Date(a.created_at).toLocaleString('uz-UZ');
                 let btns = '';
                 if (curTab === 'new') {
-                    btns = `<button class="ab ab-check" onclick="setStatus(${a.id},'checked')">✓ Tekshirildi</button>
+                    btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
+              <button class="ab ab-check" onclick="setStatus(${a.id},'checked')">✓</button>
               <button class="ab ab-del"   onclick="setStatus(${a.id},'deleted')">🗑</button>`;
                 } else if (curTab === 'checked') {
-                    btns = `<button class="ab ab-back"    onclick="setStatus(${a.id},'new')">↩ Qaytarish</button>
+                    btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
+              <button class="ab ab-back"    onclick="setStatus(${a.id},'new')">↩</button>
               <button class="ab ab-del"      onclick="setStatus(${a.id},'deleted')">🗑</button>`;
                 } else {
-                    btns = `<button class="ab ab-restore" onclick="setStatus(${a.id},'new')">↩ Tiklash</button>
-              <button class="ab ab-perm"    onclick="permDelete(${a.id})">✕ O'chirish</button>`;
+                    btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
+              <button class="ab ab-restore" onclick="setStatus(${a.id},'new')">↩</button>
+              <button class="ab ab-perm"    onclick="permDelete(${a.id})">✕</button>`;
                 }
                 h += `<tr>
       <td>${i + 1}</td>
-      <td><strong>${a.fname} ${a.lname}</strong></td>
-      <td>${a.age}</td><td>${gb}</td>
-      <td><a href="tel:${a.phone}" style="color:var(--navy);font-weight:600;text-decoration:none">${a.phone}</a></td>
+      <td><strong>${fullName(a)}</strong></td>
+      <td>${formLabel(a)}</td>
+      <td><a href="tel:${a.phone}" style="color:var(--navy);font-weight:600;text-decoration:none">${a.phone || '—'}</a></td>
       <td style="color:var(--gray);font-size:.78rem">${ds}</td>
       <td style="white-space:nowrap">${btns}</td>
     </tr>`;
@@ -161,13 +266,15 @@
             const wrap = document.getElementById('cardsWrap');
             if (!list.length) { wrap.innerHTML = emptyHtml(); return; }
             wrap.innerHTML = list.map(a => {
-                const cls = a.gender === 'Erkak' ? 'av-m' : 'av-f';
-                const ini = (a.fname[0] || '') + (a.lname[0] || '');
+                const cls = a.form_type === 'canada' ? 'av-ca' : 'av-fr';
+                const nm = fullName(a);
+                const ini = nm.replace(/[^A-Za-zА-Яа-яЁёʼ' ]/g, '').trim().split(' ').map(x => x[0] || '').slice(0, 2).join('').toUpperCase() || '?';
+                const ft = a.form_type === 'canada' ? '🇨🇦 Kanada' : '🇫🇷 France TCF';
                 return `<div class="m-card" onclick="openSheet(${a.id})">
       <div class="m-avatar ${cls}">${ini}</div>
       <div class="m-info">
-        <div class="m-name">${a.fname} ${a.lname}</div>
-        <div class="m-sub">${a.phone} · ${a.age} yosh · ${a.gender}</div>
+        <div class="m-name">${nm}</div>
+        <div class="m-sub">${a.phone || '—'} · ${ft}</div>
       </div>
       <div class="m-arrow">›</div>
     </div>`;
@@ -206,7 +313,7 @@
 
         async function permDelete(id) {
             if (!confirm("Butunlay o'chirilsinmi?")) return;
-            data = data.filter(a => a.id !== id);   // optimistic: ro'yxatdan olib tashlash
+            data = data.filter(a => a.id !== id);   // optimistic
             render();
             try {
                 await DB.delete(id);
@@ -242,17 +349,30 @@
             const a = data.find(x => x.id === id);
             if (!a) return;
             sheetId = id;
-            document.getElementById('sh_name').textContent = a.fname + ' ' + a.lname;
+            document.getElementById('sh_name').textContent = fullName(a);
+
             const ds = new Date(a.created_at).toLocaleString('uz-UZ');
             const statusLabel = { new: '🔴 Yangi', checked: '✅ Tekshirilgan', deleted: '🗑 O\'chirilgan' };
-            document.getElementById('sh_rows').innerHTML = `
-    <div class="sheet-row"><span class="s-lbl">Telefon</span><span class="s-val">${a.phone}</span></div>
-    <div class="sheet-row"><span class="s-lbl">Yosh</span><span class="s-val">${a.age}</span></div>
-    <div class="sheet-row"><span class="s-lbl">Jinsi</span><span class="s-val">${a.gender}</span></div>
-    <div class="sheet-row"><span class="s-lbl">Holat</span><span class="s-val">${statusLabel[a.status] || a.status}</span></div>
-    <div class="sheet-row"><span class="s-lbl">Sana</span><span class="s-val" style="font-size:.8rem">${ds}</span></div>
-  `;
-            document.getElementById('sh_call').href = 'tel:' + a.phone;
+            const ft = a.form_type === 'canada' ? '🇨🇦 Kanada immigratsiya' : (a.form_type === 'france' ? '🇫🇷 France TCF' : 'Eski ariza');
+
+            let rows = `<div class="sheet-row"><span class="s-lbl">Forma turi</span><span class="s-val">${ft}</span></div>`;
+            rows += `<div class="sheet-row"><span class="s-lbl">Holat</span><span class="s-val">${statusLabel[a.status] || a.status}</span></div>`;
+
+            if (a.details && typeof a.details === 'object') {
+                Object.entries(a.details).forEach(([k, v]) => {
+                    if (v === null || v === undefined || v === '') return;
+                    rows += `<div class="sheet-row"><span class="s-lbl">${k}</span><span class="s-val">${v}</span></div>`;
+                });
+            } else {
+                // eski formatdagi arizalar
+                if (a.age) rows += `<div class="sheet-row"><span class="s-lbl">Yosh</span><span class="s-val">${a.age}</span></div>`;
+                if (a.gender) rows += `<div class="sheet-row"><span class="s-lbl">Jinsi</span><span class="s-val">${a.gender}</span></div>`;
+                rows += `<div class="sheet-row"><span class="s-lbl">Telefon</span><span class="s-val">${a.phone || '—'}</span></div>`;
+            }
+            rows += `<div class="sheet-row"><span class="s-lbl">Sana</span><span class="s-val" style="font-size:.8rem">${ds}</span></div>`;
+
+            document.getElementById('sh_rows').innerHTML = rows;
+            document.getElementById('sh_call').href = 'tel:' + (a.phone || '');
 
             const act = document.getElementById('sh_action');
             const del = document.getElementById('sh_del');
@@ -310,4 +430,34 @@
         // ── Init ──────────────────────────────────────────────
         window.addEventListener('DOMContentLoaded', () => {
             if (sessionStorage.getItem('adm') === '1') enterAdmin();
+            initReveal();
+            initNavScroll();
         });
+
+        // ── Scroll reveal animatsiyasi ────────────────────────
+        function initReveal() {
+            const els = document.querySelectorAll('[data-reveal]');
+            if (!('IntersectionObserver' in window)) {
+                els.forEach(e => e.classList.add('in'));
+                return;
+            }
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((en, idx) => {
+                    if (en.isIntersecting) {
+                        en.target.style.transitionDelay = Math.min(idx * 60, 240) + 'ms';
+                        en.target.classList.add('in');
+                        io.unobserve(en.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            els.forEach(e => io.observe(e));
+        }
+
+        // ── Navbar scroll effekti ─────────────────────────────
+        function initNavScroll() {
+            const nav = document.querySelector('#mainSite nav');
+            if (!nav) return;
+            const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        }
