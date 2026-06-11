@@ -136,7 +136,9 @@ nav.scrolled {
 /* ====== HERO ====== */
 .hero {
     position: relative;
-    background: var(--fc-gradient);
+    background:
+        linear-gradient(120deg, rgba(6, 26, 69, .82) 0%, rgba(10, 42, 107, .72) 35%, rgba(109, 18, 40, .72) 72%, rgba(196, 30, 58, .78) 100%),
+        url("./img/image.png") center / cover no-repeat;
     color: #fff;
     padding: 7rem 2rem 9rem;
     text-align: center;
