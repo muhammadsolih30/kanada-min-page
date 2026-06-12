@@ -25,7 +25,7 @@
             getAll: () => api(TBL + '?order=created_at.desc&select=*'),
             insert: (d) => api(TBL, 'POST', d, 'return=minimal'),
             setStatus: async (id, st) => {
-                const res = await api(TBL + '?id=eq.' + id + '&select=*', 'PATCH', { status: st }, 'return=representation');
+                const res = await api(TBL + '?id=DARAJASIeq.' + id + '&select=*', 'PATCH', { status: st }, 'return=representation');
                 if (!res || !res.length) throw new Error("Ruxsat yo'q (RLS) — UPDATE policy qo'shilmagan");
                 return res;
             },
@@ -116,10 +116,12 @@
             sessionStorage.removeItem('adm');
             document.getElementById('adminPage').style.display = 'none';
             document.getElementById('mainSite').style.display = 'block';
+            document.body.classList.remove('admin-mode');
         }
         function enterAdmin() {
             document.getElementById('mainSite').style.display = 'none';
             document.getElementById('adminPage').style.display = 'block';
+            document.body.classList.add('admin-mode');
             curTab = 'new';
             loadData();
         }
@@ -128,9 +130,12 @@
         let data = [];
         let curTab = 'new';
         let sheetId = null;
+        let searchQuery = '';
 
         async function loadData() {
             showLoading();
+            const rb = document.getElementById('refreshBtn');
+            if (rb) rb.classList.add('spinning');
             try {
                 data = await DB.getAll();
                 render();
@@ -138,12 +143,42 @@
                 setContent('<div class="empty-state"><div class="ei">❌</div><p>Xatolik: ' + err.message + '</p></div>');
             } finally {
                 hideLoading();
+                if (rb) setTimeout(() => rb.classList.remove('spinning'), 400);
             }
         }
 
         function setContent(html) {
             document.getElementById('tblWrap').innerHTML = html;
             document.getElementById('cardsWrap').innerHTML = html;
+        }
+
+        function onSearch(q) {
+            searchQuery = (q || '').toLowerCase().trim();
+            render();
+        }
+
+        function applySearch(list) {
+            if (!searchQuery) return list;
+            return list.filter(a => {
+                const nm = fullName(a).toLowerCase();
+                const ph = (a.phone || '').toLowerCase();
+                return nm.includes(searchQuery) || ph.includes(searchQuery);
+            });
+        }
+
+        function animateNum(el, to) {
+            const from = parseInt(el.dataset.count || '0', 10) || 0;
+            if (from === to) { el.textContent = to; return; }
+            el.dataset.count = to;
+            const dur = 500;
+            const start = performance.now();
+            const step = (now) => {
+                const p = Math.min((now - start) / dur, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(from + (to - from) * eased);
+                if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
         }
 
         function render() {
@@ -154,13 +189,25 @@
             };
             ['new', 'checked', 'deleted'].forEach(s => {
                 document.getElementById('cnt_' + s).textContent = grp[s].length;
-                document.getElementById('s_' + s).textContent = grp[s].length;
+                animateNum(document.getElementById('s_' + s), grp[s].length);
             });
-            document.getElementById('s_total').textContent = grp.new.length + grp.checked.length;
+            animateNum(document.getElementById('s_total'), grp.new.length + grp.checked.length);
 
-            const list = grp[curTab] || [];
+            const list = applySearch(grp[curTab] || []);
             buildTable(list);
             buildCards(list);
+
+            const sub = document.getElementById('adminSub');
+            if (sub) {
+                const subTexts = {
+                    new: 'Yangi kelib tushgan arizalar — tekshirishni kutmoqda',
+                    checked: 'Siz tekshirib chiqqan arizalar',
+                    deleted: "O'chirilgan arizalar — tiklash yoki butunlay o'chirish mumkin"
+                };
+                sub.textContent = searchQuery
+                    ? `"${searchQuery}" bo'yicha ${list.length} ta natija`
+                    : (subTexts[curTab] || '');
+            }
         }
 
         function fullName(a) {
@@ -172,42 +219,74 @@
             if (a.form_type === 'france') return '<span class="badge b-fr">🇫🇷 France TCF</span>';
             return '<span class="badge b-old">Eski</span>';
         }
+        function statusPill(st) {
+            const map = {
+                new: '<span class="pill pill-new">Yangi</span>',
+                checked: '<span class="pill pill-done">Tekshirilgan</span>',
+                deleted: '<span class="pill pill-del">O\'chirilgan</span>'
+            };
+            return map[st] || '';
+        }
+        function timeAgo(dateStr) {
+            const d = new Date(dateStr);
+            const diff = (Date.now() - d.getTime()) / 1000;
+            if (isNaN(diff)) return '';
+            if (diff < 60) return 'hozirgina';
+            if (diff < 3600) return Math.floor(diff / 60) + ' daq oldin';
+            if (diff < 86400) return Math.floor(diff / 3600) + ' soat oldin';
+            if (diff < 604800) return Math.floor(diff / 86400) + ' kun oldin';
+            return d.toLocaleDateString('uz-UZ');
+        }
+        function highlight(text) {
+            if (!searchQuery) return text;
+            try {
+                const re = new RegExp('(' + searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+                return text.replace(re, '<mark>$1</mark>');
+            } catch { return text; }
+        }
 
         function buildTable(list) {
             const wrap = document.getElementById('tblWrap');
             if (!list.length) { wrap.innerHTML = emptyHtml(); return; }
 
             let h = `<table><thead><tr>
-    <th>#</th><th>Ism Familiya</th><th>Forma</th><th>Telefon</th><th>Sana</th><th>Amal</th>
+    <th>#</th><th>Ism Familiya</th><th>Forma</th><th>Telefon</th><th>Vaqt</th><th>Holat</th><th>Amal</th>
   </tr></thead><tbody>`;
 
             list.forEach((a, i) => {
-                const ds = new Date(a.created_at).toLocaleString('uz-UZ');
                 let btns = '';
                 if (curTab === 'new') {
                     btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
-              <button class="ab ab-check" onclick="setStatus(${a.id},'checked')">✓</button>
-              <button class="ab ab-del"   onclick="setStatus(${a.id},'deleted')">🗑</button>`;
+              <button class="ab ab-check" onclick="setStatus(${a.id},'checked')" title="Tekshirildi">✓</button>
+              <button class="ab ab-del"   onclick="setStatus(${a.id},'deleted')" title="O'chirish">🗑</button>`;
                 } else if (curTab === 'checked') {
                     btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
-              <button class="ab ab-back"    onclick="setStatus(${a.id},'new')">↩</button>
-              <button class="ab ab-del"      onclick="setStatus(${a.id},'deleted')">🗑</button>`;
+              <button class="ab ab-back"    onclick="setStatus(${a.id},'new')" title="Yangilarga">↩</button>
+              <button class="ab ab-del"      onclick="setStatus(${a.id},'deleted')" title="O'chirish">🗑</button>`;
                 } else {
                     btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
-              <button class="ab ab-restore" onclick="setStatus(${a.id},'new')">↩</button>
-              <button class="ab ab-perm"    onclick="permDelete(${a.id})">✕</button>`;
+              <button class="ab ab-restore" onclick="setStatus(${a.id},'new')" title="Tiklash">↩</button>
+              <button class="ab ab-perm"    onclick="permDelete(${a.id})" title="Butunlay o'chirish">✕</button>`;
                 }
+                const nm = fullName(a);
+                const ini = initials(nm);
+                const cls = a.form_type === 'canada' ? 'av-ca' : 'av-fr';
                 h += `<tr>
-      <td>${i + 1}</td>
-      <td><strong>${fullName(a)}</strong></td>
+      <td class="td-idx">${i + 1}</td>
+      <td><div class="td-name"><span class="td-av ${cls}">${ini}</span><strong>${highlight(nm)}</strong></div></td>
       <td>${formLabel(a)}</td>
-      <td><a href="tel:${a.phone}" style="color:var(--navy);font-weight:600;text-decoration:none">${a.phone || '—'}</a></td>
-      <td style="color:var(--gray);font-size:.78rem">${ds}</td>
+      <td><a href="tel:${a.phone}" class="td-phone">${highlight(a.phone || '—')}</a></td>
+      <td class="td-time">${timeAgo(a.created_at)}</td>
+      <td>${statusPill(a.status)}</td>
       <td style="white-space:nowrap">${btns}</td>
     </tr>`;
             });
             h += '</tbody></table>';
             wrap.innerHTML = h;
+        }
+
+        function initials(nm) {
+            return nm.replace(/[^A-Za-zА-Яа-яЁёʼ' ]/g, '').trim().split(' ').map(x => x[0] || '').slice(0, 2).join('').toUpperCase() || '?';
         }
 
         function buildCards(list) {
@@ -216,13 +295,14 @@
             wrap.innerHTML = list.map(a => {
                 const cls = a.form_type === 'canada' ? 'av-ca' : 'av-fr';
                 const nm = fullName(a);
-                const ini = nm.replace(/[^A-Za-zА-Яа-яЁёʼ' ]/g, '').trim().split(' ').map(x => x[0] || '').slice(0, 2).join('').toUpperCase() || '?';
+                const ini = initials(nm);
                 const ft = a.form_type === 'canada' ? '🇨🇦 Kanada' : '🇫🇷 France TCF';
                 return `<div class="m-card" onclick="openSheet(${a.id})">
       <div class="m-avatar ${cls}">${ini}</div>
       <div class="m-info">
-        <div class="m-name">${nm}</div>
-        <div class="m-sub">${a.phone || '—'} · ${ft}</div>
+        <div class="m-name">${highlight(nm)}</div>
+        <div class="m-sub">${highlight(a.phone || '—')} · ${ft}</div>
+        <div class="m-meta">${statusPill(a.status)} <span class="m-time">${timeAgo(a.created_at)}</span></div>
       </div>
       <div class="m-arrow">›</div>
     </div>`;
@@ -371,6 +451,13 @@
         }
         function closeSheet(e) { if (e.target === document.getElementById('sheetOverlay')) closeSheetModal(); }
 
+        // Sheet'ni ESC bilan yopish
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('sheetOverlay')?.classList.contains('open')) {
+                closeSheetModal();
+            }
+        });
+
         // ── Loading overlay ───────────────────────────────────
         function showLoading() { document.getElementById('loadingOverlay').classList.add('open'); }
         function hideLoading() { document.getElementById('loadingOverlay').classList.remove('open'); }
@@ -380,6 +467,11 @@
             if (sessionStorage.getItem('adm') === '1') enterAdmin();
             initReveal();
             initNavScroll();
+            initScrollProgress();
+            initTilt();
+            initMagnetic();
+            initBackTop();
+            initMobileBar();
         });
 
         // ── Scroll reveal animatsiyasi ────────────────────────
@@ -394,6 +486,8 @@
                     if (en.isIntersecting) {
                         en.target.style.transitionDelay = Math.min(idx * 60, 240) + 'ms';
                         en.target.classList.add('in');
+                        // Sonlarni animatsiya bilan sanash
+                        en.target.querySelectorAll('[data-count]').forEach(animateCount);
                         io.unobserve(en.target);
                     }
                 });
@@ -409,3 +503,104 @@
             window.addEventListener('scroll', onScroll, { passive: true });
             onScroll();
         }
+
+        // ── Scroll progress bar ───────────────────────────────
+        function initScrollProgress() {
+            const bar = document.getElementById('scrollProgress');
+            if (!bar) return;
+            const onScroll = () => {
+                const h = document.documentElement;
+                const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+                bar.style.width = (scrolled * 100).toFixed(2) + '%';
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        }
+
+        // ── Raqamlarni sanash animatsiyasi ────────────────────
+        function animateCount(el) {
+            if (el.dataset.done) return;
+            el.dataset.done = '1';
+            const target = parseFloat(el.dataset.count);
+            if (isNaN(target)) return;
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const dur = 1400;
+            const start = performance.now();
+            const fmt = (n) => Math.round(n).toLocaleString('ru-RU').replace(/,/g, ' ');
+            const step = (now) => {
+                const p = Math.min((now - start) / dur, 1);
+                const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+                el.textContent = prefix + fmt(target * eased) + suffix;
+                if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
+
+        // ── 3D tilt + spotlight (faqat pointer: fine) ─────────
+        function initTilt() {
+            if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const cards = document.querySelectorAll('.course-card, .info-card, .ee-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const r = card.getBoundingClientRect();
+                    const x = e.clientX - r.left;
+                    const y = e.clientY - r.top;
+                    const rx = ((y / r.height) - 0.5) * -6;
+                    const ry = ((x / r.width) - 0.5) * 6;
+                    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+                    card.style.setProperty('--mx', x + 'px');
+                    card.style.setProperty('--my', y + 'px');
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
+
+        // ── Magnetic CTA tugmalari ────────────────────────────
+        function initMagnetic() {
+            if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            document.querySelectorAll('.cta-btn, .cta-ghost, .submit-btn, .consent-btn').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const r = btn.getBoundingClientRect();
+                    const mx = e.clientX - r.left - r.width / 2;
+                    const my = e.clientY - r.top - r.height / 2;
+                    btn.style.transform = `translate(${mx * 0.18}px, ${my * 0.28}px)`;
+                });
+                btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+            });
+        }
+
+        // ── Back to top tugmasi ───────────────────────────────
+        function initBackTop() {
+            const btn = document.getElementById('backTop');
+            if (!btn) return;
+            const onScroll = () => btn.classList.toggle('show', window.scrollY > 600);
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        }
+
+        // ── Mobil pastki harakat paneli ───────────────────────
+        function initMobileBar() {
+            const bar = document.getElementById('mobileBar');
+            if (!bar) return;
+            const reg = document.getElementById('registration');
+            const update = () => {
+                // Hero'dan o'tgach ko'rsatamiz
+                const passedHero = window.scrollY > 400;
+                // Ro'yxat formasi ekranda bo'lsa, panelni yashiramiz (takror tugma bo'lmasin)
+                let inForm = false;
+                if (reg) {
+                    const r = reg.getBoundingClientRect();
+                    inForm = r.top < window.innerHeight * 0.75 && r.bottom > 0;
+                }
+                bar.classList.toggle('show', passedHero && !inForm);
+            };
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update, { passive: true });
+            update();
+        }
+
