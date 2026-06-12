@@ -14,6 +14,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
     <!-- ====== MAIN SITE ====== -->
@@ -217,13 +218,8 @@
                         onclick="acceptConsent()">Roziman, davom etish →</button>
                 </div>
 
-                <!-- Form switcher -->
-                <div class="form-switch" id="formSwitch" style="display:none">
-                    <button type="button" class="fs-btn active" id="fsb_france" onclick="switchForm('france')">🇫🇷
-                        France TCF kursi</button>
-                    <button type="button" class="fs-btn" id="fsb_canada" onclick="switchForm('canada')">🇨🇦 Kanada
-                        immigratsiya baholash</button>
-                </div>
+                <!-- Form switcher olib tashlandi (faqat France TCF formasi qoldi) -->
+
 
                 <!-- ===== FORM 1: FRANCE TCF ===== -->
                 <form id="franceForm" class="reg-form" style="display:none" onsubmit="submitFrance(event)">
@@ -291,97 +287,7 @@
                 </form>
 
 
-                <!-- ===== FORM 2: KANADA IMMIGRATSIYA ===== -->
-                <form id="canadaForm" class="reg-form" style="display:none" onsubmit="submitCanada(event)">
-                    <div class="form-note">🇨🇦 Kanada immigratsiyasi uchun dastlabki baholash formasi</div>
-                    <div class="form-group"><label>1. To'liq ism va familiyangiz *</label><input type="text"
-                            id="ca_fullname" placeholder="Ism Familiya" required></div>
-                    <div class="form-group"><label>2. Yashash manzilingiz *</label><input type="text" id="ca_address"
-                            placeholder="Shahar, tuman" required></div>
-                    <div class="form-group"><label>3. Tug'ilgan sanangiz *</label><input type="date" id="ca_birthdate"
-                            required></div>
-                    <div class="form-group"><label>4. Ma'lumotingiz</label><select id="ca_education">
-                            <option value="">Tanlang...</option>
-                            <option>O'rta</option>
-                            <option>O'rta maxsus</option>
-                            <option>Bakalavr</option>
-                            <option>Magistr</option>
-                            <option>Doktorantura</option>
-                        </select></div>
-                    <div class="form-group"><label>Ta'lim muassasasi nomi (oliy ma'lumot bo'lsa)</label><input
-                            type="text" id="ca_institution" placeholder="Universitet/institut nomi"></div>
-                    <div class="form-group"><label>5. Hozirgi ish joyingiz</label><input type="text" id="ca_work"
-                            placeholder="Ish joyingiz"></div>
-                    <div class="form-group"><label>Ish tajribangiz (yil hisobida)</label><input type="number"
-                            id="ca_experience" min="0" max="60" placeholder="0"></div>
-                    <div class="form-group"><label>6. Oilaviy holatingiz</label><select id="ca_marital">
-                            <option value="">Tanlang...</option>
-                            <option>Bo'ydoq/Turmush qurmagan</option>
-                            <option>Turmush qurgan</option>
-                            <option>Ajrashgan</option>
-                            <option>Beva</option>
-                        </select></div>
-                    <div class="form-group"><label>Farzandlaringiz soni</label><input type="number" id="ca_children"
-                            min="0" max="20" placeholder="0"></div>
-                    <div class="form-group"><label>7. Ingliz tili darajangiz</label><select id="ca_english">
-                            <option value="">Tanlang...</option>
-                            <option>Boshlang'ich</option>
-                            <option>O'rta</option>
-                            <option>Yaxshi</option>
-                            <option>Erkin</option>
-                        </select></div>
-                    <div class="form-group"><label>Sertifikatingiz bo'lsa, turi va balli (IELTS,
-                            CELPIP...)</label><input type="text" id="ca_engcert" placeholder="Masalan: IELTS 7.0"></div>
-                    <div class="form-group"><label>8. Telefon raqamingiz *</label><input type="tel" id="ca_phone"
-                            placeholder="+998 90 000 00 00" required></div>
-                    <div class="form-group"><label>Telegram akkauntingiz</label><input type="text" id="ca_telegram"
-                            placeholder="@username"></div>
-                    <div class="form-group"><label>9. Fransuz tilini o'rganishdan maqsadingiz</label><input type="text"
-                            id="ca_goal" placeholder="Maqsadingiz"></div>
-                    <div class="form-group"><label>10. Hozirgi fransuz tili darajangiz</label><select id="ca_frlevel">
-                            <option value="">Tanlang...</option>
-                            <option>Bilmayman</option>
-                            <option>A1</option>
-                            <option>A2</option>
-                            <option>B1</option>
-                            <option>B2</option>
-                            <option>C1</option>
-                            <option>C2</option>
-                        </select></div>
-                    <div class="form-group"><label>11. Sertifikat imtihonini qachon rejalashtiryapsiz?</label><input
-                            type="text" id="ca_examdate" placeholder="Sana yoki davr"></div>
-                    <div class="form-group"><label>12. Qaysi davlat yoki maqsad uchun o'rganyapsiz?</label><input
-                            type="text" id="ca_country" placeholder="Masalan: Kanada PR"></div>
-                    <div class="form-group"><label>13. Bir kunda o'rtacha qancha vaqt ajrata olasiz?</label><select
-                            id="ca_time">
-                            <option value="">Tanlang...</option>
-                            <option>30 daqiqagacha</option>
-                            <option>1 soat</option>
-                            <option>2 soat</option>
-                            <option>3 soat va undan ko'p</option>
-                        </select></div>
-                    <div class="form-group"><label>14. Darslarning qaysi formatini afzal ko'rasiz?</label><select
-                            id="ca_format">
-                            <option value="">Tanlang...</option>
-                            <option>Online</option>
-                            <option>Offline</option>
-                            <option>Farqi yo'q</option>
-                        </select></div>
-                    <div class="form-group"><label>15. Biz haqimizda qayerdan eshitdingiz?</label><select
-                            id="ca_source">
-                            <option value="">Tanlang...</option>
-                            <option>Telegram</option>
-                            <option>Instagram</option>
-                            <option>Facebook</option>
-                            <option>YouTube</option>
-                            <option>Do'stlar tavsiyasi</option>
-                            <option>Google qidiruvi</option>
-                            <option>Boshqa</option>
-                        </select></div>
-                    <div class="form-group fg-full"><label>Qo'shimcha izohlar (ixtiyoriy)</label><textarea id="ca_notes"
-                            rows="3" placeholder="Qo'shimcha ma'lumot"></textarea></div>
-                    <button type="submit" class="submit-btn" id="caSubmitBtn">Baholash uchun yuborish →</button>
-                </form>
+                <!-- ===== FORM 2 (KANADA) OLIB TASHLANDI ===== -->
 
                 <div class="msg msg-ok" id="msgOk">✅ Muvaffaqiyatli yuborildi! Tez orada bog'lanamiz.</div>
                 <div class="msg msg-err" id="msgErr">❌ Xatolik yuz berdi. Qayta urinib ko'ring.</div>
@@ -411,7 +317,8 @@
                 </div>
                 <div class="footer-col">
                     <h5>France TCF markazi</h5>
-                    <a href="https://maps.google.com/?q=Oybek+metro+Toshkent" target="_blank" rel="noopener">📍 Oybek
+                    <a href="https://maps.google.com/?q=Chilonzor+metro+Toshkent" target="_blank" rel="noopener">📍
+                        Chilonzor
                         metro</a>
                     <a href="tel:+998947382221">📞 +998 94 738 22 21</a>
                     <a href="https://t.me/France_TCF" target="_blank" rel="noopener">👤 Admin: @France_TCF</a>

@@ -46,17 +46,7 @@
         function acceptConsent() {
             if (!document.getElementById('consentCheck').checked) return;
             document.getElementById('consentBox').style.display = 'none';
-            document.getElementById('formSwitch').style.display = 'flex';
-            switchForm('france');
-        }
-
-        // ── Form switcher ─────────────────────────────────────
-        function switchForm(type) {
-            const isFr = type === 'france';
-            document.getElementById('franceForm').style.display = isFr ? 'block' : 'none';
-            document.getElementById('canadaForm').style.display = isFr ? 'none' : 'block';
-            document.getElementById('fsb_france').classList.toggle('active', isFr);
-            document.getElementById('fsb_canada').classList.toggle('active', !isFr);
+            document.getElementById('franceForm').style.display = 'block';
         }
 
         // ── France TCF form ───────────────────────────────────
@@ -98,49 +88,7 @@
             btn.disabled = false; btn.textContent = "Ro'yxatdan o'tish →";
         }
 
-        // ── Kanada immigratsiya form ──────────────────────────
-        async function submitCanada(e) {
-            e.preventDefault();
-            const btn = document.getElementById('caSubmitBtn');
-            btn.disabled = true; btn.textContent = 'Yuklanmoqda...';
-            try {
-                const fullname = val('ca_fullname');
-                const parts = fullname.split(' ');
-                await DB.insert({
-                    fname: parts[0] || fullname,
-                    lname: parts.slice(1).join(' ') || '',
-                    phone: val('ca_phone'),
-                    status: 'new',
-                    form_type: 'canada',
-                    details: {
-                        'To\'liq ismi': fullname,
-                        'Yashash manzili': val('ca_address'),
-                        'Tug\'ilgan sana': val('ca_birthdate'),
-                        'Ma\'lumoti': val('ca_education'),
-                        'Ta\'lim muassasasi': val('ca_institution'),
-                        'Ish joyi': val('ca_work'),
-                        'Ish tajribasi (yil)': val('ca_experience'),
-                        'Oilaviy holati': val('ca_marital'),
-                        'Farzandlar soni': val('ca_children'),
-                        'Ingliz tili darajasi': val('ca_english'),
-                        'Ingliz sertifikati': val('ca_engcert'),
-                        'Telefon': val('ca_phone'),
-                        'Telegram': val('ca_telegram'),
-                        'Fransuz tili maqsadi': val('ca_goal'),
-                        'Hozirgi fransuz darajasi': val('ca_frlevel'),
-                        'Imtihon vaqti': val('ca_examdate'),
-                        'Davlat/maqsad': val('ca_country'),
-                        'Kunlik vaqt': val('ca_time'),
-                        'Dars formati': val('ca_format'),
-                        'Qayerdan eshitdi': val('ca_source'),
-                        'Qo\'shimcha izoh': val('ca_notes'),
-                    }
-                });
-                document.getElementById('canadaForm').reset();
-                showMsg('msgOk');
-            } catch { showMsg('msgErr'); }
-            btn.disabled = false; btn.textContent = "Baholash uchun yuborish →";
-        }
+        // ── Kanada immigratsiya form (OLIB TASHLANDI) ─────────
 
         function showMsg(id) {
             document.getElementById(id).style.display = 'block';
