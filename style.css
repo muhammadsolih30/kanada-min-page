@@ -1077,10 +1077,10 @@ footer {
 }
 
 .footer-inner {
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1.8fr 1fr 1.2fr 1.4fr;
     gap: 2.5rem;
     padding-bottom: 3rem;
 }
@@ -1108,12 +1108,16 @@ footer {
     margin-bottom: .4rem;
 }
 
-.footer-col span {
+.footer-col span,
+.footer-col a {
     cursor: pointer;
     transition: color .2s;
+    color: inherit;
+    text-decoration: none;
 }
 
-.footer-col span:hover {
+.footer-col span:hover,
+.footer-col a:hover {
     color: var(--gold-soft);
 }
 
@@ -1848,7 +1852,7 @@ tr:hover td {
 /* ====== RESPONSIVE ====== */
 @media(max-width:860px) {
     .footer-inner {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
 }
@@ -1896,6 +1900,10 @@ tr:hover td {
     .reg-form {
         grid-template-columns: 1fr;
     }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media(max-width:480px) {
@@ -1931,5 +1939,260 @@ tr:hover td {
     [data-reveal] {
         opacity: 1;
         transform: none;
+    }
+}
+
+/* ====== OMMAVIY OFERTA: LINKS ====== */
+.offer-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 auto 1.3rem;
+    background: rgba(29, 78, 216, .07);
+    color: var(--blue-bright);
+    border: 1.5px solid rgba(29, 78, 216, .25);
+    padding: .7rem 1.3rem;
+    border-radius: 12px;
+    font-size: .95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background .2s, transform .2s, border-color .2s;
+}
+
+.offer-link-btn:hover {
+    background: rgba(29, 78, 216, .13);
+    border-color: var(--blue-bright);
+    transform: translateY(-2px);
+}
+
+.consent-offer-link {
+    color: var(--blue-bright);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.consent-offer-link:hover {
+    color: var(--red);
+}
+
+/* ====== OMMAVIY OFERTA: MODAL ====== */
+.offer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 16, 36, .6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem;
+}
+
+.offer-overlay.open {
+    display: flex;
+    animation: fadeIn .25s ease;
+}
+
+.offer-modal {
+    background: #fff;
+    border-radius: 22px;
+    width: 100%;
+    max-width: 760px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    animation: dropIn .4s var(--ease);
+}
+
+.offer-head {
+    position: relative;
+    background: var(--fc-gradient);
+    color: #fff;
+    padding: 1.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.offer-kicker {
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .8;
+    margin-bottom: .35rem;
+}
+
+.offer-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    line-height: 1.2;
+    margin-bottom: .3rem;
+}
+
+.offer-head p {
+    font-size: .9rem;
+    opacity: .85;
+    max-width: 90%;
+}
+
+.offer-close {
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .2s, transform .2s;
+}
+
+.offer-close:hover {
+    background: rgba(255, 255, 255, .3);
+    transform: rotate(90deg);
+}
+
+.offer-body {
+    padding: 1.8rem 2rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.offer-block {
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.offer-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.offer-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.22rem;
+    color: var(--blue);
+    margin-bottom: .8rem;
+}
+
+.offer-block p {
+    font-size: .95rem;
+    color: var(--navy);
+    margin-bottom: .7rem;
+    line-height: 1.65;
+}
+
+.offer-block p:last-child {
+    margin-bottom: 0;
+}
+
+.offer-block ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+}
+
+.offer-block li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-size: .94rem;
+    color: var(--navy);
+    line-height: 1.55;
+}
+
+.offer-block li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--blue-bright);
+    font-weight: 700;
+}
+
+.offer-block a {
+    color: var(--blue-bright);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    word-break: break-word;
+}
+
+.offer-block a:hover {
+    color: var(--red);
+}
+
+.offer-highlight {
+    background: linear-gradient(120deg, rgba(224, 181, 74, .12), rgba(196, 30, 58, .06));
+    border: 1px solid var(--gold-soft);
+    border-radius: 14px;
+    padding: 1.3rem 1.4rem;
+}
+
+.offer-highlight h3 {
+    color: var(--red-deep);
+}
+
+.offer-req {
+    background: var(--bg);
+    border-radius: 14px;
+    padding: 1.3rem 1.4rem;
+}
+
+.offer-req p {
+    margin-bottom: .5rem;
+    font-size: .92rem;
+}
+
+.offer-foot {
+    padding: 1.1rem 2rem;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    background: #fff;
+}
+
+.offer-foot-btn {
+    width: 100%;
+    background: var(--fc-gradient-soft);
+    color: #fff;
+    border: none;
+    padding: .95rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: filter .2s, transform .2s;
+}
+
+.offer-foot-btn:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 560px) {
+    .offer-head {
+        padding: 1.4rem 1.3rem;
+    }
+
+    .offer-head h2 {
+        font-size: 1.4rem;
+    }
+
+    .offer-body {
+        padding: 1.3rem 1.3rem;
+    }
+
+    .offer-foot {
+        padding: 1rem 1.3rem;
     }
 }

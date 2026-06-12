@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>France TCF – Fransuz Tili & Kanada PR</title>
+    <link rel="./img/image copy.png" href="./img/image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -197,6 +198,8 @@
                     <h3 class="consent-title">Kursga yozilishdan oldin</h3>
                     <p class="consent-text">Ariza qoldirishdan oldin kurs haqidagi barcha ma'lumotlar — narxlar, dars
                         tarkibi, sertifikatlar va markaz qoidalari bilan tanishib chiqing.</p>
+                    <button type="button" class="offer-link-btn" onclick="openOffer()">📄 Ommaviy ofertani to'liq
+                        o'qish</button>
                     <ul class="consent-list">
                         <li>Darslarga o'z vaqtida qatnashish</li>
                         <li>Uy vazifalarini muntazam bajarish</li>
@@ -206,7 +209,8 @@
                     </ul>
                     <label class="consent-check">
                         <input type="checkbox" id="consentCheck" onchange="toggleConsentBtn()">
-                        <span>Kurs haqidagi barcha ma'lumotlar bilan tanishib chiqdim va kursning barcha
+                        <span>Kurs haqidagi barcha ma'lumotlar va <a href="#" onclick="openOffer();return false;"
+                                class="consent-offer-link">ommaviy oferta</a> bilan tanishib chiqdim va kursning barcha
                             qonun-qoidalariga roziman.</span>
                     </label>
                     <button type="button" class="consent-btn" id="consentBtn" disabled
@@ -286,7 +290,7 @@
                     <button type="submit" class="submit-btn" id="frSubmitBtn">Ro'yxatdan o'tish →</button>
                 </form>
 
-                
+
                 <!-- ===== FORM 2: KANADA IMMIGRATSIYA ===== -->
                 <form id="canadaForm" class="reg-form" style="display:none" onsubmit="submitCanada(event)">
                     <div class="form-note">🇨🇦 Kanada immigratsiyasi uchun dastlabki baholash formasi</div>
@@ -400,13 +404,213 @@
                 </div>
                 <div class="footer-col">
                     <h5>Bog'lanish</h5>
-                    <span>📞 Telefon</span>
-                    <span>✈️ Telegram</span>
-                    <span>📷 Instagram</span>
+                    <a href="https://t.me/CanadAli" target="_blank" rel="noopener">✈️ Telegram kanal</a>
+                    <a href="https://t.me/Mr_Ali_Canada" target="_blank" rel="noopener">💬 Shaxsiy: @Mr_Ali_Canada</a>
+                    <a href="https://www.canadali.net" target="_blank" rel="noopener">🌐 www.canadali.net</a>
+                    <a href="https://instagram.com/kanadalik_uzbek" target="_blank" rel="noopener">📷 Instagram</a>
+                </div>
+                <div class="footer-col">
+                    <h5>France TCF markazi</h5>
+                    <a href="https://maps.google.com/?q=Oybek+metro+Toshkent" target="_blank" rel="noopener">📍 Oybek
+                        metro</a>
+                    <a href="tel:+998947382221">📞 +998 94 738 22 21</a>
+                    <a href="https://t.me/France_TCF" target="_blank" rel="noopener">👤 Admin: @France_TCF</a>
+                    <a href="https://t.me/Fransuzu" target="_blank" rel="noopener">📊 Natijalar: @Fransuzu</a>
+                    <a href="#" onclick="openOffer();return false;">📄 Ommaviy oferta</a>
                 </div>
             </div>
             <div class="footer-bottom">© 2025 France TCF · TCF Canada Tayyorlov Markazi</div>
         </footer>
+    </div>
+
+    <!-- ====== OMMAVIY OFERTA MODAL ====== -->
+    <div class="offer-overlay" id="offerOverlay" onclick="closeOffer(event)">
+        <div class="offer-modal" role="dialog" aria-modal="true" aria-labelledby="offerTitle">
+            <div class="offer-head">
+                <div class="offer-head-txt">
+                    <div class="offer-kicker">France TCF o'quv markazi</div>
+                    <h2 id="offerTitle">Ommaviy oferta</h2>
+                    <p>Fransuz tili bo'yicha ta'lim xizmatlarini taqdim etish to'g'risida</p>
+                </div>
+                <button class="offer-close" onclick="closeOffer()" aria-label="Yopish">✕</button>
+            </div>
+
+            <div class="offer-body" id="offerBody">
+
+                <div class="offer-block">
+                    <h3>Atama va ta'riflar</h3>
+                    <p><b>Ommaviy oferta</b> — shartnoma tuzish bo'yicha taklif. Shartnoma ofertani (uning akseptini)
+                        shartsiz qabul qilish orqali tuziladi.</p>
+                    <p><b>Ofertaning aksepti</b> — 1.3-bandda ko'rsatilgan harakatlarni hech qanday shartlarsiz qabul
+                        qilish. Aksept shartnoma tuzilishiga sabab bo'ladi.</p>
+                    <p><b>Bajaruvchi / O'quv markaz</b> — 2025-yil 20-oktyabrda berilgan 7218673-son guvohnomaga asosan
+                        ta'lim xizmatlarini taqdim etuvchi.</p>
+                    <p><b>O'quvchi / Buyurtmachi</b> — ushbu shartnoma shartlarini qabul qilgan, France TCF kurslarida
+                        fransuz tilini o'rganayotgan jismoniy shaxs.</p>
+                    <p><b>Kurs</b> — o'quv markazi metodikasi bo'yicha tanlangan muddat davomida fransuz tilini
+                        o'rgatish
+                        jarayoni (onlayn va oflayn shakllarda).</p>
+                    <p><b>Web-site</b> — <a href="https://france-tfc.uz/" target="_blank"
+                            rel="noopener">https://france-tfc.uz/</a>
+                        — markazning rasmiy veb-sahifasi.</p>
+                    <p><b>Placement</b> — fransuz tilini bilish darajasini aniqlashga qaratilgan bepul protsedura.</p>
+                </div>
+
+                <div class="offer-block">
+                    <h3>1. Umumiy qoidalar</h3>
+                    <p>1.1. O'zbekiston Respublikasi Fuqarolik kodeksiga asosan ushbu hujjat YaTT "MURODOVA SABINA
+                        NODIRBEK QIZI" (France TCF o'quv markazi) tomonidan har qanday jismoniy shaxsga yo'naltirilgan
+                        rasmiy ommaviy taklif (oferta) hisoblanadi.</p>
+                    <p>1.2. Oferta rasmiy hujjat bo'lib, Toshkent shahri, Mirobod tumani, A.Fitrat ko'chasi, 81V-uyda
+                        joylashgan o'quv markazida amalga oshiriladi.</p>
+                    <p>1.3. O'quvchi o'z shaxsiga doir ma'lumotlarni (to'liq ismi, tug'ilgan sana, telefon raqami) o'quv
+                        markazi administratsiyasiga taqdim etadi.</p>
+                    <p>1.4. Quyidagi harakatlarning birida O'quvchi oferta shartlarini to'liq va shartsiz qabul qilgan
+                        (akseptlagan) hisoblanadi:</p>
+                    <ul>
+                        <li>Xizmatlar uchun to'lov amalga oshirilsa;</li>
+                        <li><a href="https://france-tfc.uz/" target="_blank" rel="noopener">france-tfc.uz</a> rasmiy
+                            sayti orqali taklif shartlari bilan tanishganligini tasdiqlasa.</li>
+                    </ul>
+                    <p>1.5. FK 370-moddasi 4-qismiga muvofiq, ofertani qabul qilish unda ko'rsatilgan shartlar bo'yicha
+                        shartnoma tuzishga tengdir.</p>
+                </div>
+
+                <div class="offer-block">
+                    <h3>2. Shartnoma predmeti</h3>
+                    <p>2.1. Bajaruvchi "France TCF o'quv markazi"da "Fransuz tili kursi" dasturi bo'yicha ta'lim
+                        xizmatini ko'rsatadi; O'quvchi onlayn yoki oflayn tarzda tahsil olish va haq to'lash
+                        majburiyatini oladi.</p>
+                    <p>2.2. 13–18 yosh oralig'idagi voyaga yetmaganlar nomidan ofertani faqat ota-onalari yoki qonuniy
+                        vakillari akseptlashi mumkin.</p>
+                    <p>2.3. Xizmatlar "O'quv markazining fransuz tili o'qitish metodikasi"ga muvofiq ko'rsatiladi.</p>
+                    <p>2.4. O'quv rejasi davomiyligi umumiy <b>6–8 oy</b>ni tashkil qiladi.</p>
+                    <p>2.5. Xizmatlar saytdagi amaldagi narxlar ro'yxatiga muvofiq ko'rsatiladi.</p>
+                    <p>2.6. Shartnoma qoidalari onlayn va oflayn ta'lim shakllariga teng ravishda tatbiq etiladi.</p>
+                </div>
+
+                <div class="offer-block">
+                    <h3>3.1. O'quv markazining huquq va majburiyatlari</h3>
+                    <ul>
+                        <li>Xizmatlarni tashkil etish va tegishli tarzda bajarilishini ta'minlash.</li>
+                        <li>Bosqich yakunida test o'tkazib, natijaga ko'ra o'quvchini keyingi bosqichga o'tkazish,
+                            qoldirish yoki o'qishni rad etish.</li>
+                        <li>To'lovni o'z vaqtida amalga oshirmagan talabani darslarga va shaxsiy kabinetga kirishini
+                            cheklash.</li>
+                        <li>O'quvchi roziligisiz o'qituvchini almashtirish yoki o'rindosh/yordamchi o'qituvchi
+                            tayinlash.</li>
+                        <li>Mashg'ulotlar jadvali va tartibini belgilash; o'zgartirish bo'lsa oldindan xabardor qilish.
+                        </li>
+                        <li>Guruhda 7 nafardan kam o'quvchi qolsa, guruhni yopish va boshqa guruhlarga taqsimlash.</li>
+                        <li>Qoldirilgan dars uchun to'lovni boshqa shaxs hisobiga o'tkazmaslik; sababsiz qoldirilgan
+                            darsni qayta o'tib bermaslik (video yozuv bo'lsa berilishi mumkin).</li>
+                        <li>O'quvchining sertifikat va yutuqlaridan reklama materiali sifatida foydalanish.</li>
+                        <li>Qonun yoki oferta shartlarini buzgan, xodim yoki o'quvchilarni haqorat qilgan o'quvchini
+                            darslardan chetlatish va to'lovni qaytarmaslik.</li>
+                        <li>Kurs davomida 3 marta yakuniy imtihondan qoniqarsiz natija (yetarlicha harakat qilmaslik
+                            sababli) qayd etilsa, shartnoma 1 yil muddatga bekor qilinishi mumkin.</li>
+                        <li>To'lov qilib kamida 1 darsda qatnashgach, subyektiv sabablarga ko'ra kursni tashlasa,
+                            to'langan mablag' qaytarilmaydi.</li>
+                        <li>O'quvchining shaxsga doir ma'lumotlarini sir saqlash va uchinchi shaxslarga bermaslik.</li>
+                        <li>Agar markaz faoliyatini to'xtatsa, qolgan darslar 6 oy ichida kompensatsiya qilinadi.</li>
+                    </ul>
+                </div>
+
+                <div class="offer-block">
+                    <h3>3.2. O'quvchi / Buyurtmachining huquq va majburiyatlari</h3>
+                    <ul>
+                        <li>To'lovdan oldin oferta mazmuni, shartlari va saytdagi narxlar bilan tanishish.</li>
+                        <li>Har oy o'quv mashg'uloti uchun to'lovni amalga oshirish.</li>
+                        <li>Mustaqil topshiriqlarni bajarish va tasdiqlangan jadvalga muvofiq darslarda ishtirok etish.
+                        </li>
+                        <li>O'quv materiallarini tijorat yoki notijorat maqsadlarda tarqatmaslik, nusxalamaslik,
+                            uchinchi shaxslarga bermaslik.</li>
+                        <li>"Fransuz tili kurslarida o'qitish Qoidalari"ga rioya qilish.</li>
+                        <li>Markaz hududida odob-axloq normalariga amal qilish (baland musiqa, shovqin, tamaki va
+                            alkogol taqiqlanadi).</li>
+                        <li>Markaz mulkiga zarar yetkazsa, qonunchilikka muvofiq qoplash.</li>
+                        <li>Onlayn darslar uchun barqaror internet va texnik vositalarni mustaqil ta'minlash.</li>
+                        <li>Individual shaklda: dars boshidan 2 soat oldin xabar berib, oyiga ko'pi bilan 3 ta darsni
+                            qoldirish mumkin (qayta o'tkaziladi).</li>
+                        <li>Har bir darsga uy vazifasini kamida <b>80%</b> tayyorlab kelish.</li>
+                    </ul>
+                </div>
+
+                <div class="offer-block">
+                    <h3>4. Xizmatlar narxi va hisob-kitob tartibi</h3>
+                    <ul>
+                        <li>Narxlar rasmiy sayt <a href="https://france-tfc.uz/" target="_blank"
+                                rel="noopener">france-tfc.uz</a>da
+                            ko'rsatilgan.</li>
+                        <li>Bir oyda 12 ta mashg'ulot uchun to'lov ro'yxatdan o'tilgan kundan boshlab amalga oshiriladi;
+                            ba'zi oylarda 13–14 ta dars o'tilishi mumkin va qo'shimcha to'lov olinmaydi.</li>
+                        <li>To'lov muddatini o'tkaza olmasangiz, markazni oldindan ogohlantirish va muddatni kelishib
+                            olish shart.</li>
+                        <li>Qoldirilgan darslar uchun to'lov qaytarilmaydi.</li>
+                        <li>To'lov naqd yoki naqdsiz (karta, onlayn ilovalar) amalga oshiriladi; tasdiqlovchi hujjat 24
+                            soat ichida taqdim etiladi.</li>
+                        <li>Individual shaklda 1 marta bepul sinov darsida qatnashish mumkin.</li>
+                        <li>Narxlar istalgan vaqtda o'zgartirilishi mumkin; yangi narxlar keyingi oy boshidan kuchga
+                            kiradi, oy o'rtasida qo'shimcha to'lov talab qilinmaydi.</li>
+                    </ul>
+                </div>
+
+                <div class="offer-block offer-highlight">
+                    <h3>5. Keshbek (cashback) sharti</h3>
+                    <p>Tinglovchi TCF Canada rasmiy imtihonida barcha bo'limlar bo'yicha B2 yoki undan yuqori natija
+                        qayd etsa, quyidagi keshbekni olish huquqiga ega:</p>
+                    <ul>
+                        <li><b>B2 daraja — 500 000 so'm</b> (kamida 6 oy uzluksiz tahsil olgan bo'lishi shart).</li>
+                        <li><b>C1 va undan yuqori — 1 000 000 so'm</b> (kamida 9 oy uzluksiz tahsil olgan bo'lishi
+                            shart).</li>
+                    </ul>
+                    <p>Keshbek rasmiy natijani tasdiqlovchi hujjatlar taqdim etilgach to'lanadi va bir martalik
+                        hisoblanadi. Keshbek olgan tinglovchi boshqa markazlar media platformalarida shu natijani
+                        namoyish eta olmaydi.</p>
+                </div>
+
+                <div class="offer-block">
+                    <h3>5. Umumiy tartiblar</h3>
+                    <ul>
+                        <li>Rasmiy bayram kunlariga to'g'ri kelgan darslar keyingi oylarda qoplab beriladi.</li>
+                        <li>Mini va katta guruhlarga 80 daqiqadan, individual darslarga 60 daqiqadan 12 ta mashg'ulot
+                            o'tkaziladi.</li>
+                        <li>Xizmat o'quvchining subyektiv bahosiga to'g'ri kelmasligi to'lovni qaytarish asosi
+                            bo'lmaydi.</li>
+                        <li>Darslarni o'tkazib yuborib o'qishni davom ettirsa, 12 ta mashg'ulot uchun to'liq to'lov
+                            undiriladi.</li>
+                    </ul>
+                </div>
+
+                <div class="offer-block">
+                    <h3>6–8. Boshqa shartlar, fors-major va amal qilish muddati</h3>
+                    <ul>
+                        <li>Markaz o'quvchining aybi (darsga qatnashmaslik, uy vazifasini bajarmaslik) bilan yuzaga
+                            kelgan natija uchun javobgar emas.</li>
+                        <li>Fors-major holatlari (yong'in, zilzila, epidemiya, harbiy harakatlar va h.k.) tomonlarni
+                            javobgarlikdan ozod qiladi; bunday holat 10 kun ichida xabardor qilinadi.</li>
+                        <li>Shartnoma aksept qilingan paytdan kuchga kiradi va muddati cheklanmagan.</li>
+                        <li>Nizolar muzokara yo'li bilan, hal bo'lmasa O'zbekiston Respublikasi qonunchiligi asosida hal
+                            etiladi.</li>
+                    </ul>
+                </div>
+
+                <div class="offer-block offer-req">
+                    <h3>9. Rekvizitlar</h3>
+                    <p>YaTT <b>"MURODOVA SABINA NODIRBEK QIZI"</b> (France TCF o'quv markazi) — 2025-yil 20-oktyabrda
+                        berilgan 7218673-son guvohnomaga asosan ta'lim xizmatlarini taqdim etuvchi.</p>
+                    <p>📍 Yuridik manzil: Toshkent shahri, Mirobod tumani, A.Fitrat ko'chasi, 81V-uy.</p>
+                    <p>🧾 STIR: 63001025310027</p>
+                    <p>📞 Tel.: <a href="tel:+998947382221">+998 (94) 738-22-21</a></p>
+                    <p>👩‍💼 Direktor: S.N. Murodova</p>
+                </div>
+
+            </div>
+
+            <div class="offer-foot">
+                <button class="offer-foot-btn" onclick="closeOffer()">Tushunarli, yopish</button>
+            </div>
+        </div>
     </div>
 
     <!-- ====== LOGIN ====== -->

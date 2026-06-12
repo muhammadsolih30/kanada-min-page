@@ -427,6 +427,27 @@
         function showLoading() { document.getElementById('loadingOverlay').classList.add('open'); }
         function hideLoading() { document.getElementById('loadingOverlay').classList.remove('open'); }
 
+        // ── Ommaviy oferta modali ─────────────────────────────
+        function openOffer() {
+            const ov = document.getElementById('offerOverlay');
+            ov.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            const body = document.getElementById('offerBody');
+            if (body) body.scrollTop = 0;
+        }
+        function closeOffer(e) {
+            // Faqat fon (overlay) bosilganda yoki tugma orqali yopiladi
+            if (e && e.target && e.target.id !== 'offerOverlay') return;
+            document.getElementById('offerOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('offerOverlay').classList.contains('open')) {
+                document.getElementById('offerOverlay').classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+
         // ── Init ──────────────────────────────────────────────
         window.addEventListener('DOMContentLoaded', () => {
             if (sessionStorage.getItem('adm') === '1') enterAdmin();
