@@ -1949,6 +1949,22 @@ mark {
     margin-bottom: 1.3rem;
     max-height: 50vh;
     overflow-y: auto;
+    padding-bottom: .5rem;
+    padding-right: 1rem;
+    scrollbar-width: thin;
+}
+
+.sheet-rows::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sheet-rows::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+}
+
+.sheet-rows::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .sheet-row {
