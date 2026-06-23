@@ -24,6 +24,7 @@
     --radius: 18px;
     --ease: cubic-bezier(.22, 1, .36, 1);
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -1949,8 +1950,9 @@ mark {
     max-height: 50vh;
     overflow-y: auto;
     padding-bottom: .5rem;
-    padding-right: 1rem;
+    padding-right: 1.1rem;
     scrollbar-width: thin;
+    scrollbar-gutter: stable;
 }
 
 .sheet-rows::-webkit-scrollbar {
@@ -1958,7 +1960,7 @@ mark {
 }
 
 .sheet-rows::-webkit-scrollbar-thumb {
-    background: var(--border);
+    background: var(--gray-light);
     border-radius: 10px;
 }
 
