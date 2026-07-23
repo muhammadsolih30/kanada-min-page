@@ -1,40 +1,185 @@
 
+        // Supabase (ixtiyoriy). Loyiha o'chirilgan bo'lsa ham localStorage ishlayveradi.
         const SB = 'https://fireuryrmexwmindvqlx.supabase.co';
         const KEY = 'sb_publishable_PMjg2XXVVAChMDzowbDhsg_CuCAGY1C';
         const TBL = 'arizalar';
+        const LS_KEY = 'france_tcf_arizalar_v1';
+        const TG_ADMIN = 'https://t.me/France_TCF';
 
-        // ── Supabase API ──────────────────────────────────────
+        let remoteOnline = false;
+
+        // ── localStorage (asosiy zaxira) ───────────────────────
+        const Local = {
+            all() {
+                try {
+                    const raw = localStorage.getItem(LS_KEY);
+                    const list = raw ? JSON.parse(raw) : [];
+                    return Array.isArray(list) ? list : [];
+                } catch { return []; }
+            },
+            saveAll(list) {
+                localStorage.setItem(LS_KEY, JSON.stringify(list));
+            },
+            upsert(row) {
+                const list = this.all();
+                const i = list.findIndex(x => String(x.id) === String(row.id));
+                if (i >= 0) list[i] = { ...list[i], ...row };
+                else list.unshift(row);
+                this.saveAll(list);
+                return row;
+            },
+            setStatus(id, status) {
+                const list = this.all();
+                const item = list.find(x => String(x.id) === String(id));
+                if (!item) return false;
+                item.status = status;
+                this.saveAll(list);
+                return true;
+            },
+            remove(id) {
+                this.saveAll(this.all().filter(x => String(x.id) !== String(id)));
+            },
+            removeByStatus(st) {
+                this.saveAll(this.all().filter(x => x.status !== st));
+            },
+            replaceId(oldId, row) {
+                const list = this.all().filter(x => String(x.id) !== String(oldId));
+                list.unshift(row);
+                this.saveAll(list);
+            }
+        };
+
+        function genLocalId() {
+            return 'L' + Date.now() + '_' + Math.floor(Math.random() * 1e6);
+        }
+
+        // ── Supabase API (best-effort, hech qachon formani bloklamaydi) ──
         async function api(path, method = 'GET', body = null, prefer = '') {
-            const opts = {
-                method,
-                headers: {
-                    'apikey': KEY,
-                    'Authorization': 'Bearer ' + KEY,
-                    'Content-Type': 'application/json',
-                    'Prefer': prefer
-                }
-            };
-            if (body) opts.body = JSON.stringify(body);
-            const r = await fetch(SB + '/rest/v1/' + path, opts);
-            if (!r.ok) throw new Error(await r.text());
-            const t = await r.text();
-            return t ? JSON.parse(t) : null;
+            const ctrl = new AbortController();
+            const timer = setTimeout(() => ctrl.abort(), 2500);
+            try {
+                const opts = {
+                    method,
+                    signal: ctrl.signal,
+                    headers: {
+                        'apikey': KEY,
+                        'Authorization': 'Bearer ' + KEY,
+                        'Content-Type': 'application/json',
+                        'Prefer': prefer
+                    }
+                };
+                if (body) opts.body = JSON.stringify(body);
+                const r = await fetch(SB + '/rest/v1/' + path, opts);
+                if (!r.ok) throw new Error(await r.text());
+                const t = await r.text();
+                return t ? JSON.parse(t) : null;
+            } finally {
+                clearTimeout(timer);
+            }
+        }
+
+        // Remote o'chiqligini oldindan bilib qo'yamiz (forma kutmasin)
+        let remoteDisabled = false;
+        (async () => {
+            try {
+                await api(TBL + '?select=id&limit=1');
+                remoteOnline = true;
+                remoteDisabled = false;
+            } catch {
+                remoteOnline = false;
+                remoteDisabled = true; // Supabase o'chirilgan — faqat localStorage
+            }
+        })();
+
+        function mergeApps(remote, local) {
+            const map = new Map();
+            // Avval remote, keyin local — local oxirgi holatni ustun qo'yadi
+            (remote || []).forEach(r => map.set(String(r.id), r));
+            (local || []).forEach(r => {
+                const k = String(r.id);
+                const prev = map.get(k);
+                map.set(k, prev ? { ...prev, ...r } : r);
+            });
+            return [...map.values()].sort((a, b) =>
+                new Date(b.created_at || 0) - new Date(a.created_at || 0)
+            );
         }
 
         const DB = {
-            getAll: () => api(TBL + '?order=created_at.desc&select=*'),
-            insert: (d) => api(TBL, 'POST', d, 'return=minimal'),
-            setStatus: async (id, st) => {
-                const res = await api(TBL + '?id=DARAJASIeq.' + id + '&select=*', 'PATCH', { status: st }, 'return=representation');
-                if (!res || !res.length) throw new Error("Ruxsat yo'q (RLS) — UPDATE policy qo'shilmagan");
-                return res;
+            async getAll() {
+                const local = Local.all();
+                let remote = [];
+                if (!remoteDisabled) {
+                    try {
+                        remote = await api(TBL + '?order=created_at.desc&select=*') || [];
+                        remoteOnline = true;
+                    } catch {
+                        remoteOnline = false;
+                        remoteDisabled = true;
+                        remote = [];
+                    }
+                } else {
+                    remoteOnline = false;
+                }
+                const merged = mergeApps(remote, local);
+                Local.saveAll(merged);
+                return merged;
             },
-            delete: async (id) => {
-                const res = await api(TBL + '?id=eq.' + id + '&select=*', 'DELETE', null, 'return=representation');
-                if (!res || !res.length) throw new Error("Ruxsat yo'q (RLS) — DELETE policy qo'shilmagan");
-                return res;
+            async insert(payload) {
+                // 1) Avvalo localStorage — shu bilan ro'yxatdan o'tish HAR DOIM ishlaydi
+                const localRow = {
+                    id: genLocalId(),
+                    created_at: new Date().toISOString(),
+                    ...payload
+                };
+                Local.upsert(localRow);
+
+                // 2) Server bo'lsa fon rejimida yozamiz (formani kutishtirmaymiz)
+                if (!remoteDisabled) {
+                    api(TBL, 'POST', payload, 'return=representation')
+                        .then((res) => {
+                            remoteOnline = true;
+                            if (res && res[0]) Local.replaceId(localRow.id, res[0]);
+                        })
+                        .catch(() => {
+                            remoteOnline = false;
+                            remoteDisabled = true;
+                        });
+                }
+                return { row: localRow, remote: !remoteDisabled && remoteOnline };
             },
-            delByStatus: (st) => api(TBL + '?status=eq.' + st + '&select=*', 'DELETE', null, 'return=representation'),
+            async setStatus(id, st) {
+                Local.setStatus(id, st);
+                // Faqat server id (raqam) bo'lsa remote'ga yozamiz
+                if (String(id).startsWith('L')) return;
+                try {
+                    const res = await api(TBL + '?id=eq.' + id + '&select=*', 'PATCH', { status: st }, 'return=representation');
+                    remoteOnline = true;
+                    if (res && res[0]) Local.upsert(res[0]);
+                } catch {
+                    remoteOnline = false;
+                }
+            },
+            async delete(id) {
+                // Faqat qo'lda — localStorage'dan ham o'chadi
+                Local.remove(id);
+                if (String(id).startsWith('L')) return;
+                try {
+                    await api(TBL + '?id=eq.' + id + '&select=*', 'DELETE', null, 'return=representation');
+                    remoteOnline = true;
+                } catch {
+                    remoteOnline = false;
+                }
+            },
+            async delByStatus(st) {
+                Local.removeByStatus(st);
+                try {
+                    await api(TBL + '?status=eq.' + st + '&select=*', 'DELETE', null, 'return=representation');
+                    remoteOnline = true;
+                } catch {
+                    remoteOnline = false;
+                }
+            },
         };
 
         const val = (id) => (document.getElementById(id)?.value || '').trim();
@@ -54,10 +199,11 @@
             e.preventDefault();
             const btn = document.getElementById('frSubmitBtn');
             btn.disabled = true; btn.textContent = 'Yuklanmoqda...';
+            hideMsg('msgOk'); hideMsg('msgErr'); hideMsg('msgLocal');
             try {
                 const fullname = val('fr_fullname');
-                const parts = fullname.split(' ');
-                await DB.insert({
+                const parts = fullname.split(/\s+/).filter(Boolean);
+                const payload = {
                     fname: parts[0] || fullname,
                     lname: parts.slice(1).join(' ') || '',
                     phone: val('fr_phone'),
@@ -81,18 +227,64 @@
                         'Dars formati': val('fr_format'),
                         'Qayerdan eshitdi': val('fr_source'),
                     }
-                });
+                };
+                const result = await DB.insert(payload);
                 document.getElementById('franceForm').reset();
+                // Forma ochiq qolsin — qayta ariza topshirish oson bo'lsin
+                prepareTelegramFallback(result.row);
                 showMsg('msgOk');
-            } catch { showMsg('msgErr'); }
+                // Server o'chiq bo'lsa qo'shimcha Telegram yo'li
+                if (remoteDisabled || !remoteOnline) showMsg('msgLocal');
+            } catch (err) {
+                console.error(err);
+                // localStorage ishlamasa ham Telegram orqali yuborish imkonini beramiz
+                try {
+                    prepareTelegramFallback({
+                        phone: val('fr_phone'),
+                        details: {
+                            "To'liq ismi": val('fr_fullname'),
+                            "Yashash manzili": val('fr_address'),
+                            'Dars formati': val('fr_format'),
+                            'Fransuz tili maqsadi': val('fr_goal'),
+                            'Telefon': val('fr_phone')
+                        }
+                    });
+                    showMsg('msgLocal');
+                } catch {
+                    showMsg('msgErr');
+                }
+            }
             btn.disabled = false; btn.textContent = "Ro'yxatdan o'tish →";
+        }
+
+        function prepareTelegramFallback(row) {
+            const d = row.details || {};
+            const lines = [
+                '🇫🇷 France TCF — yangi ariza',
+                'Ism: ' + (d["To'liq ismi"] || fullName(row)),
+                'Tel: ' + (row.phone || d['Telefon'] || ''),
+                'Manzil: ' + (d["Yashash manzili"] || ''),
+                'Format: ' + (d['Dars formati'] || ''),
+                'Maqsad: ' + (d['Fransuz tili maqsadi'] || '')
+            ].filter(Boolean);
+            const link = TG_ADMIN + '?text=' + encodeURIComponent(lines.join('\n'));
+            const a = document.getElementById('msgLocalTg');
+            if (a) a.href = link;
         }
 
         // ── Kanada immigratsiya form (OLIB TASHLANDI) ─────────
 
         function showMsg(id) {
-            document.getElementById(id).style.display = 'block';
-            setTimeout(() => document.getElementById(id).style.display = 'none', 5000);
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.style.display = 'block';
+            if (id !== 'msgLocal') {
+                setTimeout(() => { el.style.display = 'none'; }, 6000);
+            }
+        }
+        function hideMsg(id) {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
         }
 
         // ── Login ─────────────────────────────────────────────
@@ -138,12 +330,32 @@
             if (rb) rb.classList.add('spinning');
             try {
                 data = await DB.getAll();
+                updateRemoteBadge();
                 render();
             } catch (err) {
-                setContent('<div class="empty-state"><div class="ei">❌</div><p>Xatolik: ' + err.message + '</p></div>');
+                // Remote o'chiq bo'lsa ham localStorage'dan ko'rsatamiz
+                data = Local.all();
+                remoteOnline = false;
+                updateRemoteBadge();
+                render();
+                if (!data.length) {
+                    setContent('<div class="empty-state"><div class="ei">❌</div><p>Xatolik: ' + err.message + '</p></div>');
+                }
             } finally {
                 hideLoading();
                 if (rb) setTimeout(() => rb.classList.remove('spinning'), 400);
+            }
+        }
+
+        function updateRemoteBadge() {
+            const el = document.getElementById('remoteBadge');
+            if (!el) return;
+            if (remoteOnline) {
+                el.className = 'remote-badge online';
+                el.textContent = '☁ Server ulangan · localStorage zaxira faol';
+            } else {
+                el.className = 'remote-badge offline';
+                el.textContent = '⚠ Server o\'chiq — arizalar shu qurilma localStorage\'ida saqlanmoqda';
             }
         }
 
@@ -219,6 +431,9 @@
             if (a.form_type === 'france') return '<span class="badge b-fr">🇫🇷 France TCF</span>';
             return '<span class="badge b-old">Eski</span>';
         }
+        function jsId(id) {
+            return JSON.stringify(String(id));
+        }
         function statusPill(st) {
             const map = {
                 new: '<span class="pill pill-new">Yangi</span>',
@@ -254,19 +469,20 @@
   </tr></thead><tbody>`;
 
             list.forEach((a, i) => {
+                const id = jsId(a.id);
                 let btns = '';
                 if (curTab === 'new') {
-                    btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
-              <button class="ab ab-check" onclick="setStatus(${a.id},'checked')" title="Tekshirildi">✓</button>
-              <button class="ab ab-del"   onclick="setStatus(${a.id},'deleted')" title="O'chirish">🗑</button>`;
+                    btns = `<button class="ab ab-view" onclick="openSheet(${id})">👁 Ko'rish</button>
+              <button class="ab ab-check" onclick="setStatus(${id},'checked')" title="Tekshirildi">✓</button>
+              <button class="ab ab-del"   onclick="setStatus(${id},'deleted')" title="O'chirish">🗑</button>`;
                 } else if (curTab === 'checked') {
-                    btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
-              <button class="ab ab-back"    onclick="setStatus(${a.id},'new')" title="Yangilarga">↩</button>
-              <button class="ab ab-del"      onclick="setStatus(${a.id},'deleted')" title="O'chirish">🗑</button>`;
+                    btns = `<button class="ab ab-view" onclick="openSheet(${id})">👁 Ko'rish</button>
+              <button class="ab ab-back"    onclick="setStatus(${id},'new')" title="Yangilarga">↩</button>
+              <button class="ab ab-del"      onclick="setStatus(${id},'deleted')" title="O'chirish">🗑</button>`;
                 } else {
-                    btns = `<button class="ab ab-view" onclick="openSheet(${a.id})">👁 Ko'rish</button>
-              <button class="ab ab-restore" onclick="setStatus(${a.id},'new')" title="Tiklash">↩</button>
-              <button class="ab ab-perm"    onclick="permDelete(${a.id})" title="Butunlay o'chirish">✕</button>`;
+                    btns = `<button class="ab ab-view" onclick="openSheet(${id})">👁 Ko'rish</button>
+              <button class="ab ab-restore" onclick="setStatus(${id},'new')" title="Tiklash">↩</button>
+              <button class="ab ab-perm"    onclick="permDelete(${id})" title="Butunlay o'chirish">✕</button>`;
                 }
                 const nm = fullName(a);
                 const ini = initials(nm);
@@ -297,7 +513,7 @@
                 const nm = fullName(a);
                 const ini = initials(nm);
                 const ft = a.form_type === 'canada' ? '🇨🇦 Kanada' : '🇫🇷 France TCF';
-                return `<div class="m-card" onclick="openSheet(${a.id})">
+                return `<div class="m-card" onclick="openSheet(${jsId(a.id)})">
       <div class="m-avatar ${cls}">${ini}</div>
       <div class="m-info">
         <div class="m-name">${highlight(nm)}</div>
@@ -327,54 +543,88 @@
 
         // ── Actions ───────────────────────────────────────────
         async function setStatus(id, status) {
-            const item = data.find(a => a.id === id);
-            if (item) item.status = status;   // optimistic: darrov o'sha bo'limga o'tadi
+            const item = data.find(a => String(a.id) === String(id));
+            if (item) item.status = status;
             render();
-            try {
-                await DB.setStatus(id, status);
-            } catch (err) {
-                alert('Xatolik: ' + err.message);
-                data = await DB.getAll();   // xato bo'lsa serverdan tiklash
-                render();
-            }
+            await DB.setStatus(id, status);
+            data = Local.all();
+            updateRemoteBadge();
+            render();
         }
 
         async function permDelete(id) {
-            if (!confirm("Butunlay o'chirilsinmi?")) return;
-            data = data.filter(a => a.id !== id);   // optimistic
+            if (!confirm("Butunlay o'chirilsinmi? Bu ariza localStorage'dan ham o'chadi!")) return;
+            data = data.filter(a => String(a.id) !== String(id));
             render();
-            try {
-                await DB.delete(id);
-            } catch (err) {
-                alert('Xatolik: ' + err.message);
-                data = await DB.getAll();
-                render();
-            }
+            await DB.delete(id);
+            data = Local.all();
+            updateRemoteBadge();
+            render();
         }
 
         async function clearTab() {
             if (curTab === 'deleted') {
-                if (!confirm("O'chirilganlar to'liq tozalansinmi? Bu amalni qaytarib bo'lmaydi!")) return;
+                if (!confirm("O'chirilganlar to'liq tozalansinmi? Bu amalni qaytarib bo'lmaydi (localStorage'dan ham o'chadi)!")) return;
                 data = data.filter(a => a.status !== 'deleted');
                 render();
-                try {
-                    await DB.delByStatus('deleted');
-                } catch (err) { alert('Xatolik: ' + err.message); data = await DB.getAll(); render(); }
+                await DB.delByStatus('deleted');
+                data = Local.all();
+                updateRemoteBadge();
+                render();
             } else {
                 const lbl = curTab === 'new' ? 'yangi' : 'tekshirilgan';
                 if (!confirm(`Barcha ${lbl} arizalar o'chirilganlar bo'limiga o'tkazilsinmi?`)) return;
                 const ids = data.filter(a => a.status === curTab).map(a => a.id);
                 data.forEach(a => { if (ids.includes(a.id)) a.status = 'deleted'; });
                 render();
-                try {
-                    for (const id of ids) await DB.setStatus(id, 'deleted');
-                } catch (err) { alert('Xatolik: ' + err.message); data = await DB.getAll(); render(); }
+                for (const id of ids) await DB.setStatus(id, 'deleted');
+                data = Local.all();
+                updateRemoteBadge();
+                render();
             }
+        }
+
+        // ── Export / Import (zaxira) ──────────────────────────
+        function exportApps() {
+            const list = Local.all();
+            const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const d = new Date();
+            const stamp = d.toISOString().slice(0, 10);
+            a.href = url;
+            a.download = 'france-tcf-arizalar-' + stamp + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importApps(file) {
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const parsed = JSON.parse(reader.result);
+                    if (!Array.isArray(parsed)) throw new Error('JSON massiv emas');
+                    const merged = mergeApps(Local.all(), parsed);
+                    Local.saveAll(merged);
+                    data = merged;
+                    render();
+                    alert('Import qilindi: jami ' + merged.length + ' ta ariza (localStorage).');
+                } catch (err) {
+                    alert('Import xato: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function triggerImport() {
+            const inp = document.getElementById('importFile');
+            if (inp) inp.click();
         }
 
         // ── Bottom sheet ──────────────────────────────────────
         function openSheet(id) {
-            const a = data.find(x => x.id === id);
+            const a = data.find(x => String(x.id) === String(id));
             if (!a) return;
             sheetId = id;
             document.getElementById('sh_name').textContent = fullName(a);
@@ -425,7 +675,7 @@
         }
 
         async function sheetAction() {
-            const a = data.find(x => x.id === sheetId); if (!a) return;
+            const a = data.find(x => String(x.id) === String(sheetId)); if (!a) return;
             const next = a.status === 'new' ? 'checked' : 'new';
             const id = a.id;
             closeSheetModal();
@@ -433,7 +683,7 @@
         }
 
         async function sheetDel() {
-            const a = data.find(x => x.id === sheetId); if (!a) return;
+            const a = data.find(x => String(x.id) === String(sheetId)); if (!a) return;
             const id = a.id;
             if (a.status === 'deleted') {
                 closeSheetModal();

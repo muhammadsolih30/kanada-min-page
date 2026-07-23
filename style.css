@@ -1068,6 +1068,17 @@ textarea:focus {
     color: #991b1b;
 }
 
+.msg-local {
+    background: #fff7ed;
+    border: 1px solid #fdba74;
+    color: #9a3412;
+    line-height: 1.55;
+}
+
+.msg-local a {
+    font-weight: 700;
+}
+
 /* ====== FOOTER ====== */
 footer {
     background: linear-gradient(160deg, var(--navy), #060d1c);
@@ -1256,6 +1267,57 @@ hr {
 
 .admin-refresh.spinning svg {
     animation: spin .6s linear infinite;
+}
+
+.admin-head-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.admin-backup {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--navy);
+    padding: .65rem .95rem;
+    border-radius: 12px;
+    font-size: .85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+.admin-backup:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--blue-bright);
+}
+
+.remote-badge {
+    display: inline-block;
+    margin-top: .55rem;
+    padding: .35rem .7rem;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.remote-badge.online {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.remote-badge.offline {
+    background: #ffedd5;
+    color: #9a3412;
 }
 
 /* ---- Summary cards ---- */
